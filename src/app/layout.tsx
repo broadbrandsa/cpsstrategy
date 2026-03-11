@@ -1,18 +1,13 @@
 import type { Metadata } from "next";
-import { Montserrat, Poppins } from "next/font/google";
+import { Poppins } from "next/font/google";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import SidebarNav from "@/components/sidebar-nav";
 import "./globals.css";
-
-const montserrat = Montserrat({
-  variable: "--font-montserrat",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
-});
 
 const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -30,11 +25,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body
-        className={`${montserrat.variable} ${poppins.variable} antialiased`}
-      >
-        <TooltipProvider>{children}</TooltipProvider>
+    <html lang="en" className={`${poppins.variable} ${poppins.className}`}>
+      <body className="antialiased">
+        <SidebarNav />
+
+        {/* Main content: offset by sidebar width on desktop, full-width + top-bar offset on mobile */}
+        <main className="min-h-screen pt-14 md:ml-[240px] md:pt-0">
+          <TooltipProvider>{children}</TooltipProvider>
+        </main>
       </body>
     </html>
   );

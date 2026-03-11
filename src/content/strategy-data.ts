@@ -62,7 +62,7 @@ export const PERSONAS = [
     psychographics:
       "Ambitious but uncertain. Fears wasting money on a qualification that won't lead anywhere. Researches extensively before committing. Compares CPS against Milpark, MANCOSA, Regent, and university options.",
     jtbd: "Help me get a real qualification that banks actually recognise, so I can build a career in banking and earn more.",
-    color: "#7C3AED",
+    color: "#6B2D8B",
   },
   {
     id: "acl6",
@@ -74,7 +74,7 @@ export const PERSONAS = [
     psychographics:
       "Has hit a career ceiling. Knows they need formal credentials to advance. Values practical, applicable learning over academic theory. Time-poor and needs flexibility.",
     jtbd: "Help me prove I'm ready for management and get the qualification that unlocks the next level.",
-    color: "#2EA3F2",
+    color: "#00A8E1",
   },
 ];
 
@@ -217,8 +217,8 @@ export const CONTENT_PILLARS = [
 export const BUDGET_ALLOCATION = {
   total: 15000,
   channels: [
-    { name: "Google Search", amount: 7500, percentage: 50, color: "#2EA3F2" },
-    { name: "Meta (FB + IG)", amount: 7500, percentage: 50, color: "#7C3AED" },
+    { name: "Google Search", amount: 7500, percentage: 50, color: "#00A8E1" },
+    { name: "Meta (FB + IG)", amount: 7500, percentage: 50, color: "#6B2D8B" },
   ],
 };
 
@@ -336,14 +336,14 @@ export const LAUNCH_PHASES = [
     dates: "Mar 29 – Apr 18",
     activities: "Landing pages live, Google brand + high-intent campaigns launch, Meta awareness campaigns launch, info pack lead magnet created, first 3 blog posts published",
     deliverables: "First leads captured, baseline CPCs and conversion rates established, initial lead quality assessment",
-    color: "#7C3AED",
+    color: "#6B2D8B",
   },
   {
     phase: "Phase 2: Ramp",
     dates: "Apr 19 – May 9",
     activities: "Optimise ad creative based on Phase 1 data, launch retargeting campaigns, competitor conquesting begins, email sequences firing, A/B test landing page variants",
     deliverables: "Cost per lead trending toward target, nurture sequences converting, 50% of enrollment target pipeline built",
-    color: "#2EA3F2",
+    color: "#00A8E1",
   },
   {
     phase: "Phase 3: Intake Push",
@@ -395,4 +395,202 @@ export const PRE_LAUNCH_CHECKLIST = [
   { item: "Google Ads account structured and campaigns ready", owner: "Broadbrand", status: "To do" },
   { item: "Meta Ads account configured with pixel and events", owner: "Broadbrand", status: "To do" },
   { item: "Looker Studio dashboard connected and shared", owner: "Broadbrand", status: "To do" },
+];
+
+// ===================================================
+// Industry Benchmarks
+// ===================================================
+
+export const GOOGLE_BENCHMARKS = [
+  { metric: "CPC (Search)", global: "$6.23 (~R115)", saEstimate: "R10–R30", cpsTarget: "R12–R20", source: "WordStream 2025" },
+  { metric: "CTR (Search)", global: "5.74%", saEstimate: "~5–6%", cpsTarget: "≥5%", source: "WordStream 2025" },
+  { metric: "CVR (Search)", global: "11.38%", saEstimate: "~8–12%", cpsTarget: "7–10%", source: "WordStream 2025" },
+  { metric: "CPL (Search)", global: "~$90 (~R1,665)", saEstimate: "~R500–R1,500", cpsTarget: "≤R100", source: "WordStream 2025" },
+  { metric: "CPC (Display)", global: "$0.47 (~R9)", saEstimate: "~R3–R8", cpsTarget: "N/A Phase 2", source: "WordStream 2025" },
+];
+
+export const META_BENCHMARKS = [
+  { metric: "CPC", global: "$1.05 (~R19)", cpsTarget: "R5–R8", notes: "SA typically lower", source: "SuperAds 2025" },
+  { metric: "CTR", global: "1.66%", cpsTarget: "≥1.5%", notes: "Below all-industry 1.86%", source: "SuperAds 2025" },
+  { metric: "CPL", global: "$19.27 (~R357)", cpsTarget: "≤R100", notes: "54% below all-industry", source: "SuperAds 2025" },
+  { metric: "CPL Trend", global: "$15→$21.57 (+44%)", cpsTarget: "—", notes: "Budget for Q3/Q4 inflation", source: "SuperAds 2025" },
+];
+
+export const FUNNEL_BENCHMARKS = [
+  { stage: "LP → Lead (education)", benchmark: "8.4% median", cpsModel: "4–10%", source: "Unbounce 2025" },
+  { stage: "LP → Lead (higher ed)", benchmark: "6.3%", cpsModel: "—", source: "Unbounce 2025" },
+  { stage: "Lead → Enrollment", benchmark: "3–5% industry", cpsModel: "10–20%", source: "Multiple" },
+  { stage: "Cost/enrolled student", benchmark: "$2,849 (~R52,700)", cpsModel: "R400 target", source: "UPCEA 2023" },
+  { stage: "Email nurture CVR", benchmark: "14.1%", cpsModel: "≥10%", source: "Industry reports" },
+];
+
+export const BENCHMARK_INSIGHTS = [
+  {
+    title: "SA CPC Advantage",
+    description: "Global education CPC is R115. SA is R10-30. CPS benefits from 75%+ lower auction prices.",
+    color: "#10B981",
+  },
+  {
+    title: "Rising Meta CPL",
+    description: "Education CPL rose 44% through 2025. Plan for cost inflation in Q3/Q4 near intake deadlines.",
+    color: "#F59E0B",
+  },
+  {
+    title: "CPS vs World",
+    description: "Global median cost per enrolled student is R52,700. Even our conservative scenario (R2,857) is 95% below this. Our R400 target is ambitious but achievable in SA.",
+    color: "#6B2D8B",
+  },
+];
+
+// ===================================================
+// CPA Preset Scenarios (for buttons)
+// ===================================================
+
+export const CPA_PRESETS = [
+  { name: "Conservative", budget: 15000, gsplit: 50, gcpc: 20, mcpc: 8, lpcvr: 4, lter: 10 },
+  { name: "Target", budget: 15000, gsplit: 50, gcpc: 15, mcpc: 6, lpcvr: 7, lter: 15 },
+  { name: "Optimistic", budget: 15000, gsplit: 50, gcpc: 12, mcpc: 5, lpcvr: 10, lter: 20 },
+];
+
+// ===================================================
+// Budget Scaling Scenarios
+// ===================================================
+
+export const BUDGET_SCALING = [
+  { budget: "R15,000", google: "R7,500", meta: "R7,500", enrollments: 18, cpa: "R816", sixMonth: 110 },
+  { budget: "R25,000", google: "R12,500", meta: "R12,500", enrollments: 31, cpa: "R816", sixMonth: 184 },
+  { budget: "R40,000", google: "R20,000", meta: "R20,000", enrollments: 49, cpa: "R816", sixMonth: 294 },
+  { budget: "R60,000", google: "R30,000", meta: "R30,000", enrollments: 73, cpa: "R816", sixMonth: 441 },
+];
+
+export const SCALING_TRIGGERS = [
+  { condition: "CPA ≤R400 for 4 consecutive weeks", action: "Increase budget 25%" },
+  { condition: "CPA ≤R300 for 4 consecutive weeks", action: "Increase budget 50%" },
+  { condition: "CPA >R600 for 2 consecutive weeks", action: "Pause, audit, optimise" },
+  { condition: "Recommended ceiling", action: "~R40-50k/month before audience saturation" },
+];
+
+// ===================================================
+// Ad Copy Angles with full copy
+// ===================================================
+
+export const AD_COPY_ANGLES = [
+  {
+    angle: "Career Transformation",
+    psychology: "Loss Aversion + Contrast",
+    copy: "Still stuck in the same role? A Higher Certificate in Banking could change that. Accredited. Flexible. Trusted by Absa, FNB, Standard Bank, and more. From R2,480/month.",
+    color: "#6B2D8B",
+  },
+  {
+    angle: "Social Proof + Authority",
+    psychology: "Bandwagon + Authority Bias",
+    copy: "Join 11,400+ professionals who've built their careers with CPS. NQF-accredited qualifications designed with SA's top banks. Applications now open.",
+    color: "#00A8E1",
+  },
+  {
+    angle: "Present Bias + Simplicity",
+    psychology: "Present Bias + Goal-Gradient",
+    copy: "Start your banking qualification this month. Study online. Pay monthly. Graduate in 12 months. Download the free info pack.",
+    color: "#10B981",
+  },
+  {
+    angle: "Aspiration + Specificity",
+    psychology: "Identity + Contrast",
+    copy: "Ready to lead? The Advanced Certificate in Leadership (NQF 6) gives you the frameworks, credibility, and accreditation to step up. From R2,688/month.",
+    color: "#F59E0B",
+  },
+];
+
+// ===================================================
+// SEO Content Plan with keyword data
+// ===================================================
+
+export const SEO_CONTENT_PLAN = [
+  { article: "Higher Certificate in Banking: Everything You Need to Know in 2026", keyword: "higher certificate in banking", volume: "500-800", difficulty: "Medium" },
+  { article: "How to Start a Career in Banking in SA", keyword: "career in banking south africa", volume: "800-1,200", difficulty: "Medium" },
+  { article: "HCIB vs BCOM: Which is Right for You?", keyword: "hcib vs bcom", volume: "200-400", difficulty: "Low" },
+  { article: "What is NQF Level 5? Simple Guide", keyword: "nqf level 5", volume: "1,500-2,500", difficulty: "Low" },
+  { article: "Leadership Qualifications in SA: Complete Guide", keyword: "leadership qualification south africa", volume: "300-500", difficulty: "Medium" },
+  { article: "How Much Does a Banking Qualification Cost in 2026?", keyword: "banking qualification cost", volume: "400-700", difficulty: "Low" },
+  { article: "Is CPS Accredited? Understanding CHE & QCTO", keyword: "CPS accredited", volume: "100-200", difficulty: "Low" },
+];
+
+// ===================================================
+// Enhanced Nurture Sequence with subject lines
+// ===================================================
+
+export const NURTURE_SEQUENCE_ENHANCED = [
+  { day: 0, email: "Info pack + Welcome", purpose: "Deliver value, set expectations", subject: "Your CPS info pack is ready", preview: "Everything you need to know about [Programme]..." },
+  { day: 2, email: "Why students choose CPS", purpose: "Social proof", subject: "[Name], here's why 11,400 professionals chose CPS", preview: "Students like you share their stories..." },
+  { day: 4, email: "Programme deep-dive", purpose: "Answer research questions", subject: "Here's exactly what you'll study in [Programme]", preview: "Module breakdown, schedule, outcomes inside..." },
+  { day: 7, email: "Is this right for you?", purpose: "Objection handling", subject: "Is [Programme] right for you? Let's find out", preview: "Honest answers to the 5 biggest questions..." },
+  { day: 9, email: "Student transformation story", purpose: "Emotional proof", subject: "From security guard to bank manager: [Student]'s story", preview: "How CPS changed one student's career..." },
+  { day: 11, email: "Pricing breakdown", purpose: "Remove financial uncertainty", subject: "R2,480/month — here's how the numbers work", preview: "Payment plans, total cost, and how it compares..." },
+  { day: 14, email: "Applications closing", purpose: "Urgency + CTA", subject: "May intake closes soon — your place is waiting", preview: "Apply in 3 steps. We're here to help..." },
+];
+
+// ===================================================
+// Lead Scoring
+// ===================================================
+
+export const LEAD_SCORING_ACTIONS = [
+  { action: "Info pack download", points: "+10" },
+  { action: "Email open", points: "+2" },
+  { action: "Email click", points: "+5" },
+  { action: "Landing page revisit", points: "+8" },
+  { action: "Pricing page visit", points: "+15" },
+  { action: "WhatsApp reply", points: "+20" },
+  { action: "Application started", points: "+30" },
+];
+
+export const LEAD_SCORING_TIERS = [
+  { score: "0-20", status: "Cold", action: "Nurture sequence only", color: "#94A3B8" },
+  { score: "21-40", status: "Warm", action: "Advisor WhatsApp outreach", color: "#F59E0B" },
+  { score: "41+", status: "Hot", action: "Phone call within 4 hours", color: "#EF4444" },
+];
+
+// ===================================================
+// Risk Triggers
+// ===================================================
+
+export const RISK_TRIGGERS = [
+  { phase: "1", signal: "CPC >R25 on Google", response: "Shift 60/40 toward Meta. Review keywords." },
+  { phase: "1", signal: "LP CVR <3%", response: "Pause ads. Fix LP. A/B test new variant." },
+  { phase: "2", signal: "Zero applications after 2 weeks", response: "Emergency review: check nurture, forms, admissions response." },
+  { phase: "3", signal: "<20 enrollments by May 31", response: "Extend deadline. Increase budget. Phone outreach to all warm leads." },
+];
+
+// ===================================================
+// ROI & Student Lifetime Value
+// ===================================================
+
+export const STUDENT_LTV = {
+  hcib: { monthly: 2480, duration: 12, total: 29760 },
+  acl6: { monthly: 2688, duration: 12, total: 32256 },
+  totalStudents: 70,
+  totalTuitionPerIntake: 2170560,
+  mediaSpendPerIntake: 90000,
+  roi: "24:1",
+};
+
+// ===================================================
+// A/B Testing Plan
+// ===================================================
+
+export const AB_TESTING_PLAN = [
+  { weeks: "1-2", test: "Copy angles", what: "4 angles x 2 creatives = 8 ads per platform", impact: "Identify winning message" },
+  { weeks: "3-4", test: "Kill & scale", what: "Drop bottom 50%, scale winners, test new headlines", impact: "Improve CTR 20-30%" },
+  { weeks: "5-6", test: "Audiences", what: "Interest vs lookalike vs retargeting", impact: "Find lowest CPA audience" },
+  { weeks: "7-8", test: "Landing pages", what: "Long-form vs short-form, video vs static", impact: "Improve LP CVR" },
+  { weeks: "Ongoing", test: "Creative refresh", what: "Rotate every 3-4 weeks", impact: "Prevent ad fatigue" },
+];
+
+// ===================================================
+// WhatsApp Automation
+// ===================================================
+
+export const WHATSAPP_AUTOMATION = [
+  { timing: "0 min", message: "Hi [Name]! Thanks for downloading the [Programme] info pack. Your guide is on its way to [email]. Any questions? Just reply — I'm a real person! — [Advisor], CPS Admissions" },
+  { timing: "Day 3", message: "Hi [Name], did you get a chance to look through the info pack? Happy to answer any questions — no pressure." },
+  { timing: "Day 10", message: "Quick check-in — the May intake is filling up. Want me to walk you through the application? Takes about 5 minutes." },
 ];
