@@ -14,6 +14,7 @@ import {
   GitBranch,
   Menu,
   X,
+  EyeOff,
 } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
@@ -120,6 +121,19 @@ function SidebarContent({ pathname, onNavigate }: { pathname: string; onNavigate
       {/* ---- Footer ---- */}
       <div className="px-5 pb-5 pt-4">
         <div className="mb-3 border-t border-black/[0.06]" />
+
+        <button
+          type="button"
+          onClick={() => {
+            try { localStorage.removeItem("cps_strategy_v1_unlocked"); } catch {}
+            window.location.reload();
+          }}
+          className="mb-3 flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-[12px] font-medium text-foreground/40 transition-colors hover:bg-red-50 hover:text-red-500"
+        >
+          <EyeOff size={15} strokeWidth={1.8} />
+          Hide Proposal
+        </button>
+
         <div className="flex items-center gap-2">
           <Image
             src="/logos/Broadbrand.png"

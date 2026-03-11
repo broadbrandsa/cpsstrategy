@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import SidebarNav from "@/components/sidebar-nav";
+import { LockScreen } from "@/components/LockScreen";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -27,12 +28,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${poppins.variable} ${poppins.className}`}>
       <body className="antialiased">
-        <SidebarNav />
+        <LockScreen>
+          <SidebarNav />
 
-        {/* Main content: offset by sidebar width on desktop, full-width + top-bar offset on mobile */}
-        <main className="min-h-screen pt-14 md:ml-[240px] md:pt-0">
-          <TooltipProvider>{children}</TooltipProvider>
-        </main>
+          {/* Main content: offset by sidebar width on desktop, full-width + top-bar offset on mobile */}
+          <main className="min-h-screen pt-14 md:ml-[240px] md:pt-0">
+            <TooltipProvider>{children}</TooltipProvider>
+          </main>
+        </LockScreen>
       </body>
     </html>
   );
