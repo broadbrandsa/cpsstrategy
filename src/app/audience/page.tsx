@@ -1,15 +1,96 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import Footer from "@/components/sections/footer";
+
+/* ─── Pyramid Tiers ─── */
+const PYRAMID_TIERS = [
+  {
+    label: "Immediate Target Audience",
+    color: "#6B2D8B",
+    width: "45%",
+    description:
+      "Individuals actively researching qualifications in banking or leadership and comparing providers.",
+    bullets: [
+      "Searching for qualifications online",
+      "Comparing costs and outcomes",
+      "Evaluating accreditation",
+      "Downloading information packs",
+    ],
+    note: "These individuals represent the highest probability of enrollment.",
+  },
+  {
+    label: "Career Progression Audience",
+    color: "#00A8E1",
+    width: "70%",
+    description:
+      "Individuals currently working in financial services or related industries who are seeking promotion or career advancement.",
+    bullets: [
+      "Retail banking staff",
+      "Call centre agents",
+      "Insurance advisors",
+      "Operations staff",
+      "Junior managers",
+    ],
+    note: "These individuals may not yet be searching for a qualification but are highly likely to consider one within the next 6\u201324 months.",
+  },
+  {
+    label: "Future Career Audience",
+    color: "#10B981",
+    width: "100%",
+    description:
+      "Individuals exploring career options in financial services.",
+    bullets: [
+      "Recent school leavers",
+      "Early-career professionals",
+      "Unemployed graduates",
+      "Career changers",
+    ],
+    note: "This audience represents the largest pool of potential future students.",
+  },
+];
+
+/* ─── Demand Drivers ─── */
+const DEMAND_DRIVERS = [
+  {
+    title: "Industry Professionalisation",
+    description:
+      "Careers in banking increasingly require formal qualifications and ongoing professional development to progress within organisations.",
+    color: "#6B2D8B",
+  },
+  {
+    title: "Skills Gap",
+    description:
+      "Employers frequently report gaps between graduate skills and workplace expectations, creating demand for practical, career-focused qualifications.",
+    color: "#00A8E1",
+  },
+  {
+    title: "Digital Transformation",
+    description:
+      "Technology and regulatory changes in banking continue to create new skill requirements across the financial services sector.",
+    color: "#10B981",
+  },
+  {
+    title: "Career Mobility",
+    description:
+      "Many professionals seek additional qualifications to move into leadership or management roles.",
+    color: "#F59E0B",
+  },
+  {
+    title: "Economic Pressure",
+    description:
+      "High unemployment and job insecurity drive demand for qualifications that improve employability and career prospects.",
+    color: "#EF4444",
+  },
+];
 
 /* ─── Persona Data ─── */
 const PERSONA_BANKING = {
   tag: "HCIB Programme",
-  name: "Persona 1 — The Banking Starter",
+  name: "Persona 1 \u2014 The Banking Starter",
   subtitle: "Career starters seeking entry into the banking sector.",
-  age: "22–32",
+  age: "18\u201330",
   color: "#6B2D8B",
   lifeStage: [
     "Recently completed matric or tertiary study",
@@ -19,18 +100,23 @@ const PERSONA_BANKING = {
   ],
   demographics: {
     location: "South African metros (Gauteng, Western Cape, KwaZulu-Natal)",
-    education: "Matric or equivalent — some may have incomplete tertiary education",
+    education:
+      "Matric or equivalent. Some may have incomplete tertiary education.",
     employment:
-      "Retail banking assistants, call centre staff, retail workers, graduates seeking first professional role",
-    income: "R6,000 – R18,000 monthly",
+      "Retail banking assistants, call centre staff, retail workers, unemployed graduates seeking corporate careers",
+    income: "R5,000 \u2013 R20,000 monthly",
   },
   psychographics: [
     "Ambitious but uncertain about career direction",
     "Strong desire to enter stable industries such as banking",
-    "Fear making a costly mistake by choosing the wrong qualification",
-    "Extensive research behaviour before committing",
+    "Highly sensitive to affordability and job prospects",
   ],
-  influences: ["Affordability", "Career outcomes", "Brand credibility"],
+  influences: [
+    "Affordability",
+    "Career outcomes",
+    "Brand credibility",
+    "Employer recognition",
+  ],
   drivers: [
     "Career entry into banking",
     "Recognised qualification",
@@ -41,17 +127,18 @@ const PERSONA_BANKING = {
     "Fear of wasting money",
     "Uncertainty about qualification recognition",
     "Comparing against universities and other institutions",
+    "Limited disposable income",
   ],
 };
 
 const PERSONA_LEADER = {
   tag: "ACL6 Programme",
-  name: "Persona 2 — The Aspiring Leader",
+  name: "Persona 2 \u2014 The Aspiring Leader",
   subtitle: "Mid-career professionals seeking leadership progression.",
-  age: "28–40",
+  age: "28\u201340",
   color: "#00A8E1",
   lifeStage: [
-    "3–10 years professional experience",
+    "3\u201310 years professional experience",
     "Already employed in financial services or corporate environments",
     "Beginning to supervise teams or manage projects",
   ],
@@ -60,17 +147,18 @@ const PERSONA_LEADER = {
     education: "",
     employment:
       "Financial services professionals, operations managers, team leaders, supervisors",
-    income: "R18,000 – R45,000 monthly",
+    income: "R18,000 \u2013 R60,000+ monthly",
   },
   psychographics: [
     "Highly pragmatic learners",
-    "Not looking for academic theory but practical leadership capability",
-    "Time-poor and balancing work responsibilities with professional development",
+    "Prioritise practical, applicable knowledge over academic theory",
+    "Balancing professional responsibilities with personal development",
   ],
   influences: [
     "Promotion opportunities",
     "Salary growth",
     "Credibility as a leader",
+    "Professional recognition",
   ],
   drivers: [
     "Career advancement",
@@ -80,8 +168,8 @@ const PERSONA_LEADER = {
   ],
   barriers: [
     "Time commitment",
-    "Employer support",
-    "Perceived ROI of qualification",
+    "Employer funding constraints",
+    "Uncertainty about return on investment",
   ],
 };
 
@@ -91,31 +179,31 @@ const PSYCHOLOGY = [
     principle: "Loss Aversion",
     description:
       "Fear of choosing the wrong qualification or wasting money.",
-    icon: "🛡",
   },
   {
     principle: "Authority Bias",
     description:
-      "Trust in institutions recognised by industry leaders.",
-    icon: "🏛",
+      "Trust increases when institutions are associated with respected organisations or employers.",
   },
   {
     principle: "Social Proof",
     description:
-      "Confidence increases when students see real success stories.",
-    icon: "👥",
+      "Testimonials and graduate success stories reduce perceived risk.",
   },
   {
     principle: "Present Bias",
     description:
-      "Preference for immediate, flexible study options rather than long university programmes.",
-    icon: "⚡",
+      "Prospective students prefer flexible study options that fit around work commitments.",
   },
   {
     principle: "Goal Gradient Effect",
     description:
-      "Motivation increases as students move closer to completing a qualification.",
-    icon: "🎯",
+      "Motivation increases as individuals move closer to achieving career goals.",
+  },
+  {
+    principle: "Identity Motivation",
+    description:
+      "People pursue qualifications aligned with the identity they want to achieve, such as becoming a banking professional or recognised leader.",
   },
 ];
 
@@ -153,9 +241,9 @@ const GOOGLE_INTENT = [
 /* ─── Meta Targeting ─── */
 const META_TARGETING = [
   {
-    audience: "Banking Starter",
+    audience: "Banking Starter Targeting",
     color: "#6B2D8B",
-    age: "22–32",
+    age: "18\u201330",
     interests: [
       "Banking",
       "Financial services",
@@ -165,9 +253,9 @@ const META_TARGETING = [
     ],
   },
   {
-    audience: "Aspiring Leader",
+    audience: "Aspiring Leader Targeting",
     color: "#00A8E1",
-    age: "28–40",
+    age: "28\u201340",
     interests: [
       "Leadership",
       "Management training",
@@ -182,39 +270,38 @@ const SHARED_TRAITS = [
   "Located primarily in South African metros",
   "Seeking career progression in financial services",
   "Evaluating multiple education providers",
-  "Highly price-sensitive but outcome-driven",
+  "Price-sensitive but outcome-driven",
   "Require strong trust signals before committing",
 ];
 
 const RESEARCH_STEPS = [
   "Search for qualifications online",
-  "Compare costs and programme structures",
-  "Evaluate credibility and accreditation",
-  "Speak to peers or colleagues",
+  "Compare providers and programme structures",
+  "Evaluate accreditation and credibility",
+  "Speak to colleagues or peers",
   "Download information packs",
-  "Consider affordability",
+  "Consider affordability and career outcomes",
 ];
 
-const GROWTH_CHANNELS = [
+/* ─── Growth Timeline ─── */
+const GROWTH_TIMELINE = [
   {
-    label: "Lookalike audiences",
-    description: "Built from lead lists and converters to find similar prospects",
+    period: "Month 1\u20133",
+    label: "Interest-based targeting",
+    description: "Initial audience testing",
     color: "#6B2D8B",
   },
   {
-    label: "Retargeting pools",
-    description: "Website visitors, video viewers, and info pack downloaders",
+    period: "Month 4\u20136",
+    label: "Lookalike audiences",
+    description: "Optimised targeting based on lead data",
     color: "#00A8E1",
   },
   {
-    label: "Organic social engagement",
-    description: "Community growth through valuable content and student stories",
+    period: "Month 6+",
+    label: "Conversion-based audiences",
+    description: "Retargeting and alumni referral expansion",
     color: "#10B981",
-  },
-  {
-    label: "Referral programmes",
-    description: "Leveraging enrolled students as brand advocates",
-    color: "#F59E0B",
   },
 ];
 
@@ -232,9 +319,9 @@ function DetailRow({
   color: string;
 }) {
   return (
-    <div className="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-4 py-3 border-b border-black/[0.04] last:border-0">
+    <div className="py-3 border-b border-black/[0.04] last:border-0 px-4">
       <span
-        className="text-[10px] font-semibold tracking-[0.15em] uppercase shrink-0 w-32"
+        className="text-[10px] font-semibold tracking-[0.15em] uppercase block mb-1"
         style={{ color }}
       >
         {label}
@@ -260,7 +347,6 @@ function PersonaCard({
       transition={{ duration: 0.6, delay: 0.2 + index * 0.15 }}
       className="card-elevated !p-0 overflow-hidden"
     >
-      {/* Color accent */}
       <div
         className="h-1.5 w-full"
         style={{
@@ -389,7 +475,10 @@ function PersonaCard({
               border: `1px solid ${persona.color}10`,
             }}
           >
-            <p className="text-[10px] font-semibold tracking-[0.15em] uppercase mb-3" style={{ color: persona.color }}>
+            <p
+              className="text-[10px] font-semibold tracking-[0.15em] uppercase mb-3"
+              style={{ color: persona.color }}
+            >
               Decision Drivers
             </p>
             <ul className="space-y-1.5">
@@ -398,7 +487,10 @@ function PersonaCard({
                   key={d}
                   className="flex items-start gap-2 text-sm text-foreground/55"
                 >
-                  <span className="text-xs mt-0.5" style={{ color: persona.color }}>
+                  <span
+                    className="text-xs mt-0.5"
+                    style={{ color: persona.color }}
+                  >
                     +
                   </span>
                   {d}
@@ -416,7 +508,7 @@ function PersonaCard({
                   key={b}
                   className="flex items-start gap-2 text-sm text-foreground/55"
                 >
-                  <span className="text-xs text-red-400 mt-0.5">−</span>
+                  <span className="text-xs text-red-400 mt-0.5">{"\u2212"}</span>
                   {b}
                 </li>
               ))}
@@ -434,6 +526,8 @@ function PersonaCard({
 
 export default function AudiencePage() {
   const headerRef = useRef(null);
+  const pyramidRef = useRef(null);
+  const demandRef = useRef(null);
   const landscapeRef = useRef(null);
   const personaRef = useRef(null);
   const behaviourRef = useRef(null);
@@ -443,6 +537,8 @@ export default function AudiencePage() {
   const growthRef = useRef(null);
 
   const headerInView = useInView(headerRef, { once: true, margin: "-80px" });
+  const pyramidInView = useInView(pyramidRef, { once: true, margin: "-80px" });
+  const demandInView = useInView(demandRef, { once: true, margin: "-80px" });
   const landscapeInView = useInView(landscapeRef, { once: true, margin: "-80px" });
   const personaInView = useInView(personaRef, { once: true, margin: "-80px" });
   const behaviourInView = useInView(behaviourRef, { once: true, margin: "-80px" });
@@ -451,12 +547,13 @@ export default function AudiencePage() {
   const metaInView = useInView(metaRef, { once: true, margin: "-80px" });
   const growthInView = useInView(growthRef, { once: true, margin: "-80px" });
 
-  const [expandedPsych, setExpandedPsych] = useState<number | null>(null);
-
   return (
     <div className="relative min-h-screen bg-white">
       {/* ─── Page Header ─── */}
-      <section className="relative py-20 sm:py-28 overflow-hidden" ref={headerRef}>
+      <section
+        className="relative py-20 sm:py-28 overflow-hidden"
+        ref={headerRef}
+      >
         <div className="absolute inset-0 bg-gradient-to-b from-cps-purple/[0.03] to-transparent" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <motion.div
@@ -485,28 +582,228 @@ export default function AudiencePage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-base sm:text-lg text-foreground/50 max-w-3xl leading-relaxed mb-4"
           >
-            Understanding who CPS must reach in order to build a sustainable B2C
-            student acquisition engine.
+            Understanding who CPS must reach to build a sustainable B2C student
+            acquisition engine.
           </motion.p>
 
-          <motion.p
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-sm text-foreground/40 max-w-3xl leading-relaxed"
+            className="text-sm text-foreground/40 max-w-3xl leading-relaxed space-y-3"
           >
-            CPS is transitioning from a predominantly B2B education provider to a
-            direct-to-student model. Success depends on understanding the
-            motivations, fears, and decision processes of prospective students.
-            This page defines the audiences CPS must reach, the psychology driving
-            their decisions, and how those audiences translate into targeting on
-            Google and Meta.
-          </motion.p>
+            <p>
+              CPS is transitioning from a predominantly B2B education provider
+              to a direct-to-student model. Success depends on understanding the
+              motivations, fears, and decision processes of prospective students.
+            </p>
+            <p>
+              The South African financial services sector employs millions of
+              people and continues to require new skills as technology,
+              regulation, and digital banking reshape the industry. The broader
+              finance industry alone employs roughly 2.5 million people in South
+              Africa, with the largest concentration of jobs in Gauteng, followed
+              by the Western Cape and KwaZulu-Natal.
+            </p>
+            <p>
+              At the same time, South Africa faces one of the highest
+              unemployment rates globally, exceeding 30%. As a result, many
+              individuals seek practical qualifications that can improve
+              employability and career progression.
+            </p>
+            <p>
+              This page defines the audiences CPS must reach, the psychology
+              driving their decisions, and how those audiences translate into
+              targeting on Google and Meta.
+            </p>
+          </motion.div>
         </div>
       </section>
 
-      {/* ─── Audience Landscape ─── */}
-      <section className="relative py-20 sm:py-28 section-tinted" ref={landscapeRef}>
+      {/* ─── 01 Audience Pyramid ─── */}
+      <section
+        className="relative py-20 sm:py-28 section-tinted"
+        ref={pyramidRef}
+      >
+        <div className="section-divider" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={pyramidInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.5 }}
+            className="flex items-center gap-3 mb-4"
+          >
+            <div className="w-8 h-[2px] bg-cps-purple rounded-full" />
+            <span className="section-label text-cps-purple">
+              01 — AUDIENCE PYRAMID
+            </span>
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={pyramidInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight mb-4"
+          >
+            The CPS{" "}
+            <span className="text-gradient-purple">Audience Pyramid</span>
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={pyramidInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="text-sm text-foreground/45 max-w-2xl mb-12"
+          >
+            Understanding the full market helps prioritise the most valuable
+            audiences.
+          </motion.p>
+
+          <div className="space-y-8 max-w-3xl mx-auto">
+            {PYRAMID_TIERS.map((tier, i) => (
+              <motion.div
+                key={tier.label}
+                initial={{ opacity: 0, y: 20 }}
+                animate={pyramidInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.2 + i * 0.12 }}
+                className="flex flex-col items-center"
+              >
+                {/* Pyramid bar */}
+                <div
+                  className="rounded-t-lg py-3 px-6 text-center"
+                  style={{
+                    width: tier.width,
+                    minWidth: "200px",
+                    backgroundColor: `${tier.color}10`,
+                    borderTop: `2px solid ${tier.color}30`,
+                    borderLeft: `1px solid ${tier.color}15`,
+                    borderRight: `1px solid ${tier.color}15`,
+                  }}
+                >
+                  <span
+                    className="text-[10px] font-semibold tracking-[0.15em] uppercase"
+                    style={{ color: tier.color }}
+                  >
+                    {i === 0
+                      ? "Top of Pyramid"
+                      : i === 1
+                      ? "Middle of Pyramid"
+                      : "Base of Pyramid"}
+                  </span>
+                  <h4 className="text-sm font-bold text-foreground mt-1">
+                    {tier.label}
+                  </h4>
+                </div>
+
+                {/* Details card — matches pyramid bar width */}
+                <div
+                  className="rounded-b-xl border border-black/[0.04] border-t-0 bg-white p-6"
+                  style={{ width: tier.width, minWidth: "200px" }}
+                >
+                  <p className="text-sm text-foreground/55 leading-relaxed mb-4">
+                    {tier.description}
+                  </p>
+                  <p className="text-[10px] font-semibold tracking-[0.15em] text-foreground/25 uppercase mb-3">
+                    {i === 0
+                      ? "Estimated behaviour"
+                      : i === 1
+                      ? "Typical roles"
+                      : "Typical characteristics"}
+                  </p>
+                  <ul className="space-y-1.5 mb-4">
+                    {tier.bullets.map((b) => (
+                      <li
+                        key={b}
+                        className="flex items-start gap-2 text-sm text-foreground/55"
+                      >
+                        <span
+                          className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0"
+                          style={{ backgroundColor: tier.color }}
+                        />
+                        {b}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="text-xs text-foreground/40 italic">
+                    {tier.note}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── 02 Qualification Demand Drivers ─── */}
+      <section className="relative py-20 sm:py-28" ref={demandRef}>
+        <div className="section-divider" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={demandInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.5 }}
+            className="flex items-center gap-3 mb-4"
+          >
+            <div className="w-8 h-[2px] bg-cps-blue rounded-full" />
+            <span className="section-label text-cps-blue">
+              02 — QUALIFICATION DEMAND DRIVERS
+            </span>
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={demandInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight mb-4"
+          >
+            Why Demand for Banking and Leadership{" "}
+            <span className="text-gradient-purple">Qualifications Exists</span>
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={demandInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="text-sm text-foreground/45 max-w-2xl mb-10"
+          >
+            Several macroeconomic factors drive demand for qualifications like
+            HCIB and ACL6.
+          </motion.p>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {DEMAND_DRIVERS.map((driver, i) => (
+              <motion.div
+                key={driver.title}
+                initial={{ opacity: 0, y: 15 }}
+                animate={demandInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.4, delay: 0.2 + i * 0.07 }}
+                className="card-elevated !p-0 overflow-hidden"
+              >
+                <div
+                  className="h-1 w-full"
+                  style={{
+                    background: `linear-gradient(90deg, ${driver.color}, ${driver.color}60)`,
+                  }}
+                />
+                <div className="p-6">
+                  <h4 className="text-sm font-semibold text-foreground mb-2">
+                    {driver.title}
+                  </h4>
+                  <p className="text-xs text-foreground/45 leading-relaxed">
+                    {driver.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── 03 Audience Landscape ─── */}
+      <section
+        className="relative py-20 sm:py-28 section-tinted"
+        ref={landscapeRef}
+      >
         <div className="section-divider" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
           <motion.div
@@ -517,7 +814,7 @@ export default function AudiencePage() {
           >
             <div className="w-8 h-[2px] bg-cps-purple rounded-full" />
             <span className="section-label text-cps-purple">
-              01 — AUDIENCE LANDSCAPE
+              03 — AUDIENCE LANDSCAPE
             </span>
           </motion.div>
 
@@ -541,7 +838,6 @@ export default function AudiencePage() {
             programmes.
           </motion.p>
 
-          {/* Two audience cards */}
           <div className="grid md:grid-cols-2 gap-6 mb-12">
             {[
               {
@@ -577,18 +873,20 @@ export default function AudiencePage() {
                   <h3 className="text-xl font-bold text-foreground mt-2 mb-3">
                     {aud.name}
                   </h3>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-semibold tracking-[0.15em] uppercase" style={{ color: aud.color }}>
-                      Primary programme
-                    </span>
-                  </div>
-                  <p className="text-sm text-foreground/55 mt-1">{aud.programme}</p>
+                  <span
+                    className="text-[10px] font-semibold tracking-[0.15em] uppercase"
+                    style={{ color: aud.color }}
+                  >
+                    Primary programme
+                  </span>
+                  <p className="text-sm text-foreground/55 mt-1">
+                    {aud.programme}
+                  </p>
                 </div>
               </motion.div>
             ))}
           </div>
 
-          {/* Shared characteristics */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={landscapeInView ? { opacity: 1, y: 0 } : {}}
@@ -598,22 +896,22 @@ export default function AudiencePage() {
             <p className="text-[10px] font-semibold tracking-[0.2em] text-foreground/25 uppercase mb-4">
               Shared Characteristics
             </p>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <ul className="space-y-2.5">
               {SHARED_TRAITS.map((trait, i) => (
-                <div
+                <li
                   key={i}
-                  className="flex items-start gap-2.5 p-3 rounded-lg bg-cps-purple/[0.03] border border-cps-purple/[0.06]"
+                  className="flex items-start gap-3 text-sm text-foreground/55"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-cps-purple mt-1.5 shrink-0" />
-                  <span className="text-sm text-foreground/55">{trait}</span>
-                </div>
+                  {trait}
+                </li>
               ))}
-            </div>
+            </ul>
           </motion.div>
         </div>
       </section>
 
-      {/* ─── Persona Deep Dives ─── */}
+      {/* ─── 04 Persona Deep Dives ─── */}
       <section className="relative py-20 sm:py-28" ref={personaRef}>
         <div className="section-divider" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
@@ -625,7 +923,7 @@ export default function AudiencePage() {
           >
             <div className="w-8 h-[2px] bg-cps-purple rounded-full" />
             <span className="section-label text-cps-purple">
-              02 — PERSONA DEEP DIVES
+              04 — PERSONA DEEP DIVES
             </span>
           </motion.div>
 
@@ -640,14 +938,25 @@ export default function AudiencePage() {
           </motion.h2>
 
           <div className="grid lg:grid-cols-2 gap-8">
-            <PersonaCard persona={PERSONA_BANKING} index={0} inView={personaInView} />
-            <PersonaCard persona={PERSONA_LEADER} index={1} inView={personaInView} />
+            <PersonaCard
+              persona={PERSONA_BANKING}
+              index={0}
+              inView={personaInView}
+            />
+            <PersonaCard
+              persona={PERSONA_LEADER}
+              index={1}
+              inView={personaInView}
+            />
           </div>
         </div>
       </section>
 
-      {/* ─── Shared Behaviour ─── */}
-      <section className="relative py-20 sm:py-28 section-tinted" ref={behaviourRef}>
+      {/* ─── 05 Shared Behaviour ─── */}
+      <section
+        className="relative py-20 sm:py-28 section-tinted"
+        ref={behaviourRef}
+      >
         <div className="section-divider" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
           <motion.div
@@ -658,7 +967,7 @@ export default function AudiencePage() {
           >
             <div className="w-8 h-[2px] bg-cps-blue rounded-full" />
             <span className="section-label text-cps-blue">
-              03 — SHARED BEHAVIOUR
+              05 — SHARED BEHAVIOUR
             </span>
           </motion.div>
 
@@ -678,56 +987,46 @@ export default function AudiencePage() {
             transition={{ duration: 0.6, delay: 0.15 }}
             className="text-sm text-foreground/45 max-w-2xl mb-12"
           >
-            Both personas share several behavioural patterns. Prospective students
-            typically spend several weeks researching before committing. They often
-            compare CPS with universities, private colleges, and online education
-            providers.
+            Both personas follow a similar research journey before enrolling.
+            Education decisions typically take between 2 and 8 weeks.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={behaviourInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.25 }}
-            className="card-elevated"
+            className="card-elevated !p-0 overflow-hidden"
           >
-            <p className="text-[10px] font-semibold tracking-[0.2em] text-foreground/25 uppercase mb-6">
-              Typical Research Process
-            </p>
-            <div className="space-y-0">
-              {RESEARCH_STEPS.map((step, i) => (
-                <div
-                  key={i}
-                  className="flex items-center gap-4 py-4 border-b border-black/[0.04] last:border-0"
-                >
-                  <span
-                    className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white shrink-0"
-                    style={{
-                      background: `linear-gradient(135deg, ${
-                        i < 2
-                          ? "#6B2D8B"
-                          : i < 4
-                          ? "#00A8E1"
-                          : "#10B981"
-                      }, ${
-                        i < 2
-                          ? "#6B2D8B80"
-                          : i < 4
-                          ? "#00A8E180"
-                          : "#10B98180"
-                      })`,
-                    }}
+            <div className="px-6 pt-5 pb-3">
+              <p className="text-[10px] font-semibold tracking-[0.2em] text-foreground/25 uppercase">
+                Typical Research Journey
+              </p>
+            </div>
+            <div className="divide-y divide-black/[0.04]">
+              {RESEARCH_STEPS.map((step, i) => {
+                const color =
+                  i < 2 ? "#6B2D8B" : i < 4 ? "#00A8E1" : "#10B981";
+                return (
+                  <div
+                    key={i}
+                    className="flex items-center gap-4 px-6 py-3"
                   >
-                    {i + 1}
-                  </span>
-                  <span className="text-sm text-foreground/60">{step}</span>
-                </div>
-              ))}
+                    <span
+                      className="w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold text-white shrink-0"
+                      style={{ backgroundColor: color }}
+                    >
+                      {i + 1}
+                    </span>
+                    <span className="text-sm text-foreground/60">{step}</span>
+                  </div>
+                );
+              })}
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* ─── Decision Psychology ─── */}
+      {/* ─── 06 Decision Psychology ─── */}
       <section className="relative py-20 sm:py-28" ref={psychologyRef}>
         <div className="section-divider" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
@@ -739,7 +1038,7 @@ export default function AudiencePage() {
           >
             <div className="w-8 h-[2px] bg-cps-purple rounded-full" />
             <span className="section-label text-cps-purple">
-              04 — DECISION PSYCHOLOGY
+              06 — DECISION PSYCHOLOGY
             </span>
           </motion.div>
 
@@ -759,40 +1058,35 @@ export default function AudiencePage() {
             transition={{ duration: 0.6, delay: 0.15 }}
             className="text-sm text-foreground/45 max-w-2xl mb-10"
           >
-            Key psychological drivers influencing enrollment decisions.
+            Several behavioural drivers influence enrollment decisions.
           </motion.p>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {PSYCHOLOGY.map((p, i) => (
-              <motion.button
+              <motion.div
                 key={p.principle}
                 initial={{ opacity: 0, y: 15 }}
                 animate={psychologyInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.4, delay: 0.2 + i * 0.06 }}
-                onClick={() =>
-                  setExpandedPsych(expandedPsych === i ? null : i)
-                }
-                className={`text-left p-6 rounded-xl border transition-all duration-300 ${
-                  expandedPsych === i
-                    ? "bg-white border-cps-purple/15 shadow-[0_2px_12px_rgba(107,45,139,0.08)]"
-                    : "bg-white border-black/[0.04] hover:border-black/[0.08]"
-                }`}
+                className="p-6 rounded-xl border border-black/[0.04] bg-white"
               >
-                <span className="text-2xl mb-3 block">{p.icon}</span>
                 <h4 className="text-sm font-semibold text-foreground mb-2">
                   {p.principle}
                 </h4>
                 <p className="text-xs text-foreground/45 leading-relaxed">
                   {p.description}
                 </p>
-              </motion.button>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ─── Google Ads Mapping ─── */}
-      <section className="relative py-20 sm:py-28 section-tinted" ref={googleRef}>
+      {/* ─── 07 Google Ads Mapping ─── */}
+      <section
+        className="relative py-20 sm:py-28 section-tinted"
+        ref={googleRef}
+      >
         <div className="section-divider" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
           <motion.div
@@ -803,7 +1097,7 @@ export default function AudiencePage() {
           >
             <div className="w-8 h-[2px] bg-cps-blue rounded-full" />
             <span className="section-label text-cps-blue">
-              05 — GOOGLE ADS MAPPING
+              07 — GOOGLE ADS MAPPING
             </span>
           </motion.div>
 
@@ -823,12 +1117,11 @@ export default function AudiencePage() {
             transition={{ duration: 0.6, delay: 0.15 }}
             className="text-sm text-foreground/45 max-w-2xl mb-10"
           >
-            Google captures high-intent searches from users already researching
-            qualifications. These searches indicate strong enrollment intent and
-            form the backbone of Google acquisition campaigns.
+            Google captures high-intent searches from users actively researching
+            qualifications.
           </motion.p>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
             {GOOGLE_INTENT.map((cat, i) => (
               <motion.div
                 key={cat.category}
@@ -856,7 +1149,7 @@ export default function AudiencePage() {
                         key={q}
                         className="text-sm text-foreground/55 flex items-center gap-2"
                       >
-                        <span className="text-foreground/20">→</span>
+                        <span className="text-foreground/20">{"\u2192"}</span>
                         <code className="text-xs bg-black/[0.03] rounded px-2 py-1">
                           {q}
                         </code>
@@ -867,10 +1160,20 @@ export default function AudiencePage() {
               </motion.div>
             ))}
           </div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            animate={googleInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.4, delay: 0.5 }}
+            className="text-sm text-foreground/40 italic"
+          >
+            These searches indicate strong enrollment intent and form the
+            backbone of Google acquisition campaigns.
+          </motion.p>
         </div>
       </section>
 
-      {/* ─── Meta Ads Mapping ─── */}
+      {/* ─── 08 Meta Ads Mapping ─── */}
       <section className="relative py-20 sm:py-28" ref={metaRef}>
         <div className="section-divider" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
@@ -882,7 +1185,7 @@ export default function AudiencePage() {
           >
             <div className="w-8 h-[2px] bg-cps-blue rounded-full" />
             <span className="section-label text-cps-blue">
-              06 — META ADS MAPPING
+              08 — META ADS MAPPING
             </span>
           </motion.div>
 
@@ -902,9 +1205,8 @@ export default function AudiencePage() {
             transition={{ duration: 0.6, delay: 0.15 }}
             className="text-sm text-foreground/45 max-w-2xl mb-10"
           >
-            Meta allows CPS to reach potential students before they begin
-            searching for qualifications. Audience targeting focuses on interests
-            aligned with the personas.
+            Meta allows CPS to reach prospective students earlier in their
+            decision journey.
           </motion.p>
 
           <div className="grid md:grid-cols-2 gap-6 mb-8">
@@ -956,7 +1258,7 @@ export default function AudiencePage() {
             ))}
           </div>
 
-          {/* Expansion & Retargeting */}
+          {/* Expansion */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={metaInView ? { opacity: 1, y: 0 } : {}}
@@ -967,8 +1269,9 @@ export default function AudiencePage() {
               Audience Expansion
             </p>
             <p className="text-sm text-foreground/55 leading-relaxed mb-3">
-              Meta also enables expansion through lookalike audiences created from
-              lead lists, website visitors, and video engagement.
+              Meta campaigns will expand reach using lookalike audiences from
+              leads, lookalike audiences from website visitors, and video
+              engagement audiences.
             </p>
             <p className="text-sm text-foreground/55 leading-relaxed">
               Retargeting ensures CPS remains visible during the research phase
@@ -978,8 +1281,11 @@ export default function AudiencePage() {
         </div>
       </section>
 
-      {/* ─── Audience Growth ─── */}
-      <section className="relative py-20 sm:py-28 section-tinted" ref={growthRef}>
+      {/* ─── 09 Audience Growth ─── */}
+      <section
+        className="relative py-20 sm:py-28 section-tinted"
+        ref={growthRef}
+      >
         <div className="section-divider" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
           <motion.div
@@ -990,7 +1296,7 @@ export default function AudiencePage() {
           >
             <div className="w-8 h-[2px] bg-green-500 rounded-full" />
             <span className="section-label text-green-600">
-              07 — AUDIENCE GROWTH
+              09 — AUDIENCE GROWTH
             </span>
           </motion.div>
 
@@ -1010,37 +1316,52 @@ export default function AudiencePage() {
             transition={{ duration: 0.6, delay: 0.15 }}
             className="text-sm text-foreground/45 max-w-2xl mb-10"
           >
-            As CPS grows its B2C acquisition engine, audience targeting will
-            expand through compounding data sources that improve targeting accuracy
-            and reduce acquisition costs over time.
+            As CPS builds its B2C acquisition engine, audience targeting becomes
+            more precise.
           </motion.p>
 
-          <div className="grid sm:grid-cols-2 gap-4">
-            {GROWTH_CHANNELS.map((ch, i) => (
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
+            {GROWTH_TIMELINE.map((phase, i) => (
               <motion.div
-                key={ch.label}
+                key={phase.period}
                 initial={{ opacity: 0, y: 15 }}
                 animate={growthInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.4, delay: 0.2 + i * 0.08 }}
+                transition={{ duration: 0.4, delay: 0.2 + i * 0.1 }}
                 className="card-elevated !p-0 overflow-hidden"
               >
                 <div
                   className="h-1 w-full"
                   style={{
-                    background: `linear-gradient(90deg, ${ch.color}, ${ch.color}60)`,
+                    background: `linear-gradient(90deg, ${phase.color}, ${phase.color}60)`,
                   }}
                 />
                 <div className="p-6">
-                  <h4 className="text-sm font-semibold text-foreground mb-2">
-                    {ch.label}
+                  <span
+                    className="text-[10px] font-semibold tracking-[0.15em] uppercase"
+                    style={{ color: phase.color }}
+                  >
+                    {phase.period}
+                  </span>
+                  <h4 className="text-sm font-semibold text-foreground mt-2 mb-2">
+                    {phase.label}
                   </h4>
                   <p className="text-xs text-foreground/45 leading-relaxed">
-                    {ch.description}
+                    {phase.description}
                   </p>
                 </div>
               </motion.div>
             ))}
           </div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            animate={growthInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.4, delay: 0.5 }}
+            className="text-sm text-foreground/40 italic"
+          >
+            These compounding data sources improve targeting accuracy and reduce
+            acquisition costs over time.
+          </motion.p>
         </div>
       </section>
 
