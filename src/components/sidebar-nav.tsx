@@ -13,6 +13,7 @@ import {
   BarChart3,
   Pen,
   GitBranch,
+  RefreshCw,
   Menu,
   X,
   EyeOff,
@@ -43,6 +44,12 @@ const groups = [
       { name: "Paid Media", href: "/paid-media", icon: BarChart3 },
       { name: "Content & Creative", href: "/content-creative", icon: Pen },
       { name: "Conversion & Ops", href: "/conversion", icon: GitBranch },
+    ],
+  },
+  {
+    label: "GROWTH",
+    items: [
+      { name: "Alumni / Community", href: "/alumni", icon: RefreshCw },
     ],
   },
 ];

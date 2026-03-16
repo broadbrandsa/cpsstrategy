@@ -9,12 +9,14 @@ import ObjectivesKpi from "@/components/strategy/objectives-kpi";
 import CustomerJourney from "@/components/strategy/customer-journey";
 import ChannelEcosystem from "@/components/strategy/channel-ecosystem";
 import AuthorityTrust from "@/components/strategy/authority-trust";
+import StrategicChoices from "@/components/strategy/strategic-choices";
 
 export default function StrategyPage() {
   return (
     <div className="relative min-h-screen bg-white">
       <StrategyPageHeader />
       <ExecutiveSummary />
+      <StrategicChoices />
       <ObjectivesKpi />
       <SituationAnalysis />
       <CustomerJourney />

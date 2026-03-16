@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import Link from "next/link";
 import Footer from "@/components/sections/footer";
 
 /* ─── Pyramid Tiers ─── */
@@ -891,22 +892,25 @@ export default function AudiencePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={landscapeInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="card-elevated"
+            className="card-elevated !p-0 overflow-hidden"
           >
-            <p className="text-[10px] font-semibold tracking-[0.2em] text-foreground/25 uppercase mb-4">
-              Shared Characteristics
-            </p>
-            <ul className="space-y-2.5">
-              {SHARED_TRAITS.map((trait, i) => (
-                <li
-                  key={i}
-                  className="flex items-start gap-3 text-sm text-foreground/55"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-cps-purple mt-1.5 shrink-0" />
-                  {trait}
-                </li>
-              ))}
-            </ul>
+            <div className="h-[3px] w-full bg-gradient-to-r from-cps-purple to-cps-blue" />
+            <div className="p-7">
+              <p className="text-[10px] font-semibold tracking-[0.2em] text-foreground/25 uppercase mb-4">
+                Shared Characteristics
+              </p>
+              <div className="grid sm:grid-cols-2 gap-x-6 gap-y-2.5">
+                {SHARED_TRAITS.map((trait, i) => (
+                  <div
+                    key={i}
+                    className="flex items-start gap-3 text-sm text-foreground/55"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-cps-purple mt-1.5 shrink-0" />
+                    <span>{trait}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -1361,6 +1365,18 @@ export default function AudiencePage() {
           >
             These compounding data sources improve targeting accuracy and reduce
             acquisition costs over time.
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            animate={growthInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.4, delay: 0.55 }}
+            className="text-sm text-foreground/40 mt-6 leading-[1.8]"
+          >
+            Community and alumni participation also strengthen audience growth over time by creating warmer retargeting pools, stronger social proof, and more credible referral pathways.{" "}
+            <Link href="/alumni" className="text-cps-purple font-medium hover:underline">
+              See Alumni / Community Flywheel &rarr;
+            </Link>
           </motion.p>
         </div>
       </section>

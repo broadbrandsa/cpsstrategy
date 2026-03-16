@@ -15,29 +15,38 @@ import {
 const FLYWHEEL_STEPS = [
   {
     icon: Building2,
-    title: "B2B Brand Credibility",
+    title: "Industry Credibility",
     description:
-      "Banks trust CPS (Absa, Standard Bank, FNB, Capitec, Nedbank)",
+      "CPS already has strong credibility through its B2B relationships with major banks. This is the foundation the entire flywheel builds on.",
     color: "#6B2D8B",
   },
   {
     icon: ShieldCheck,
-    title: "B2C Trust Signals",
+    title: "Student Trust",
     description:
-      'Trusted by SA\'s biggest banks becomes key ad messaging',
+      "This institutional credibility becomes a powerful trust signal for individual learners considering a B2C programme.",
     color: "#00A8E1",
   },
   {
     icon: GraduationCap,
-    title: "Student Enrollments",
-    description: "B2C students succeed, graduate, refer peers",
+    title: "Student Success",
+    description:
+      "Students complete qualifications, develop professional skills, and progress in their careers — creating real outcomes to showcase.",
     color: "#10B981",
   },
   {
     icon: Handshake,
-    title: "More B2B Contracts",
-    description: "Graduate success stories strengthen B2B sales pitch",
-    color: "#F59E0B",
+    title: "Advocacy & Proof",
+    description:
+      "Graduates share experiences, recommend programmes, and provide testimonials that become the most credible form of marketing.",
+    color: "#FFD100",
+  },
+  {
+    icon: Users,
+    title: "Audience Growth",
+    description:
+      "These stories generate warmer audiences, referrals, and organic reach — reducing acquisition costs and expanding the pipeline.",
+    color: "#EF4444",
   },
 ];
 
@@ -72,7 +81,7 @@ export default function B2bB2cFlywheel() {
         >
           <div className="w-8 h-[2px] bg-cps-purple rounded-full" />
           <span className="section-label text-cps-purple">
-            B2B-to-B2C Flywheel
+            The CPS Growth Flywheel
           </span>
         </motion.div>
 
@@ -82,8 +91,8 @@ export default function B2bB2cFlywheel() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-3xl sm:text-4xl font-bold text-foreground mt-8 mb-4 tracking-tight"
         >
-          The reinforcing loop between{" "}
-          <span className="text-gradient-purple">B2B and B2C</span>
+          A reinforcing flywheel,{" "}
+          <span className="text-gradient-purple">not a linear funnel</span>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -91,12 +100,11 @@ export default function B2bB2cFlywheel() {
           transition={{ duration: 0.6, delay: 0.15 }}
           className="text-sm text-foreground/35 mb-16 max-w-3xl"
         >
-          CPS&apos;s B2B credibility is its biggest untapped B2C asset. Each
-          side of the business strengthens the other in a compounding cycle.
+          CPS&apos;s growth is best understood as a five-stage flywheel where each stage feeds the next. As the cycle repeats, the cost of acquiring each new student decreases while brand credibility increases.
         </motion.p>
 
         {/* Flywheel cycle cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
           {FLYWHEEL_STEPS.map((step, i) => (
             <motion.div
               key={step.title}

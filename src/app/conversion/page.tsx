@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import Link from "next/link";
 import ConversionStrategy from "@/components/sections/conversion-strategy";
 import LeadNurturing from "@/components/sections/lead-nurturing";
 import Footer from "@/components/sections/footer";
@@ -9,7 +10,6 @@ import { LeadScoringChart } from "@/components/charts";
 import MartechStack from "@/components/sections/martech-stack";
 import DataAttribution from "@/components/sections/data-attribution";
 import {
-  RISK_TRIGGERS,
   LEAD_SCORING_ACTIONS,
   LEAD_SCORING_TIERS,
   WHATSAPP_AUTOMATION,
@@ -89,6 +89,18 @@ function WhatsAppTemplates() {
             </motion.div>
           ))}
         </div>
+
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.4, delay: 0.6 }}
+          className="text-sm text-foreground/40 mt-8 leading-[1.8]"
+        >
+          The long-term goal is not only enrollment, but continued participation in a broader CPS community that strengthens retention, progression, and advocacy.{" "}
+          <Link href="/alumni" className="text-cps-purple font-medium hover:underline">
+            See Alumni / Community Flywheel &rarr;
+          </Link>
+        </motion.p>
       </div>
     </section>
   );
@@ -212,38 +224,6 @@ function LeadScoringSummary() {
             ))}
           </motion.div>
         </div>
-
-        {/* Risk Triggers */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-6 overflow-x-auto"
-        >
-          <div className="min-w-[600px] card-elevated !rounded-2xl overflow-hidden">
-            <div className="grid grid-cols-3 gap-4 px-6 py-4 bg-cps-red/[0.04] border-b border-cps-red/10">
-              <span className="text-[11px] font-semibold tracking-[0.1em] text-cps-red uppercase">Phase</span>
-              <span className="text-[11px] font-semibold tracking-[0.1em] text-cps-red uppercase">Signal</span>
-              <span className="text-[11px] font-semibold tracking-[0.1em] text-cps-red uppercase">Auto-Response</span>
-            </div>
-            {RISK_TRIGGERS.map((trigger, i) => (
-              <div
-                key={`risk-${i}`}
-                className={`grid grid-cols-3 gap-4 px-6 py-3.5 border-b border-black/[0.03] hover:bg-cps-grey/50 transition-colors ${i % 2 === 1 ? "bg-black/[0.01]" : ""}`}
-              >
-                <span className="text-sm font-medium text-foreground/70">
-                  {trigger.phase}
-                </span>
-                <span className="text-sm text-cps-red/80">
-                  {trigger.signal}
-                </span>
-                <span className="text-sm text-foreground/50">
-                  {trigger.response}
-                </span>
-              </div>
-            ))}
-          </div>
-        </motion.div>
 
         {/* Performance Escalation Logic */}
         <motion.div
@@ -418,6 +398,112 @@ function ReportingAttribution() {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Roles, Ownership & Reporting                                        */
+/* ------------------------------------------------------------------ */
+
+const ROLES = [
+  {
+    name: "Karen",
+    responsibility: "Responsible for overall marketing alignment, overseeing strategy and plans, and managing reporting and feedback.",
+    color: "#6B2D8B",
+  },
+  {
+    name: "Dylan",
+    responsibility: "Point of contact for B2B marketing, including LinkedIn campaigns, website feedback, and reporting from lead through to pipeline and close.",
+    color: "#00A8E1",
+  },
+  {
+    name: "Susan",
+    responsibility: "Point of contact for B2C marketing, including intake dates, pricing, website updates, and reporting.",
+    color: "#10B981",
+  },
+  {
+    name: "Broadbrand",
+    responsibility: "Operates as CPS\u2019s outsourced CMO function across strategy, PPC, CRO, UX, content, creative direction, analytics, and growth planning.",
+    color: "#FFD100",
+  },
+];
+
+function RolesOwnership() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <section className="relative py-20 sm:py-28 section-tinted">
+      <div className="section-divider" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8" ref={ref}>
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.5 }}
+          className="flex items-center gap-3 mb-4"
+        >
+          <div className="w-8 h-[2px] bg-cps-purple rounded-full" />
+          <span className="section-label text-cps-purple">
+            Roles, Ownership &amp; Reporting
+          </span>
+        </motion.div>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="text-2xl sm:text-3xl font-bold text-foreground/90 mb-4 tracking-tight"
+        >
+          Clear ownership across B2B and B2C
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="text-sm text-foreground/50 max-w-2xl mb-12"
+        >
+          Clear ownership is required for the strategy to run effectively across B2B and B2C.
+        </motion.p>
+
+        <div className="grid sm:grid-cols-2 gap-4 mb-10">
+          {ROLES.map((role, i) => (
+            <motion.div
+              key={role.name}
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.4, delay: 0.2 + i * 0.08 }}
+              className="card-elevated !p-0 overflow-hidden"
+            >
+              <div className="h-[3px] w-full" style={{ backgroundColor: role.color }} />
+              <div className="p-6">
+                <h4 className="text-sm font-bold text-foreground mb-2">
+                  {role.name}
+                </h4>
+                <p className="text-xs text-foreground/45 leading-[1.7]">
+                  {role.responsibility}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Operational Principle */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="rounded-2xl bg-white border border-black/[0.05] p-8"
+          style={{ borderLeft: "4px solid #6B2D8B" }}
+        >
+          <h4 className="text-xs font-bold text-cps-purple uppercase tracking-wider mb-3">
+            Operational Principle
+          </h4>
+          <p className="text-sm text-foreground/50 leading-[1.8]">
+            Broadbrand owns strategic coordination and growth execution across the digital funnel. CPS retains operational ownership of internal decision-making, programme inputs, pricing approval, and student-facing business processes.
+          </p>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /*  Page Header                                                         */
 /* ------------------------------------------------------------------ */
 
@@ -467,6 +553,7 @@ export default function ConversionPage() {
       <MartechStack />
       <DataAttribution />
       <ReportingAttribution />
+      <RolesOwnership />
       <Footer />
     </div>
   );

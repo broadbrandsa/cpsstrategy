@@ -15,6 +15,155 @@ import {
 } from "@/content/strategy-data";
 
 /* ------------------------------------------------------------------ */
+/*  Google vs Meta — Different Jobs in the Funnel                       */
+/* ------------------------------------------------------------------ */
+
+const GOOGLE_TRAITS = [
+  "Intent-led",
+  "Query-driven",
+  "Captures high-intent demand",
+  "Strongest for bottom-funnel traffic",
+  "Works when prospects already know what problem they are trying to solve",
+];
+
+const META_TRAITS = [
+  "Audience-led",
+  "Interruption-based discovery",
+  "Creates awareness and consideration",
+  "Strongest for top- and mid-funnel demand generation",
+  "Works by placing relevant messages in front of people based on who they are and what they are likely to care about",
+];
+
+function GoogleVsMeta() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <section className="relative py-20 sm:py-28 section-tinted">
+      <div className="section-divider" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8" ref={ref}>
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.5 }}
+          className="flex items-center gap-3 mb-4"
+        >
+          <div className="w-8 h-[2px] bg-cps-gold rounded-full" />
+          <span className="section-label text-cps-gold">
+            Google vs Meta — Different Jobs in the Funnel
+          </span>
+        </motion.div>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="text-2xl sm:text-3xl font-bold text-foreground/90 mb-4 tracking-tight"
+        >
+          Two platforms, two different jobs
+        </motion.h2>
+
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="text-sm text-foreground/50 max-w-3xl mb-10"
+        >
+          Google and Meta do not perform the same role in this strategy.
+        </motion.p>
+
+        {/* Explanation cards */}
+        <div className="grid md:grid-cols-2 gap-6 mb-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="card-elevated !p-0 overflow-hidden"
+          >
+            <div className="h-[3px] w-full bg-cps-blue" />
+            <div className="p-6">
+              <h4 className="text-xs font-bold text-cps-blue uppercase tracking-wider mb-3">
+                Google captures existing demand
+              </h4>
+              <p className="text-sm text-foreground/50 leading-[1.8] mb-4">
+                It reaches people who are already searching for qualifications, comparing providers, evaluating costs, or looking for a next step in their career. Search campaigns work best when intent already exists.
+              </p>
+              <div className="rounded-xl bg-cps-blue/[0.04] border border-cps-blue/10 p-4">
+                <p className="text-xs font-semibold text-cps-blue mb-3 uppercase tracking-wide">Google Ads</p>
+                <div className="space-y-2">
+                  {GOOGLE_TRAITS.map((trait, i) => (
+                    <div key={i} className="flex items-start gap-2">
+                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-cps-blue/60 shrink-0" />
+                      <span className="text-xs text-foreground/50 leading-[1.6]">{trait}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="card-elevated !p-0 overflow-hidden"
+          >
+            <div className="h-[3px] w-full bg-cps-purple" />
+            <div className="p-6">
+              <h4 className="text-xs font-bold text-cps-purple uppercase tracking-wider mb-3">
+                Meta creates and shapes demand
+              </h4>
+              <p className="text-sm text-foreground/50 leading-[1.8] mb-4">
+                It allows CPS to place relevant messages in front of people before they actively search, helping the brand build awareness, trust, and consideration earlier in the decision journey.
+              </p>
+              <div className="rounded-xl bg-cps-purple/[0.04] border border-cps-purple/10 p-4">
+                <p className="text-xs font-semibold text-cps-purple mb-3 uppercase tracking-wide">Meta Ads</p>
+                <div className="space-y-2">
+                  {META_TRAITS.map((trait, i) => (
+                    <div key={i} className="flex items-start gap-2">
+                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-cps-purple/60 shrink-0" />
+                      <span className="text-xs text-foreground/50 leading-[1.6]">{trait}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* In simple terms */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="grid md:grid-cols-2 gap-4 mb-8"
+        >
+          <div className="rounded-xl bg-cps-blue/[0.04] border border-cps-blue/10 px-6 py-4">
+            <p className="text-sm text-foreground/55 font-medium">
+              Google finds people who are already looking.
+            </p>
+          </div>
+          <div className="rounded-xl bg-cps-purple/[0.04] border border-cps-purple/10 px-6 py-4">
+            <p className="text-sm text-foreground/55 font-medium">
+              Meta helps CPS get in front of people who should be looking.
+            </p>
+          </div>
+        </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="text-sm text-foreground/40 leading-[1.8] max-w-3xl"
+        >
+          Used together, Google and Meta create a more complete acquisition system. Google converts active demand. Meta expands future demand, nurtures familiarity, and supports retargeting until prospects are ready to act.
+        </motion.p>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /*  Google Deep Dive                                                    */
 /* ------------------------------------------------------------------ */
 
@@ -43,7 +192,7 @@ function GoogleDeepDive() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-2xl sm:text-3xl font-bold text-foreground/90 mb-4 tracking-tight"
         >
-          Capture high-intent search demand
+          Campaign structure &amp; keyword strategy
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 15 }}
@@ -51,9 +200,7 @@ function GoogleDeepDive() {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="text-sm text-foreground/50 max-w-2xl mb-12"
         >
-          Google Search is the primary engine for bottom-funnel leads already
-          researching banking qualifications. Our campaign structure captures
-          intent at every stage.
+          Six campaign types capture intent at every stage of the search journey, from branded queries to competitor conquesting.
         </motion.p>
 
         {/* Campaign Structure */}
@@ -125,7 +272,7 @@ function MetaDeepDive() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-2xl sm:text-3xl font-bold text-foreground/90 mb-4 tracking-tight"
         >
-          Drive awareness &amp; mid-funnel consideration
+          Audience segments, creative role &amp; retargeting
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 15 }}
@@ -133,13 +280,11 @@ function MetaDeepDive() {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="text-sm text-foreground/50 max-w-2xl mb-12"
         >
-          Meta (Facebook &amp; Instagram) is where we generate top-of-funnel
-          awareness and nurture mid-funnel consideration with compelling
-          creative and precise audience targeting.
+          Meta campaigns target specific audience segments with creative designed to build familiarity, warm up future demand, and retarget engaged visitors until they are ready to act.
         </motion.p>
 
         {/* Audience Segments */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
           {META_AUDIENCES.map((aud, i) => (
             <motion.div
               key={`meta-aud-${i}`}
@@ -157,6 +302,165 @@ function MetaDeepDive() {
             </motion.div>
           ))}
         </div>
+
+        {/* Creative Formats */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mb-12"
+        >
+          <h3 className="text-lg font-bold text-foreground mb-3 tracking-tight">
+            Creative Formats
+          </h3>
+          <p className="text-sm text-foreground/45 leading-[1.8] mb-6 max-w-3xl">
+            Meta campaigns rely heavily on visual storytelling. Creative formats should include a mix of static, video, and short-form content to communicate credibility, aspiration, and clarity around the qualifications.
+          </p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {[
+              "Short video explainers introducing the programme",
+              "Testimonial videos from graduates",
+              "Carousel ads explaining career pathways",
+              "Simple graphic posts highlighting pricing and flexibility",
+              "Reels and short-form vertical video explaining study life",
+            ].map((format, i) => (
+              <div
+                key={i}
+                className="flex items-start gap-3 px-4 py-3 rounded-xl bg-cps-purple/[0.03] border border-cps-purple/8"
+              >
+                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-cps-purple/50 shrink-0" />
+                <span className="text-xs text-foreground/50 leading-[1.6]">{format}</span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Messaging Layers */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.45 }}
+          className="mb-12"
+        >
+          <h3 className="text-lg font-bold text-foreground mb-3 tracking-tight">
+            Messaging Layers
+          </h3>
+          <p className="text-sm text-foreground/45 leading-[1.8] mb-6 max-w-3xl">
+            Meta campaigns should operate across several messaging layers.
+          </p>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {[
+              {
+                title: "Career Aspiration",
+                body: "Position qualifications as the pathway to professional advancement.",
+                example: "\u201CLaunch a career in banking with a qualification trusted by SA\u2019s biggest banks.\u201D",
+                color: "#6B2D8B",
+              },
+              {
+                title: "Proof & Authority",
+                body: "Build trust through credibility signals such as accreditation, graduate numbers, and bank partnerships.",
+                example: "\u201CTrusted by professionals from Absa, Standard Bank, FNB and more.\u201D",
+                color: "#00A8E1",
+              },
+              {
+                title: "Programme Clarity",
+                body: "Explain what the qualification includes, who it is for, and what outcomes students can expect.",
+                example: null,
+                color: "#10B981",
+              },
+              {
+                title: "Decision Support",
+                body: "Retarget warm prospects with pricing information, deadlines, and clear calls to action.",
+                example: null,
+                color: "#FFD100",
+              },
+            ].map((layer, i) => (
+              <div key={i} className="card-elevated !p-0 overflow-hidden">
+                <div className="h-[3px] w-full" style={{ backgroundColor: layer.color }} />
+                <div className="p-5">
+                  <h4 className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: layer.color }}>
+                    {layer.title}
+                  </h4>
+                  <p className="text-xs text-foreground/45 leading-[1.7] mb-2">{layer.body}</p>
+                  {layer.example && (
+                    <p className="text-xs text-foreground/35 italic">{layer.example}</p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Ad Types */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="mb-12"
+        >
+          <h3 className="text-lg font-bold text-foreground mb-3 tracking-tight">
+            Ad Types
+          </h3>
+          <div className="grid md:grid-cols-3 gap-4">
+            {[
+              {
+                title: "Awareness Campaigns",
+                body: "Introduce CPS and the programme opportunity to relevant audiences.",
+                color: "#6B2D8B",
+              },
+              {
+                title: "Consideration Campaigns",
+                body: "Encourage info pack downloads and guide prospects to landing pages.",
+                color: "#00A8E1",
+              },
+              {
+                title: "Retargeting Campaigns",
+                body: "Re-engage website visitors and content viewers with stronger calls to action.",
+                color: "#10B981",
+              },
+            ].map((ad, i) => (
+              <div key={i} className="card-elevated !p-0 overflow-hidden">
+                <div className="h-[3px] w-full" style={{ backgroundColor: ad.color }} />
+                <div className="p-5">
+                  <h4 className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: ad.color }}>
+                    {ad.title}
+                  </h4>
+                  <p className="text-xs text-foreground/45 leading-[1.7]">{ad.body}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Content Strategy within Meta */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.55 }}
+        >
+          <h3 className="text-lg font-bold text-foreground mb-3 tracking-tight">
+            Content Strategy within Meta
+          </h3>
+          <p className="text-sm text-foreground/45 leading-[1.8] mb-6 max-w-3xl">
+            Meta campaigns should leverage the broader content strategy rather than operate in isolation. Organic content and blog material can be repurposed into ad creatives, including:
+          </p>
+          <div className="grid sm:grid-cols-2 gap-3">
+            {[
+              "Career advice snippets",
+              "Short qualification explainers",
+              "Student transformation stories",
+              "Programme highlights",
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="flex items-center gap-3 px-4 py-3 rounded-xl bg-cps-blue/[0.04] border border-cps-blue/10"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-cps-blue/50 shrink-0" />
+                <span className="text-sm text-foreground/55">{item}</span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
 
       </div>
     </section>
@@ -402,12 +706,12 @@ export default function PaidMediaPage() {
         </div>
       </section>
       <PaidMedia />
+      <GoogleVsMeta />
       <GoogleDeepDive />
       <MetaDeepDive />
       <CpaModelling />
       <Benchmarks />
       <ABTestingRoadmap />
-      <EfficiencyFramework />
       <BudgetSummary />
       <Footer />
     </div>

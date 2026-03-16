@@ -117,18 +117,18 @@ export default function PaidMedia() {
             <div className="p-6 rounded-2xl bg-cps-blue/[0.04] border border-cps-blue/10">
               <h4 className="text-sm font-bold text-cps-blue mb-2">Google Search — R7,500</h4>
               <p className="text-sm text-foreground/45 leading-[1.7]">
-                Capture high-intent searchers actively looking for banking/leadership qualifications. CPC range: R12–R20. Three campaign types: Brand Search, High-Intent Non-Brand, and Competitor Conquesting.
+                CPC range: R12–R20. Six campaign types from brand search to competitor conquesting.
               </p>
             </div>
             <div className="p-6 rounded-2xl bg-cps-purple/[0.04] border border-cps-purple/10">
               <h4 className="text-sm font-bold text-cps-purple mb-2">Meta (FB + IG) — R7,500</h4>
               <p className="text-sm text-foreground/45 leading-[1.7]">
-                Build awareness among target personas, drive info pack downloads, and retarget website visitors. CPC range: R5–R8. Lower cost per click drives volume, balancing Google&apos;s higher intent.
+                CPC range: R5–R8. Lower cost per click drives volume and pipeline alongside Google&apos;s higher-intent traffic.
               </p>
             </div>
             <div className="p-6 rounded-2xl bg-white border border-black/[0.05] shadow-sm">
               <p className="text-sm text-foreground/45 leading-[1.7]">
-                This balanced approach lets us capture high-intent search demand while simultaneously building awareness and pipeline through social. Allocation will shift based on early performance data.
+                Allocation will shift based on early performance data. See the platform-role comparison below for how each channel contributes to the funnel.
               </p>
             </div>
           </motion.div>

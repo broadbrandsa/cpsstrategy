@@ -71,17 +71,42 @@ const CREATIVE_BRIEF_FIELDS = [
 
 /* ================================================================== */
 
+const CONTENT_ENGINE_ITEMS = [
+  {
+    title: "How content feeds paid media",
+    body: "Educational articles, career guides, and student stories provide raw material that can be adapted into paid ads, social posts, and short-form video creatives. This ensures the advertising system always has fresh, relevant creative rather than relying on repetitive promotional messaging.",
+    color: "#6B2D8B",
+  },
+  {
+    title: "How content improves conversion",
+    body: "Prospective students frequently search for answers before applying. Clear, informative content addressing questions such as career pathways, qualification comparisons, and pricing builds confidence and reduces perceived risk before a prospect reaches the application stage.",
+    color: "#00A8E1",
+  },
+  {
+    title: "How content supports retargeting",
+    body: "Visitors who read articles or interact with educational content can be retargeted with programme-specific messaging. For example: career article reader \u2192 HCIB programme ad, leadership article reader \u2192 ACL6 programme ad. This creates a more personalised journey from discovery to application.",
+    color: "#10B981",
+  },
+  {
+    title: "How content compounds over time",
+    body: "Unlike advertising, which stops generating traffic when spending stops, high-quality content continues attracting prospective students through organic search and social discovery. Over time this reduces reliance on paid media and lowers the blended cost of acquiring new students.",
+    color: "#FFD100",
+  },
+];
+
 export default function ContentCreativePage() {
   const headerRef = useRef(null);
   const headlineRef = useRef(null);
 
   const briefRef = useRef(null);
   const seoRef = useRef(null);
+  const engineRef = useRef(null);
 
   const headerInView = useInView(headerRef, { once: true, margin: "-100px" });
   const headlineInView = useInView(headlineRef, { once: true, margin: "-100px" });
   const seoInView = useInView(seoRef, { once: true, margin: "-100px" });
   const briefInView = useInView(briefRef, { once: true, margin: "-100px" });
+  const engineInView = useInView(engineRef, { once: true, margin: "-100px" });
 
   return (
     <div className="relative min-h-screen bg-white">
@@ -335,6 +360,67 @@ export default function ContentCreativePage() {
 
       {/* ───────── Organic Social Strategy ───────── */}
       <OrganicSocial />
+
+      {/* ───────── How Content Powers the Acquisition Engine ───────── */}
+      <section className="relative py-28 sm:py-36 section-tinted" ref={engineRef}>
+        <div className="section-divider" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={engineInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.5 }}
+            className="flex items-center gap-3 mb-4"
+          >
+            <div className="w-8 h-[2px] bg-cps-blue rounded-full" />
+            <span className="section-label text-cps-blue">
+              Content &amp; Acquisition
+            </span>
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={engineInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-3xl sm:text-4xl font-bold text-foreground mt-8 mb-4 tracking-tight"
+          >
+            How content powers the{" "}
+            <span className="text-cps-blue">acquisition engine</span>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            animate={engineInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="text-sm text-foreground/35 mb-14 max-w-3xl"
+          >
+            Content is not only a long-term SEO asset. It directly strengthens the paid acquisition system.
+          </motion.p>
+
+          <div className="grid sm:grid-cols-2 gap-6">
+            {CONTENT_ENGINE_ITEMS.map((item, i) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={engineInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.4, delay: 0.2 + i * 0.08 }}
+                className="card-elevated !p-0 overflow-hidden"
+              >
+                <div className="h-[3px] w-full" style={{ backgroundColor: item.color }} />
+                <div className="p-6 sm:p-8">
+                  <h3
+                    className="text-sm font-bold mb-3 uppercase tracking-wider"
+                    style={{ color: item.color }}
+                  >
+                    {item.title}
+                  </h3>
+                  <p className="text-sm text-foreground/50 leading-[1.7]">
+                    {item.body}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ───────── Creative Brief Template ───────── */}
       <section className="relative py-28 sm:py-36" ref={briefRef}>

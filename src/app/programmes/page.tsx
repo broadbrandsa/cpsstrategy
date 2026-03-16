@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import Link from "next/link";
 import Footer from "@/components/sections/footer";
 
 /* ------------------------------------------------------------------ */
@@ -637,6 +638,18 @@ export default function ProgrammesPage() {
               </div>
             </div>
           </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            animate={referralInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="text-sm text-foreground/40 mt-8 leading-[1.8]"
+          >
+            This referral opportunity becomes significantly stronger when students remain connected through an intentional alumni and community experience.{" "}
+            <Link href="/alumni" className="text-cps-purple font-medium hover:underline">
+              See Alumni / Community Flywheel &rarr;
+            </Link>
+          </motion.p>
         </div>
       </section>
 
