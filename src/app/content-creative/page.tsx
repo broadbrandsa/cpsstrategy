@@ -7,6 +7,7 @@ import ContentStrategy from "@/components/sections/content-strategy";
 import Footer from "@/components/sections/footer";
 
 import OrganicSocial from "@/components/sections/organic-social";
+import GraduateOutcomes from "@/components/sections/graduate-outcomes";
 
 /* ─── Headline Bank Data ─── */
 const HEADLINES = [
@@ -357,6 +358,9 @@ export default function ContentCreativePage() {
 
       {/* ───────── Content Strategy (existing) ───────── */}
       <ContentStrategy />
+
+      {/* ───────── Graduate Outcomes / Success Stories ───────── */}
+      <GraduateOutcomes />
 
       {/* ───────── Organic Social Strategy ───────── */}
       <OrganicSocial />

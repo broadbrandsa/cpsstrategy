@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import Link from "next/link";
 import {
   Building2,
   ShieldCheck,
@@ -223,6 +224,19 @@ export default function B2bB2cFlywheel() {
             differently.&rdquo;
           </p>
         </motion.div>
+
+        {/* Cross-link */}
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.4, delay: 0.9 }}
+          className="text-sm text-foreground/40 mt-8 leading-[1.8]"
+        >
+          For the enterprise side of this system, see{" "}
+          <Link href="/b2b" className="text-cps-purple font-medium hover:underline">
+            B2B Strategy &rarr;
+          </Link>
+        </motion.p>
       </div>
     </section>
   );

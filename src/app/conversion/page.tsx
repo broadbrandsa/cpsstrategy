@@ -17,6 +17,347 @@ import {
 
 
 /* ------------------------------------------------------------------ */
+/*  Qualification Selector Tool                                         */
+/* ------------------------------------------------------------------ */
+
+const SELECTOR_CARDS = [
+  {
+    heading: "What it asks",
+    body: "The tool should ask simple questions about current role, years of experience, career goals, industry context, and desired next step.",
+    color: "#6B2D8B",
+  },
+  {
+    heading: "What it returns",
+    body: "The tool should recommend the most relevant qualification pathway, explain why that route fits, and provide the clearest next step.",
+    color: "#00A8E1",
+  },
+  {
+    heading: "Why it matters",
+    body: "This helps CPS move from a catalogue-style experience to a guided student journey built around clarity, confidence, and progression.",
+    color: "#10B981",
+  },
+];
+
+const SELECTOR_BENEFITS = [
+  "Reduce confusion between programmes",
+  "Help students self-identify the right pathway",
+  "Improve lead quality before application",
+  "Create a more guided and confidence-building experience",
+  "Support stronger conversion from information stage to inquiry stage",
+];
+
+function QualificationSelector() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <section className="relative py-20 sm:py-28">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.5 }}
+          className="flex items-center gap-3 mb-4"
+        >
+          <div className="w-8 h-[2px] bg-cps-purple rounded-full" />
+          <span className="section-label text-cps-purple">Coming Later</span>
+        </motion.div>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="text-2xl sm:text-3xl font-bold text-foreground/90 mb-4 tracking-tight"
+        >
+          Qualification Selector Tool
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="text-sm text-foreground/50 max-w-2xl mb-10"
+        >
+          A guided decision tool to reduce confusion and help students choose the right path.
+        </motion.p>
+
+        {/* Body copy */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="max-w-3xl space-y-4 mb-10"
+        >
+          <p className="text-sm text-foreground/50 leading-[1.8]">
+            One of the recurring frictions in the CPS journey is that prospective students are often unsure which qualification is right for them.
+          </p>
+          <p className="text-sm text-foreground/50 leading-[1.8]">
+            They are not only asking whether CPS is credible. They are also asking:
+          </p>
+          <ul className="space-y-2 pl-1">
+            {[
+              "What programme fits my goals?",
+              "What qualification level is right for me?",
+              "Which option will actually help me progress?",
+            ].map((q) => (
+              <li key={q} className="flex items-start gap-3 text-sm text-foreground/50">
+                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-cps-purple/60 shrink-0" />
+                {q}
+              </li>
+            ))}
+          </ul>
+          <p className="text-sm text-foreground/50 leading-[1.8]">
+            The qualification selector is a later-phase guided commerce feature that will help solve that problem. Rather than forcing prospective students to interpret qualification structures on their own, CPS can guide them through a short series of decision questions and recommend the most relevant next step.
+          </p>
+          <p className="text-sm text-foreground/50 leading-[1.8]">
+            This tool should achieve the following:
+          </p>
+          <ul className="space-y-2 pl-1">
+            {SELECTOR_BENEFITS.map((b) => (
+              <li key={b} className="flex items-start gap-3 text-sm text-foreground/50">
+                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-cps-purple/60 shrink-0" />
+                {b}
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+
+        {/* 3 cards */}
+        <div className="grid sm:grid-cols-3 gap-4 mb-10">
+          {SELECTOR_CARDS.map((card, i) => (
+            <motion.div
+              key={card.heading}
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.4, delay: 0.3 + i * 0.08 }}
+              className="card-elevated !p-0 overflow-hidden"
+            >
+              <div className="h-[3px] w-full" style={{ backgroundColor: card.color }} />
+              <div className="p-6">
+                <h4 className="text-sm font-bold text-foreground mb-2">{card.heading}</h4>
+                <p className="text-xs text-foreground/45 leading-[1.7]">{card.body}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Note block */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="rounded-2xl bg-white border border-black/[0.05] p-8"
+          style={{ borderLeft: "4px solid #6B2D8B" }}
+        >
+          <h4 className="text-xs font-bold text-cps-purple uppercase tracking-wider mb-3">
+            Later-Phase Role
+          </h4>
+          <p className="text-sm text-foreground/50 leading-[1.8]">
+            This tool sits after the website and paid media foundation is working. It is designed to improve decision quality, not to replace the core landing page and inquiry system.
+          </p>
+        </motion.div>
+
+        {/* Cross-link */}
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.4, delay: 0.6 }}
+          className="text-sm text-foreground/40 mt-8 leading-[1.8]"
+        >
+          For organisation-level pathways and enterprise packaging, see{" "}
+          <Link href="/b2b" className="text-cps-purple font-medium hover:underline">
+            B2B Strategy &rarr;
+          </Link>
+        </motion.p>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Email Nurture Ecosystem                                             */
+/* ------------------------------------------------------------------ */
+
+const NURTURE_STEPS = [
+  {
+    step: "01",
+    title: "Welcome & Info Delivery",
+    body: "Deliver the promised information pack or programme guide immediately and set expectations clearly.",
+    color: "#6B2D8B",
+  },
+  {
+    step: "02",
+    title: "Career & Outcome Framing",
+    body: "Help the prospect understand where the qualification leads, what outcomes it supports, and why it matters.",
+    color: "#00A8E1",
+  },
+  {
+    step: "03",
+    title: "Programme Clarity",
+    body: "Explain what the programme includes, who it is for, what the time commitment looks like, and what support exists.",
+    color: "#10B981",
+  },
+  {
+    step: "04",
+    title: "Decision Support",
+    body: "Address affordability, recognition, flexibility, fit, and common concerns through reassurance-led content.",
+    color: "#FFD100",
+  },
+  {
+    step: "05",
+    title: "Action & Urgency",
+    body: "Use deadlines, reminders, transformation proof, and clear next steps to move warm leads toward application.",
+    color: "#EF4444",
+  },
+];
+
+const NURTURE_CONTENT_TYPES = [
+  "Programme guides",
+  "Career outcome explanations",
+  "Timelines and qualification structure",
+  "\u201CStill considering?\u201D nudges",
+  "Pricing and payment clarity",
+  "Graduate stories",
+  "FAQs and reassurance content",
+];
+
+const NURTURE_ROLES = [
+  "Deliver the right information at the right stage",
+  "Reinforce trust and credibility",
+  "Answer common objections before they become barriers",
+  "Support WhatsApp and admissions follow-up with consistent messaging",
+  "Move more leads from inquiry to application",
+];
+
+function EmailNurtureEcosystem() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <section className="relative py-20 sm:py-28 section-tinted">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.5 }}
+          className="flex items-center gap-3 mb-4"
+        >
+          <div className="w-8 h-[2px] bg-cps-green rounded-full" />
+          <span className="section-label text-cps-green">Email Nurture Ecosystem</span>
+        </motion.div>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="text-2xl sm:text-3xl font-bold text-foreground/90 mb-4 tracking-tight"
+        >
+          Email Nurture Ecosystem
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="text-sm text-foreground/50 max-w-2xl mb-10"
+        >
+          Turning initial interest into confidence, clarity, and application intent.
+        </motion.p>
+
+        {/* Body copy */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="max-w-3xl space-y-4 mb-10"
+        >
+          <p className="text-sm text-foreground/50 leading-[1.8]">
+            Most prospective students will not apply immediately after their first interaction with CPS. They need time to evaluate credibility, understand programme fit, compare options, and feel confident that they are making the right move.
+          </p>
+          <p className="text-sm text-foreground/50 leading-[1.8]">
+            The email nurture ecosystem is designed to support that decision journey in a structured, reassuring, and outcome-led way. This should not behave like generic email marketing. It should behave like guided student support before enrollment.
+          </p>
+          <p className="text-sm text-foreground/50 leading-[1.8]">
+            The role of the nurture ecosystem is to:
+          </p>
+          <ul className="space-y-2 pl-1">
+            {NURTURE_ROLES.map((r) => (
+              <li key={r} className="flex items-start gap-3 text-sm text-foreground/50">
+                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-cps-green/60 shrink-0" />
+                {r}
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+
+        {/* Sequence steps */}
+        <div className="space-y-4 mb-10">
+          {NURTURE_STEPS.map((s, i) => (
+            <motion.div
+              key={s.step}
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.4, delay: 0.3 + i * 0.08 }}
+              className="card-elevated !p-0 overflow-hidden"
+            >
+              <div className="h-[3px] w-full" style={{ backgroundColor: s.color }} />
+              <div className="p-6 flex items-start gap-5">
+                <div
+                  className="flex items-center justify-center w-10 h-10 rounded-xl shrink-0"
+                  style={{
+                    backgroundColor: `${s.color}0A`,
+                    border: `1px solid ${s.color}15`,
+                  }}
+                >
+                  <span className="text-xs font-bold" style={{ color: s.color }}>
+                    {s.step}
+                  </span>
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-foreground mb-1">{s.title}</h4>
+                  <p className="text-xs text-foreground/45 leading-[1.7]">{s.body}</p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Content Types */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="card-elevated !p-0 overflow-hidden mb-10"
+        >
+          <div className="h-[3px] w-full bg-gradient-to-r from-cps-purple to-cps-blue" />
+          <div className="p-7">
+            <p className="text-[10px] font-semibold tracking-[0.2em] text-foreground/25 uppercase mb-4">
+              Content Types
+            </p>
+            <div className="grid sm:grid-cols-2 gap-x-6 gap-y-2.5">
+              {NURTURE_CONTENT_TYPES.map((t) => (
+                <div key={t} className="flex items-start gap-3 text-sm text-foreground/55">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cps-blue mt-1.5 shrink-0" />
+                  <span>{t}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Closing paragraph */}
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.7 }}
+          className="text-sm text-foreground/50 max-w-3xl leading-[1.8]"
+        >
+          The email ecosystem works best when paired with WhatsApp, strong landing pages, and fast admissions follow-up. It is part of the conversion system, not a separate communications stream.
+        </motion.p>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /*  WhatsApp Templates                                                  */
 /* ------------------------------------------------------------------ */
 
@@ -547,7 +888,9 @@ export default function ConversionPage() {
     <div className="relative min-h-screen bg-white">
       <ConversionHeader />
       <ConversionStrategy />
+      <QualificationSelector />
       <LeadNurturing />
+      <EmailNurtureEcosystem />
       <LeadScoringSummary />
       <WhatsAppTemplates />
       <MartechStack />

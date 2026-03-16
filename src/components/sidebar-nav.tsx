@@ -14,6 +14,7 @@ import {
   Pen,
   GitBranch,
   RefreshCw,
+  Briefcase,
   Menu,
   X,
   EyeOff,
@@ -49,6 +50,7 @@ const groups = [
   {
     label: "GROWTH",
     items: [
+      { name: "B2B Strategy", href: "/b2b", icon: Briefcase },
       { name: "Alumni / Community", href: "/alumni", icon: RefreshCw },
     ],
   },

@@ -121,6 +121,181 @@ const doDont = [
 ];
 
 /* ------------------------------------------------------------------ */
+/*  Career Path / NQF Education                                        */
+/* ------------------------------------------------------------------ */
+
+const NQF_PARTS = [
+  {
+    heading: "Why this matters",
+    color: "#6B2D8B",
+    bullets: [
+      "What qualification level is right for me?",
+      "What does NQF 5 or NQF 6 actually mean?",
+      "Which programme fits my goals?",
+      "What comes after this qualification?",
+    ],
+    outro:
+      "If CPS answers these questions clearly, it reduces decision anxiety and improves conversion.",
+  },
+  {
+    heading: "What this content should explain",
+    color: "#00A8E1",
+    bullets: [
+      "What qualification levels mean in simple language",
+      "How different CPS qualifications relate to each other",
+      "What kind of student each route is best suited to",
+      "How a learner can progress from one level to the next over time",
+    ],
+    outro: null,
+  },
+  {
+    heading: "What this unlocks",
+    color: "#10B981",
+    bullets: [
+      "Improve lead quality",
+      "Reduce confusion between programmes",
+      "Strengthen trust",
+      "Create clearer progression logic",
+      "Make the qualification journey feel more guided and less overwhelming",
+    ],
+    outro: null,
+  },
+];
+
+function CareerPathNQF() {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  return (
+    <section className="relative py-28 sm:py-36 section-tinted">
+      <div className="section-divider" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28" ref={ref}>
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.5 }}
+          className="flex items-center gap-3 mb-4"
+        >
+          <div className="w-8 h-[2px] bg-cps-purple rounded-full" />
+          <span className="section-label text-cps-purple">
+            Career Path / NQF Education
+          </span>
+        </motion.div>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="text-3xl sm:text-4xl font-bold text-foreground mt-8 mb-4 tracking-tight"
+        >
+          Career Path /{" "}
+          <span className="text-cps-purple">NQF Education</span>
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="text-sm text-foreground/50 max-w-2xl mb-10"
+        >
+          Helping prospective students understand where they are, what level they need, and what comes next.
+        </motion.p>
+
+        {/* Body copy */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="max-w-3xl space-y-4 mb-12"
+        >
+          <p className="text-sm text-foreground/50 leading-[1.8]">
+            One of the most important gaps in the current market journey is that many prospective students do not fully understand qualification levels, progression pathways, or how a specific programme fits into their career development.
+          </p>
+          <p className="text-sm text-foreground/50 leading-[1.8]">
+            This creates confusion at exactly the moment CPS needs clarity. The role of this content is to educate prospects, reduce uncertainty, and help them see how CPS qualifications connect to real career movement.
+          </p>
+        </motion.div>
+
+        {/* 3-part block */}
+        <div className="grid md:grid-cols-3 gap-4 mb-10">
+          {NQF_PARTS.map((part, i) => (
+            <motion.div
+              key={part.heading}
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.4, delay: 0.3 + i * 0.08 }}
+              className="card-elevated !p-0 overflow-hidden"
+            >
+              <div
+                className="h-[3px] w-full"
+                style={{ backgroundColor: part.color }}
+              />
+              <div className="p-6">
+                <h4
+                  className="text-sm font-bold mb-3 uppercase tracking-wider"
+                  style={{ color: part.color }}
+                >
+                  {part.heading}
+                </h4>
+                {part.heading === "Why this matters" && (
+                  <p className="text-xs text-foreground/45 leading-[1.7] mb-3">
+                    Students often ask:
+                  </p>
+                )}
+                {part.heading === "What this content should explain" && (
+                  <p className="text-xs text-foreground/45 leading-[1.7] mb-3">
+                    This section on the main CPS website should clearly explain:
+                  </p>
+                )}
+                {part.heading === "What this unlocks" && (
+                  <p className="text-xs text-foreground/45 leading-[1.7] mb-3">
+                    When career-path and NQF content is explained clearly, CPS can:
+                  </p>
+                )}
+                <ul className="space-y-2">
+                  {part.bullets.map((b) => (
+                    <li
+                      key={b}
+                      className="flex items-start gap-2 text-xs text-foreground/45 leading-[1.7]"
+                    >
+                      <span
+                        className="mt-1.5 w-1.5 h-1.5 rounded-full shrink-0"
+                        style={{ backgroundColor: `${part.color}60` }}
+                      />
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+                {part.outro && (
+                  <p className="text-xs text-foreground/45 leading-[1.7] mt-3">
+                    {part.outro}
+                  </p>
+                )}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Note */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="rounded-2xl bg-white border border-black/[0.05] p-8"
+          style={{ borderLeft: "4px solid #6B2D8B" }}
+        >
+          <h4 className="text-xs font-bold text-cps-purple uppercase tracking-wider mb-3">
+            Website Role
+          </h4>
+          <p className="text-sm text-foreground/50 leading-[1.8]">
+            This content should live prominently on the CPS website as a practical education layer, not only inside brochures or forms.
+          </p>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /*  Component                                                          */
 /* ------------------------------------------------------------------ */
 
@@ -341,8 +516,25 @@ export default function ProgrammesPage() {
               Build a complete career pathway with CPS
             </p>
           </motion.div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            animate={pathwayInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="text-sm text-foreground/40 mt-8 leading-[1.8]"
+          >
+            For organisational learning and team-level packaging, see{" "}
+            <Link href="/b2b" className="text-cps-purple font-medium hover:underline">
+              B2B Strategy &rarr;
+            </Link>
+          </motion.p>
         </div>
       </section>
+
+      {/* ============================================================ */}
+      {/*  3b — Career Path / NQF Education                             */}
+      {/* ============================================================ */}
+      <CareerPathNQF />
 
       {/* ============================================================ */}
       {/*  4 — CPSLearn Platform Reference                              */}
