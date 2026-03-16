@@ -11,17 +11,16 @@ export const META = {
   date: "March 2026",
   focus: "HCIB (Higher Certificate in Banking) & ACL6 (Advanced Certificate in Leadership)",
   target: "35 students per qualification per intake",
-  cpaTarget: "R400",
   launchDate: "May 10, 2026",
   mediaBudget: "R15,000/month",
 };
 
 export const KEY_METRICS = [
-  { label: "Target CPA", value: "R400", description: "Per enrolled student" },
+  { label: "Spend", value: "R15k", description: "Monthly media budget" },
   { label: "Per Qualification", value: "35", description: "Students per intake" },
   { label: "Total Target", value: "70", description: "Students per intake" },
-  { label: "Media Budget", value: "R15k", description: "Monthly spend" },
-  { label: "Launch Date", value: "May 10", description: "First intake 2026" },
+  { label: "Scenario A", value: "6 mo", description: "CPA ≤ R1,286" },
+  { label: "Scenario B", value: "3 mo", description: "CPA ≤ R643" },
   { label: "Programmes", value: "2", description: "HCIB & ACL6" },
 ];
 
@@ -60,7 +59,7 @@ export const PERSONAS = [
     demographics:
       "Matric graduate or career changer, based in Gauteng/WC/KZN metros, currently employed in entry-level banking or retail, or unemployed seeking entry into financial services.",
     psychographics:
-      "Ambitious but uncertain. Fears wasting money on a qualification that won't lead anywhere. Researches extensively before committing. Compares CPS against Milpark, MANCOSA, Regent, and university options.",
+      "Ambitious but uncertain. Fears wasting money on a qualification that won't lead anywhere. Researches extensively before committing. Compares CPS against Milpark, Chartall, Novia, and university options.",
     jtbd: "Help me get a real qualification that banks actually recognise, so I can build a career in banking and earn more.",
     color: "#6B2D8B",
   },
@@ -301,7 +300,7 @@ export const GOOGLE_CAMPAIGNS = [
     name: "Competitor Conquesting",
     status: "Phase 2",
     budget: "R1,000/month",
-    keywords: ["Milpark banking", "MANCOSA leadership", "Regent banking course"],
+    keywords: ["Milpark banking", "Chartall business banking", "Novia leadership"],
     purpose: "Intercept students comparing options — focus on CPS differentiators",
   },
 ];
@@ -362,23 +361,25 @@ export const LAUNCH_PHASES = [
 ];
 
 export const KPI_DASHBOARD = [
-  { kpi: "Enrolled students (per qualification per intake)", target: "35", frequency: "Per intake" },
-  { kpi: "Cost per acquisition (CPA)", target: "≤ R400", frequency: "Monthly" },
-  { kpi: "Cost per lead", target: "≤ R100", frequency: "Monthly" },
-  { kpi: "Landing page conversion rate", target: "≥ 8%", frequency: "Weekly" },
-  { kpi: "Lead-to-enrollment conversion rate", target: "≥ 20%", frequency: "Monthly" },
-  { kpi: "Email open rate (nurture sequence)", target: "≥ 35%", frequency: "Weekly" },
-  { kpi: "Email click rate (nurture sequence)", target: "≥ 5%", frequency: "Weekly" },
-  { kpi: "Google Ads CTR", target: "≥ 5%", frequency: "Weekly" },
-  { kpi: "Meta Ads CTR", target: "≥ 1.5%", frequency: "Weekly" },
-  { kpi: "WhatsApp response rate", target: "≥ 60%", frequency: "Weekly" },
-  { kpi: "Website traffic (organic + paid)", target: "Growth MoM", frequency: "Monthly" },
+  { kpi: "Students per intake", scenarioA: "70", scenarioB: "70" },
+  { kpi: "Students per month", scenarioA: "12", scenarioB: "23" },
+  { kpi: "Monthly media spend", scenarioA: "R15,000", scenarioB: "R15,000" },
+  { kpi: "Total media spend", scenarioA: "R90,000", scenarioB: "R45,000" },
+  { kpi: "Target CPA", scenarioA: "≤ R1,286", scenarioB: "≤ R643" },
+  { kpi: "Target CPL", scenarioA: "≤ R193", scenarioB: "≤ R96" },
+  { kpi: "Monthly leads required", scenarioA: "78", scenarioB: "156" },
+  { kpi: "Lead-to-enrollment rate", scenarioA: "15%", scenarioB: "15%" },
+  { kpi: "Google Ads CTR", scenarioA: "≥ 5%", scenarioB: "≥ 5%" },
+  { kpi: "Meta Ads CTR", scenarioA: "≥ 1.5%", scenarioB: "≥ 1.5%" },
+  { kpi: "Email open rate", scenarioA: "≥ 35%", scenarioB: "≥ 35%" },
+  { kpi: "Email click rate", scenarioA: "≥ 5%", scenarioB: "≥ 5%" },
+  { kpi: "WhatsApp response rate", scenarioA: "≥ 60%", scenarioB: "≥ 60%" },
 ];
 
 export const BUDGET_SUMMARY = [
-  { item: "Google Ads media spend", cost: "R7,500", notes: "50% of media budget; scales with performance" },
-  { item: "Meta Ads media spend", cost: "R7,500", notes: "50% of media budget; scales with performance" },
-  { item: "Total media spend", cost: "R15,000", notes: "Starting budget, increases with traction" },
+  { item: "Google Ads media spend", cost: "R7,500", notes: "50% of fixed monthly media budget" },
+  { item: "Meta Ads media spend", cost: "R7,500", notes: "50% of fixed monthly media budget" },
+  { item: "Total media spend", cost: "R15,000", notes: "Fixed monthly budget" },
   { item: "Agency retainer (Broadbrand)", cost: "Per agreement", notes: "Covers strategy, creative, CRO, reporting, nurture management" },
   { item: "Content production", cost: "Minimal additional", notes: "UGC-style content, Canva creatives, blog posts included in retainer" },
   { item: "Software/tools", cost: "CPS existing", notes: "GA4 (free), GTM (free), Looker Studio (free), Pipedrive (CPS existing)" },
@@ -405,14 +406,14 @@ export const GOOGLE_BENCHMARKS = [
   { metric: "CPC (Search)", global: "$6.23 (~R115)", saEstimate: "R10–R30", cpsTarget: "R12–R20", source: "WordStream 2025" },
   { metric: "CTR (Search)", global: "5.74%", saEstimate: "~5–6%", cpsTarget: "≥5%", source: "WordStream 2025" },
   { metric: "CVR (Search)", global: "11.38%", saEstimate: "~8–12%", cpsTarget: "7–10%", source: "WordStream 2025" },
-  { metric: "CPL (Search)", global: "~$90 (~R1,665)", saEstimate: "~R500–R1,500", cpsTarget: "≤R100", source: "WordStream 2025" },
+  { metric: "CPL (Search)", global: "~$90 (~R1,665)", saEstimate: "~R500–R1,500", cpsTarget: "A: ≤R193 · B: ≤R96", source: "WordStream 2025" },
   { metric: "CPC (Display)", global: "$0.47 (~R9)", saEstimate: "~R3–R8", cpsTarget: "N/A Phase 2", source: "WordStream 2025" },
 ];
 
 export const META_BENCHMARKS = [
   { metric: "CPC", global: "$1.05 (~R19)", cpsTarget: "R5–R8", notes: "SA typically lower", source: "SuperAds 2025" },
   { metric: "CTR", global: "1.66%", cpsTarget: "≥1.5%", notes: "Below all-industry 1.86%", source: "SuperAds 2025" },
-  { metric: "CPL", global: "$19.27 (~R357)", cpsTarget: "≤R100", notes: "54% below all-industry", source: "SuperAds 2025" },
+  { metric: "CPL", global: "$19.27 (~R357)", cpsTarget: "A: ≤R193 · B: ≤R96", notes: "Blended target", source: "SuperAds 2025" },
   { metric: "CPL Trend", global: "$15→$21.57 (+44%)", cpsTarget: "—", notes: "Budget for Q3/Q4 inflation", source: "SuperAds 2025" },
 ];
 
@@ -420,7 +421,7 @@ export const FUNNEL_BENCHMARKS = [
   { stage: "LP → Lead (education)", benchmark: "8.4% median", cpsModel: "4–10%", source: "Unbounce 2025" },
   { stage: "LP → Lead (higher ed)", benchmark: "6.3%", cpsModel: "—", source: "Unbounce 2025" },
   { stage: "Lead → Enrollment", benchmark: "3–5% industry", cpsModel: "10–20%", source: "Multiple" },
-  { stage: "Cost/enrolled student", benchmark: "$2,849 (~R52,700)", cpsModel: "R400 target", source: "UPCEA 2023" },
+  { stage: "Cost/enrolled student", benchmark: "$2,849 (~R52,700)", cpsModel: "A: ≤R1,286 · B: ≤R643", source: "UPCEA 2023" },
   { stage: "Email nurture CVR", benchmark: "14.1%", cpsModel: "≥10%", source: "Industry reports" },
 ];
 
@@ -437,7 +438,7 @@ export const BENCHMARK_INSIGHTS = [
   },
   {
     title: "CPS vs World",
-    description: "Global median cost per enrolled student is R52,700. Even our conservative scenario (R2,857) is 95% below this. Our R400 target is ambitious but achievable in SA.",
+    description: "Global median cost per enrolled student is substantially higher than CPS's required economics. Scenario A (6 months): CPA ≤ R1,286. Scenario B (3 months): CPA ≤ R643.",
     color: "#6B2D8B",
   },
 ];
@@ -456,19 +457,7 @@ export const CPA_PRESETS = [
 // Budget Scaling Scenarios
 // ===================================================
 
-export const BUDGET_SCALING = [
-  { budget: "R15,000", google: "R7,500", meta: "R7,500", enrollments: 18, cpa: "R816", sixMonth: 110 },
-  { budget: "R25,000", google: "R12,500", meta: "R12,500", enrollments: 31, cpa: "R816", sixMonth: 184 },
-  { budget: "R40,000", google: "R20,000", meta: "R20,000", enrollments: 49, cpa: "R816", sixMonth: 294 },
-  { budget: "R60,000", google: "R30,000", meta: "R30,000", enrollments: 73, cpa: "R816", sixMonth: 441 },
-];
-
-export const SCALING_TRIGGERS = [
-  { condition: "CPA ≤R400 for 4 consecutive weeks", action: "Increase budget 25%" },
-  { condition: "CPA ≤R300 for 4 consecutive weeks", action: "Increase budget 50%" },
-  { condition: "CPA >R600 for 2 consecutive weeks", action: "Pause, audit, optimise" },
-  { condition: "Recommended ceiling", action: "~R40-50k/month before audience saturation" },
-];
+// Budget scaling and scaling triggers removed — replaced by fixed-spend efficiency framework
 
 // ===================================================
 // Ad Copy Angles with full copy
@@ -557,7 +546,7 @@ export const RISK_TRIGGERS = [
   { phase: "1", signal: "CPC >R25 on Google", response: "Shift 60/40 toward Meta. Review keywords." },
   { phase: "1", signal: "LP CVR <3%", response: "Pause ads. Fix LP. A/B test new variant." },
   { phase: "2", signal: "Zero applications after 2 weeks", response: "Emergency review: check nurture, forms, admissions response." },
-  { phase: "3", signal: "<20 enrollments by May 31", response: "Extend deadline. Increase budget. Phone outreach to all warm leads." },
+  { phase: "3", signal: "Monthly leads below scenario target", response: "Investigate channel mix, LP conversion, and admissions handoff." },
 ];
 
 // ===================================================
@@ -569,8 +558,6 @@ export const STUDENT_LTV = {
   acl6: { monthly: 2688, duration: 12, total: 32256 },
   totalStudents: 70,
   totalTuitionPerIntake: 2170560,
-  mediaSpendPerIntake: 90000,
-  roi: "24:1",
 };
 
 // ===================================================

@@ -6,6 +6,8 @@ import MessagingFramework from "@/components/sections/messaging-framework";
 import ContentStrategy from "@/components/sections/content-strategy";
 import Footer from "@/components/sections/footer";
 
+import OrganicSocial from "@/components/sections/organic-social";
+
 /* ─── Headline Bank Data ─── */
 const HEADLINES = [
   {
@@ -56,21 +58,6 @@ const HEADLINES = [
   },
 ];
 
-/* ─── Content Split Data ─── */
-const CONTENT_SPLIT = [
-  { label: "Student stories / social proof", pct: 40, color: "#6B2D8B" },
-  { label: "Educational / value", pct: 30, color: "#00A8E1" },
-  { label: "Promotional", pct: 20, color: "#10B981" },
-  { label: "Industry insight", pct: 10, color: "#F59E0B" },
-];
-
-const PLATFORMS = [
-  { name: "Instagram", focus: "Visual stories, Reels" },
-  { name: "Facebook", focus: "Detailed posts, ads" },
-  { name: "LinkedIn", focus: "B2B / thought leadership" },
-  { name: "TikTok", focus: "Short student stories" },
-  { name: "Blog", focus: "SEO articles" },
-];
 
 const CREATIVE_BRIEF_FIELDS = [
   { label: "Objective", desc: "Awareness / Consideration / Conversion" },
@@ -79,7 +66,7 @@ const CREATIVE_BRIEF_FIELDS = [
   { label: "Psychological Trigger", desc: "From behavioural framework (e.g. Loss Aversion, Social Proof)" },
   { label: "CTA", desc: "Specific call-to-action (e.g. Download info pack, Apply now)" },
   { label: "Format & Specs", desc: "Platform, dimensions, duration (e.g. Meta Feed 1080\u00d71080, 15s Reel)" },
-  { label: "Success Metric", desc: "Primary KPI for this asset (e.g. CTR \u22651.5%, CPL \u2264R100)" },
+  { label: "Success Metric", desc: "Primary KPI for this asset (e.g. CTR ≥1.5%, efficiency target aligned to scenario KPI framework)" },
 ];
 
 /* ================================================================== */
@@ -87,19 +74,20 @@ const CREATIVE_BRIEF_FIELDS = [
 export default function ContentCreativePage() {
   const headerRef = useRef(null);
   const headlineRef = useRef(null);
-  const calendarRef = useRef(null);
+
   const briefRef = useRef(null);
+  const seoRef = useRef(null);
 
   const headerInView = useInView(headerRef, { once: true, margin: "-100px" });
   const headlineInView = useInView(headlineRef, { once: true, margin: "-100px" });
-  const calendarInView = useInView(calendarRef, { once: true, margin: "-100px" });
+  const seoInView = useInView(seoRef, { once: true, margin: "-100px" });
   const briefInView = useInView(briefRef, { once: true, margin: "-100px" });
 
   return (
     <div className="relative min-h-screen bg-white">
       {/* ───────── Page Header ───────── */}
-      <section className="relative py-28 sm:py-36" ref={headerRef}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28">
+      <section className="relative pt-32 pb-16 sm:pt-40 sm:pb-20" ref={headerRef}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={headerInView ? { opacity: 1, x: 0 } : {}}
@@ -213,156 +201,140 @@ export default function ContentCreativePage() {
         </div>
       </section>
 
-      {/* ───────── Content Strategy (existing) ───────── */}
-      <ContentStrategy />
-
-      {/* ───────── Content Calendar Framework ───────── */}
-      <section className="relative py-28 sm:py-36 section-tinted" ref={calendarRef}>
+      {/* ───────── SEO Opportunity Themes ───────── */}
+      <section className="relative py-28 sm:py-36 section-tinted" ref={seoRef}>
         <div className="section-divider" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
-            animate={calendarInView ? { opacity: 1, x: 0 } : {}}
+            animate={seoInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.5 }}
             className="flex items-center gap-3 mb-4"
           >
-            <div className="w-8 h-[2px] bg-cps-blue rounded-full" />
-            <span className="section-label text-cps-blue">
-              Content Calendar Framework
+            <div className="w-8 h-[2px] bg-cps-green rounded-full" />
+            <span className="section-label text-cps-green">
+              SEO Opportunity Themes
             </span>
           </motion.div>
 
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
-            animate={calendarInView ? { opacity: 1, y: 0 } : {}}
+            animate={seoInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-3xl sm:text-4xl font-bold text-foreground mt-8 mb-4 tracking-tight"
           >
-            Weekly rhythm and{" "}
-            <span className="text-cps-blue">content mix</span>
+            Key search topics for{" "}
+            <span className="text-cps-green">student discovery</span>
           </motion.h2>
-
-          {/* Weekly Rhythm */}
-          <motion.div
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
-            animate={calendarInView ? { opacity: 1, y: 0 } : {}}
+            animate={seoInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="text-sm text-foreground/35 mb-4 max-w-3xl"
+          >
+            Key search topics prospective students use when researching banking and leadership qualifications in South Africa.
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={seoInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-12 mb-14 card-elevated !p-8"
+            className="text-sm text-foreground/35 mb-14 max-w-3xl"
           >
-            <h3 className="text-lg font-bold text-foreground mb-6 tracking-tight">
-              Weekly Publishing Rhythm
-            </h3>
-            <div className="grid sm:grid-cols-3 gap-4">
-              {[
-                { label: "Social Posts", freq: "3 / week", detail: "Mon \u00b7 Wed \u00b7 Fri", color: "#6B2D8B" },
-                { label: "Blog Article", freq: "1 / week", detail: "SEO-focused long-form", color: "#00A8E1" },
-                { label: "Nurture Email", freq: "1 / stage", detail: "Per nurture sequence step", color: "#10B981" },
-              ].map((item, i) => (
-                <motion.div
-                  key={item.label}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={calendarInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.4, delay: 0.3 + i * 0.07 }}
-                  className="p-5 rounded-xl border bg-white"
-                  style={{ borderColor: `${item.color}15` }}
-                >
-                  <div className="text-2xl font-bold mb-1" style={{ color: item.color }}>
-                    {item.freq}
+            These keywords represent the primary discovery pathways for prospective students researching qualifications and career progression in financial services. Search volumes will be validated using Google Keyword Planner once advertising accounts are active.
+          </motion.p>
+
+          {/* Theme Cards */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={seoInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.25 }}
+            className="grid sm:grid-cols-2 gap-6 mb-10"
+          >
+            {[
+              {
+                title: "Banking Career Pathways",
+                color: "#6B2D8B",
+                desc: "Searches from individuals exploring how to enter the banking industry or move into financial services roles.",
+                queries: ["Career in banking South Africa", "How to work in banking", "Banking qualification South Africa", "Banking course South Africa"],
+              },
+              {
+                title: "Higher Certificate in Banking (HCIB)",
+                color: "#00A8E1",
+                desc: "Searches from prospective students specifically researching the HCIB qualification and entry pathways.",
+                queries: ["Higher certificate in banking", "NQF level 5 banking qualification", "Online banking qualification South Africa", "Banking qualification cost South Africa"],
+              },
+              {
+                title: "Leadership Qualification Pathways",
+                color: "#10B981",
+                desc: "Searches from working professionals exploring leadership or management qualifications.",
+                queries: ["Leadership qualification South Africa", "Management qualification online", "Leadership course for managers", "Advanced certificate in leadership"],
+              },
+              {
+                title: "Qualification Comparison & Decision Support",
+                color: "#F59E0B",
+                desc: "Searches from students comparing different education pathways.",
+                queries: ["HCIB vs BCom", "Banking qualification vs university degree", "Is CPS accredited", "CHE accredited banking course"],
+              },
+            ].map((theme, i) => (
+              <motion.div
+                key={theme.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={seoInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.4, delay: 0.3 + i * 0.08 }}
+                className="card-elevated !p-0 overflow-hidden"
+              >
+                <div className="h-[3px] w-full" style={{ backgroundColor: theme.color }} />
+                <div className="p-6 sm:p-8">
+                  <h3
+                    className="text-sm font-bold mb-3 uppercase tracking-wider"
+                    style={{ color: theme.color }}
+                  >
+                    {theme.title}
+                  </h3>
+                  <p className="text-sm text-foreground/50 leading-[1.7] mb-5">
+                    {theme.desc}
+                  </p>
+                  <div className="space-y-2">
+                    <p className="text-[10px] font-semibold tracking-[0.1em] text-foreground/25 uppercase mb-2">
+                      Example search queries
+                    </p>
+                    {theme.queries.map((q) => (
+                      <div
+                        key={q}
+                        className="flex items-center gap-2 text-[13px] text-foreground/60"
+                      >
+                        <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ backgroundColor: theme.color }} />
+                        {q}
+                      </div>
+                    ))}
                   </div>
-                  <div className="text-sm font-semibold text-foreground mb-1">{item.label}</div>
-                  <div className="text-xs text-foreground/35">{item.detail}</div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Content Split */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={calendarInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.35 }}
-            className="mb-14 card-elevated !p-8"
-          >
-            <h3 className="text-lg font-bold text-foreground mb-6 tracking-tight">
-              Content Split
-            </h3>
-            {/* Horizontal bar */}
-            <div className="flex rounded-xl overflow-hidden h-10 mb-6">
-              {CONTENT_SPLIT.map((seg) => (
-                <div
-                  key={seg.label}
-                  className="flex items-center justify-center text-white text-[10px] font-bold tracking-wider"
-                  style={{ width: `${seg.pct}%`, backgroundColor: seg.color }}
-                >
-                  {seg.pct}%
                 </div>
-              ))}
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              {CONTENT_SPLIT.map((seg) => (
-                <div key={seg.label} className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: seg.color }} />
-                  <span className="text-xs text-foreground/50">
-                    <span className="font-semibold" style={{ color: seg.color }}>{seg.pct}%</span>{" "}
-                    {seg.label}
-                  </span>
-                </div>
-              ))}
-            </div>
+              </motion.div>
+            ))}
           </motion.div>
 
-          {/* Platform Allocation */}
+          {/* Strategy Implication */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={calendarInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.45 }}
-            className="mb-14"
+            animate={seoInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="card-elevated !p-8 sm:!p-10"
           >
-            <h3 className="text-lg font-bold text-foreground mb-6 tracking-tight">
-              Platform Allocation
+            <h3 className="text-lg font-bold text-foreground mb-4 tracking-tight">
+              SEO Strategy Implication
             </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-              {PLATFORMS.map((p, i) => (
-                <motion.div
-                  key={p.name}
-                  initial={{ opacity: 0, y: 15 }}
-                  animate={calendarInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.4, delay: 0.5 + i * 0.06 }}
-                  className="card-elevated !p-5 text-center"
-                >
-                  <div className="text-sm font-bold text-foreground mb-1">{p.name}</div>
-                  <div className="text-xs text-foreground/40">{p.focus}</div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Workflow */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={calendarInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.55 }}
-            className="p-8 rounded-2xl bg-white border border-cps-blue/8 accent-bar-left pl-10"
-          >
-            <p className="text-[10px] font-semibold tracking-[0.2em] text-cps-blue/40 uppercase mb-4">
-              Content Workflow
+            <p className="text-sm text-foreground/50 leading-[1.8]">
+              SEO should focus on answering the exact questions prospective students ask during the research phase. High-quality articles, guides, and programme pages targeting these topics will build long-term organic traffic while supporting paid media campaigns.
             </p>
-            <div className="flex flex-wrap items-center gap-3 text-sm text-foreground/60">
-              <span className="tag bg-cps-purple/8 text-cps-purple border border-cps-purple/15">
-                Broadbrand drafts
-              </span>
-              <span className="text-foreground/20">&rarr;</span>
-              <span className="tag bg-cps-blue/8 text-cps-blue border border-cps-blue/15">
-                CPS reviews (2 business days)
-              </span>
-              <span className="text-foreground/20">&rarr;</span>
-              <span className="tag bg-cps-green/8 text-cps-green border border-cps-green/15">
-                Broadbrand publishes
-              </span>
-            </div>
           </motion.div>
         </div>
       </section>
+
+      {/* ───────── Content Strategy (existing) ───────── */}
+      <ContentStrategy />
+
+      {/* ───────── Organic Social Strategy ───────── */}
+      <OrganicSocial />
 
       {/* ───────── Creative Brief Template ───────── */}
       <section className="relative py-28 sm:py-36" ref={briefRef}>

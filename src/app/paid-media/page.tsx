@@ -7,14 +7,11 @@ import PaidMedia from "@/components/sections/paid-media";
 import Benchmarks from "@/components/sections/benchmarks";
 import BudgetSummary from "@/components/sections/budget-summary";
 import Footer from "@/components/sections/footer";
+import { BudgetAllocationDonut } from "@/components/charts";
 import {
-  GOOGLE_BENCHMARKS,
-  META_BENCHMARKS,
   GOOGLE_CAMPAIGNS,
   META_AUDIENCES,
   AB_TESTING_PLAN,
-  BUDGET_SCALING,
-  SCALING_TRIGGERS,
 } from "@/content/strategy-data";
 
 /* ------------------------------------------------------------------ */
@@ -94,29 +91,6 @@ function GoogleDeepDive() {
           ))}
         </div>
 
-        {/* Google Benchmarks Table */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="card-elevated overflow-hidden"
-        >
-          <div className="table-header px-5 py-3">
-            <h4 className="text-xs font-semibold text-foreground/60">
-              Google Ads — SA Education Benchmarks
-            </h4>
-          </div>
-          <div className="divide-y divide-black/[0.04]">
-            {GOOGLE_BENCHMARKS.map((row) => (
-              <div key={row.metric} className="table-row px-5 py-3 grid grid-cols-4 gap-4 items-center">
-                <span className="text-[13px] font-medium text-foreground/70">{row.metric}</span>
-                <span className="text-[13px] text-foreground/60">{row.global}</span>
-                <span className="text-[13px] font-semibold text-cps-purple">{row.cpsTarget}</span>
-                <span className="text-[11px] text-foreground/40">{row.source}</span>
-              </div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );
@@ -184,29 +158,6 @@ function MetaDeepDive() {
           ))}
         </div>
 
-        {/* Meta Benchmarks Table */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="card-elevated overflow-hidden"
-        >
-          <div className="table-header px-5 py-3">
-            <h4 className="text-xs font-semibold text-foreground/60">
-              Meta Ads — SA Education Benchmarks
-            </h4>
-          </div>
-          <div className="divide-y divide-black/[0.04]">
-            {META_BENCHMARKS.map((row, i) => (
-              <div key={`meta-bench-${i}`} className="table-row px-5 py-3 grid grid-cols-4 gap-4 items-center">
-                <span className="text-[13px] font-medium text-foreground/70">{row.metric}</span>
-                <span className="text-[13px] text-foreground/60">{row.global}</span>
-                <span className="text-[13px] font-semibold text-cps-blue">{row.cpsTarget}</span>
-                <span className="text-[11px] text-foreground/40">{row.source}</span>
-              </div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );
@@ -293,9 +244,39 @@ function ABTestingRoadmap() {
 /*  Budget Scaling Rules                                                */
 /* ------------------------------------------------------------------ */
 
-function BudgetScalingRules() {
+function EfficiencyFramework() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  const CARDS = [
+    {
+      heading: "6-Month Efficiency Target",
+      color: "#6B2D8B",
+      items: [
+        "78 leads per month",
+        "12 enrollments per month",
+        "CPL ≤ R193",
+        "CPA ≤ R1,286",
+      ],
+    },
+    {
+      heading: "3-Month Efficiency Target",
+      color: "#00A8E1",
+      items: [
+        "156 leads per month",
+        "23 enrollments per month",
+        "CPL ≤ R96",
+        "CPA ≤ R643",
+      ],
+    },
+    {
+      heading: "Operational Implication",
+      color: "#10B981",
+      items: [
+        "The 3-month scenario requires materially stronger conversion performance from creative, landing pages, nurture, and admissions follow-up. The spend does not increase. The system has to get better.",
+      ],
+    },
+  ];
 
   return (
     <section className="relative py-20 sm:py-28">
@@ -308,7 +289,7 @@ function BudgetScalingRules() {
         >
           <div className="w-8 h-[2px] bg-cps-gold rounded-full" />
           <span className="section-label text-cps-gold">
-            Budget Scaling Framework
+            Efficiency Framework at Fixed Spend
           </span>
         </motion.div>
 
@@ -318,7 +299,7 @@ function BudgetScalingRules() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="text-2xl sm:text-3xl font-bold text-foreground/90 mb-4 tracking-tight"
         >
-          When and how to scale spend
+          Fixed spend, variable efficiency
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 15 }}
@@ -326,60 +307,35 @@ function BudgetScalingRules() {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="text-sm text-foreground/50 max-w-2xl mb-12"
         >
-          Clear rules for increasing or decreasing budget based on real
-          performance data — no guesswork.
+          This strategy assumes the monthly media budget remains fixed at R15,000. The growth question is therefore not &ldquo;How much more can we spend?&rdquo; but &ldquo;How efficiently can we convert the same spend into qualified leads and enrollments?&rdquo;
         </motion.p>
 
-        {/* Budget Scaling Table */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="card-elevated overflow-hidden mb-6"
-        >
-          <div className="table-header px-5 py-3">
-            <h4 className="text-xs font-semibold text-foreground/60">
-              Budget Scaling Scenarios
-            </h4>
-          </div>
-          <div className="divide-y divide-black/[0.04]">
-            {BUDGET_SCALING.map((row) => (
-              <div key={row.budget} className="table-row px-5 py-3 grid grid-cols-5 gap-4 items-center">
-                <span className="text-[13px] font-semibold text-foreground/80">{row.budget}</span>
-                <span className="text-[13px] text-foreground/50">Google: {row.google}</span>
-                <span className="text-[13px] text-foreground/50">Meta: {row.meta}</span>
-                <span className="text-[13px] font-medium text-cps-green">{row.enrollments} enrollments/mo</span>
-                <span className="text-[13px] font-medium text-cps-purple">{row.sixMonth} in 6 mo</span>
+        <div className="grid md:grid-cols-3 gap-4">
+          {CARDS.map((card, i) => (
+            <motion.div
+              key={card.heading}
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.4, delay: 0.2 + i * 0.1 }}
+              className="card-elevated !p-0 overflow-hidden"
+            >
+              <div className="h-[3px] w-full" style={{ backgroundColor: card.color }} />
+              <div className="p-6">
+                <h4 className="text-sm font-bold mb-4" style={{ color: card.color }}>
+                  {card.heading}
+                </h4>
+                <div className="space-y-2">
+                  {card.items.map((item, j) => (
+                    <div key={j} className="flex items-start gap-2">
+                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: `${card.color}60` }} />
+                      <span className="text-sm text-foreground/55 leading-[1.7]">{item}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Scaling Triggers */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="card-elevated overflow-hidden"
-        >
-          <div className="table-header px-5 py-3">
-            <h4 className="text-xs font-semibold text-foreground/60">
-              Scaling Triggers
-            </h4>
-          </div>
-          <div className="divide-y divide-black/[0.04]">
-            {SCALING_TRIGGERS.map((trigger) => (
-              <div key={trigger.condition} className="table-row px-5 py-3 flex items-center justify-between">
-                <span className="text-[13px] text-foreground/60">
-                  {trigger.condition}
-                </span>
-                <span className="text-[13px] font-medium text-cps-purple">
-                  {trigger.action}
-                </span>
-              </div>
-            ))}
-          </div>
-        </motion.div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -394,7 +350,7 @@ function PaidMediaHeader() {
   const inView = useInView(ref, { once: true, margin: "-40px" });
 
   return (
-    <section className="relative pt-16 pb-8 sm:pt-24 sm:pb-12">
+    <section className="relative pt-32 pb-16 sm:pt-40 sm:pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -406,12 +362,11 @@ function PaidMediaHeader() {
             <span className="section-label text-cps-purple">Paid Media</span>
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground/90 tracking-tight mb-4">
-            Paid Media &amp; CPA Strategy
+            Paid Media &amp; Intake Efficiency Strategy
           </h1>
           <p className="text-base sm:text-lg text-foreground/50 max-w-3xl">
-            Google &amp; Meta deep dives, CPA modelling, A/B testing roadmap,
-            budget allocation, and scaling rules — everything to drive
-            cost-efficient student acquisition.
+            Google &amp; Meta deep dives, fixed-spend funnel modelling, A/B testing roadmap,
+            and efficiency targets designed to reach 70 students per intake without changing the monthly media budget.
           </p>
         </motion.div>
       </div>
@@ -427,13 +382,32 @@ export default function PaidMediaPage() {
   return (
     <div className="relative min-h-screen bg-white">
       <PaidMediaHeader />
+      {/* Budget Allocation Visual */}
+      <section className="relative pb-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 gap-6">
+            <BudgetAllocationDonut />
+            <div className="card-elevated !p-6 sm:!p-8 flex flex-col justify-center">
+              <h4 className="text-sm font-bold text-foreground/70 mb-2">R15,000/month Fixed Budget</h4>
+              <p className="text-[13px] text-foreground/45 leading-[1.7] mb-4">
+                Equal 50/50 split between Google Search (bottom-funnel intent) and Meta (top-funnel awareness).
+                Monthly spend stays fixed — efficiency determines outcomes.
+              </p>
+              <div className="flex gap-3">
+                <div className="px-3 py-1.5 rounded-full bg-cps-blue/8 text-cps-blue text-[11px] font-medium">Google: R7,500</div>
+                <div className="px-3 py-1.5 rounded-full bg-cps-purple/8 text-cps-purple text-[11px] font-medium">Meta: R7,500</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <PaidMedia />
       <GoogleDeepDive />
       <MetaDeepDive />
       <CpaModelling />
       <Benchmarks />
       <ABTestingRoadmap />
-      <BudgetScalingRules />
+      <EfficiencyFramework />
       <BudgetSummary />
       <Footer />
     </div>

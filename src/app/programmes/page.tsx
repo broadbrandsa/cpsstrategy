@@ -150,8 +150,8 @@ export default function ProgrammesPage() {
       {/* ============================================================ */}
       {/*  1 — Page Header                                              */}
       {/* ============================================================ */}
-      <section className="relative py-28 sm:py-36">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28" ref={headerRef}>
+      <section className="relative pt-32 pb-16 sm:pt-40 sm:pb-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={headerRef}>
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={headerInView ? { opacity: 1, x: 0 } : {}}

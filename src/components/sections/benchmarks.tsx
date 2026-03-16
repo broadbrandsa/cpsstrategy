@@ -150,7 +150,7 @@ export default function Benchmarks() {
           <h3 className="text-xl font-bold text-foreground mb-2 tracking-tight">
             Enrollment Funnel Benchmarks
           </h3>
-          <p className="text-sm text-foreground/35 mb-6">How industry conversion rates compare to our model</p>
+          <p className="text-sm text-foreground/35 mb-6">How industry conversion rates compare to CPS scenario targets</p>
           <div className="overflow-x-auto">
             <div className="min-w-[500px] card-elevated !rounded-2xl overflow-hidden">
               <div className="grid grid-cols-4 gap-4 px-6 py-4 bg-cps-green/[0.05] border-b border-cps-green/10">

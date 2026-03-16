@@ -43,7 +43,7 @@ export default function MeasurementKpis() {
           style={{ ["--tw-border-opacity" as string]: undefined }}
         >
           <p className="text-xl sm:text-2xl text-foreground/80 leading-[1.6]">
-            <span className="text-cps-green font-bold">Enrolled students per intake at or below R400 CPA.</span>{" "}
+            <span className="text-cps-green font-bold">Enrolled students per intake within fixed-spend efficiency targets.</span>{" "}
             Everything else — traffic, leads, click-through rates — is a leading indicator in service of this outcome.
           </p>
         </motion.div>
@@ -59,15 +59,15 @@ export default function MeasurementKpis() {
           </h3>
           <div className="overflow-x-auto">
             <div className="min-w-[600px] card-elevated !rounded-2xl overflow-hidden">
-              <div className="grid grid-cols-[1fr_120px_100px] gap-4 px-6 py-4 bg-cps-green/[0.05] border-b border-cps-green/10">
+              <div className="grid grid-cols-[1fr_140px_140px] gap-4 px-6 py-4 bg-cps-green/[0.05] border-b border-cps-green/10">
                 <span className="text-[11px] font-semibold tracking-[0.1em] text-cps-green uppercase">
                   KPI
                 </span>
-                <span className="text-[11px] font-semibold tracking-[0.1em] text-cps-green uppercase">
-                  Target
+                <span className="text-[11px] font-semibold tracking-[0.1em] text-cps-purple uppercase">
+                  Scenario A — 6 Mo
                 </span>
-                <span className="text-[11px] font-semibold tracking-[0.1em] text-cps-green uppercase">
-                  Frequency
+                <span className="text-[11px] font-semibold tracking-[0.1em] text-cps-blue uppercase">
+                  Scenario B — 3 Mo
                 </span>
               </div>
               {KPI_DASHBOARD.map((row, i) => (
@@ -76,15 +76,17 @@ export default function MeasurementKpis() {
                   initial={{ opacity: 0, x: -10 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.3, delay: 0.4 + i * 0.03 }}
-                  className={`grid grid-cols-[1fr_120px_100px] gap-4 px-6 py-4 border-b border-black/[0.03] hover:bg-cps-grey/50 transition-colors ${
+                  className={`grid grid-cols-[1fr_140px_140px] gap-4 px-6 py-4 border-b border-black/[0.03] hover:bg-cps-grey/50 transition-colors ${
                     i % 2 === 1 ? "bg-black/[0.01]" : ""
                   }`}
                 >
                   <span className="text-sm text-foreground/55">{row.kpi}</span>
                   <span className="text-sm text-foreground font-semibold">
-                    {row.target}
+                    {row.scenarioA}
                   </span>
-                  <span className="text-sm text-foreground/35">{row.frequency}</span>
+                  <span className="text-sm text-foreground font-semibold">
+                    {row.scenarioB}
+                  </span>
                 </motion.div>
               ))}
             </div>

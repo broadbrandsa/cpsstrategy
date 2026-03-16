@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { REDESIGN_PRIORITIES, FUNNEL_STEPS } from "@/content/strategy-data";
+import { FunnelVisualization } from "@/components/charts";
 
 export default function ConversionStrategy() {
   const ref = useRef(null);
@@ -100,6 +101,16 @@ export default function ConversionStrategy() {
             Introducing a micro-conversion step to reduce friction
           </p>
 
+          {/* Funnel Visualization */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.55 }}
+            className="card-elevated !p-6 sm:!p-8 mb-10"
+          >
+            <FunnelVisualization />
+          </motion.div>
+
           <div className="relative">
             {/* Connection line */}
             <div className="hidden lg:block absolute top-1/2 left-4 right-4 h-px -translate-y-1/2" style={{ background: "linear-gradient(90deg, #6B2D8B30, #00A8E130, #10B98130)" }} />
@@ -116,7 +127,7 @@ export default function ConversionStrategy() {
                     transition={{ duration: 0.5, delay: 0.6 + i * 0.08 }}
                     className="relative group"
                   >
-                    <div className="card-elevated !rounded-xl p-5 text-center group-hover:!border-opacity-30"
+                    <div className="card-elevated !rounded-xl p-5 text-center h-full flex flex-col items-center justify-center group-hover:!border-opacity-30"
                       style={{ ["--tw-border-opacity" as string]: undefined }}
                     >
                       <div

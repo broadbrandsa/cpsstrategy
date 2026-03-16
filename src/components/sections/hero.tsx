@@ -4,9 +4,7 @@ import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { META, KEY_METRICS } from "@/content/strategy-data";
 
-const FILTERED_METRICS = KEY_METRICS.filter(m => m.label !== "Launch Date");
-
-const ACCENT_COLORS = ["#6B2D8B", "#00A8E1", "#10B981", "#6B2D8B", "#00A8E1"];
+const ACCENT_COLORS = ["#6B2D8B", "#00A8E1", "#10B981", "#6B2D8B", "#00A8E1", "#10B981"];
 
 export default function Hero() {
   return (
@@ -78,20 +76,16 @@ export default function Hero() {
             className="mt-8 flex flex-wrap items-center justify-center gap-3"
           >
             {[
-              { label: "Focus", value: META.focus.split("&")[0].trim() + " & ACL6" },
+              { label: "Focus", value: "HCIB & ACL6" },
               { label: "Target", value: META.target },
-              { label: "CPA Goal", value: META.cpaTarget, highlight: true },
+              { label: "Budget", value: META.mediaBudget },
             ].map((item) => (
               <span
                 key={item.label}
-                className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs ${
-                  item.highlight
-                    ? "bg-cps-green/8 text-cps-green border border-cps-green/15"
-                    : "bg-foreground/[0.03] text-foreground/50 border border-foreground/[0.06]"
-                }`}
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs bg-foreground/[0.03] text-foreground/50 border border-foreground/[0.06]"
               >
                 <span className="font-medium">{item.label}:</span>
-                <span className={item.highlight ? "font-semibold" : ""}>{item.value}</span>
+                <span>{item.value}</span>
               </span>
             ))}
           </motion.div>
@@ -101,9 +95,9 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.55 }}
-            className="mt-20 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4"
+            className="mt-20 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4"
           >
-            {FILTERED_METRICS.map((metric, i) => (
+            {KEY_METRICS.map((metric, i) => (
               <motion.div
                 key={metric.label}
                 initial={{ opacity: 0, y: 20 }}

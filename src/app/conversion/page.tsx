@@ -4,9 +4,10 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import ConversionStrategy from "@/components/sections/conversion-strategy";
 import LeadNurturing from "@/components/sections/lead-nurturing";
-import LaunchPlan from "@/components/sections/launch-plan";
-import MeasurementKpis from "@/components/sections/measurement-kpis";
 import Footer from "@/components/sections/footer";
+import { LeadScoringChart } from "@/components/charts";
+import MartechStack from "@/components/sections/martech-stack";
+import DataAttribution from "@/components/sections/data-attribution";
 import {
   RISK_TRIGGERS,
   LEAD_SCORING_ACTIONS,
@@ -14,142 +15,6 @@ import {
   WHATSAPP_AUTOMATION,
 } from "@/content/strategy-data";
 
-/* ------------------------------------------------------------------ */
-/*  Admissions Handoff Protocol                                         */
-/* ------------------------------------------------------------------ */
-
-const HANDOFF_STEPS = [
-  {
-    stage: "Lead Capture",
-    owner: "Marketing (Broadbrand)",
-    action: "Form submission → CRM entry created with UTM, source, programme",
-    sla: "Instant",
-    color: "#6B2D8B",
-  },
-  {
-    stage: "Lead Scoring",
-    owner: "Marketing Automation",
-    action: "Score assigned based on engagement signals; routes to tier (Cold / Warm / Hot)",
-    sla: "< 5 min",
-    color: "#00A8E1",
-  },
-  {
-    stage: "Hot Lead Alert",
-    owner: "Marketing → Admissions",
-    action: "Score ≥ 80 triggers instant Slack/email notification to CPS admissions team",
-    sla: "< 10 min",
-    color: "#10B981",
-  },
-  {
-    stage: "First Contact",
-    owner: "CPS Admissions",
-    action: "Personal call or WhatsApp from admissions advisor with programme details",
-    sla: "< 2 hours",
-    color: "#FFD100",
-  },
-  {
-    stage: "Application Assist",
-    owner: "CPS Admissions",
-    action: "Guide student through application form, document upload, and fee payment",
-    sla: "24 hours",
-    color: "#6B2D8B",
-  },
-  {
-    stage: "Enrollment Confirmed",
-    owner: "CPS Admissions",
-    action: "CRM status updated → conversion event fires → attribution loop closes",
-    sla: "48 hours",
-    color: "#10B981",
-  },
-];
-
-function AdmissionsHandoff() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-
-  return (
-    <section className="relative py-20 sm:py-28 section-tinted">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="flex items-center gap-3 mb-4"
-        >
-          <div className="w-8 h-[2px] bg-cps-green rounded-full" />
-          <span className="section-label text-cps-green">
-            Admissions Handoff
-          </span>
-        </motion.div>
-
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-2xl sm:text-3xl font-bold text-foreground/90 mb-4 tracking-tight"
-        >
-          Marketing → Admissions protocol
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.15 }}
-          className="text-sm text-foreground/50 max-w-2xl mb-12"
-        >
-          A clear, SLA-driven handoff from digital lead to enrolled student —
-          no leads fall through the cracks.
-        </motion.p>
-
-        {/* Timeline */}
-        <div className="relative">
-          <div className="absolute left-[18px] top-4 bottom-4 w-px bg-black/[0.06] hidden sm:block" />
-
-          <div className="space-y-4">
-            {HANDOFF_STEPS.map((step, i) => (
-              <motion.div
-                key={step.stage}
-                initial={{ opacity: 0, x: -20 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.4, delay: 0.2 + i * 0.08 }}
-                className="flex gap-4 sm:gap-6"
-              >
-                <div className="flex-shrink-0 relative z-10 mt-1.5">
-                  <div
-                    className="w-[10px] h-[10px] rounded-full ring-4 ring-white"
-                    style={{ backgroundColor: step.color }}
-                  />
-                </div>
-
-                <div className="card-elevated p-5 flex-1">
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-2">
-                    <h4 className="text-sm font-semibold text-foreground/80">
-                      {step.stage}
-                    </h4>
-                    <span className="tag text-[10px] px-2 py-0.5 bg-black/[0.04] text-foreground/50 rounded-full">
-                      {step.owner}
-                    </span>
-                    <span
-                      className="tag text-[10px] px-2 py-0.5 rounded-full font-medium ml-auto"
-                      style={{
-                        backgroundColor: step.color + "10",
-                        color: step.color,
-                      }}
-                    >
-                      SLA: {step.sla}
-                    </span>
-                  </div>
-                  <p className="text-[13px] text-foreground/50">
-                    {step.action}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* ------------------------------------------------------------------ */
 /*  WhatsApp Templates                                                  */
@@ -268,34 +133,47 @@ function LeadScoringSummary() {
           routing and follow-up urgency.
         </motion.p>
 
+        {/* Lead Scoring Chart */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.18 }}
+          className="card-elevated !p-6 sm:!p-8 mb-6"
+        >
+          <h4 className="text-sm font-bold text-foreground/70 mb-1">
+            Point Values by Action
+          </h4>
+          <p className="text-xs text-foreground/35 mb-4">
+            Higher-intent actions earn more points toward scoring threshold
+          </p>
+          <LeadScoringChart />
+        </motion.div>
+
         <div className="grid lg:grid-cols-2 gap-6">
           {/* Scoring Actions */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="card-elevated overflow-hidden"
+            className="card-elevated !rounded-2xl overflow-hidden"
           >
-            <div className="table-header px-5 py-3">
-              <h4 className="text-xs font-semibold text-foreground/60">
-                Scoring Actions
-              </h4>
+            <div className="grid grid-cols-[1fr_80px] gap-4 px-6 py-4 bg-cps-purple/[0.04] border-b border-cps-purple/10">
+              <span className="text-[11px] font-semibold tracking-[0.1em] text-cps-purple uppercase">Action</span>
+              <span className="text-[11px] font-semibold tracking-[0.1em] text-cps-purple uppercase text-right">Points</span>
             </div>
-            <div className="divide-y divide-black/[0.04]">
-              {LEAD_SCORING_ACTIONS.map((item, i) => (
-                <div
-                  key={`score-${i}`}
-                  className="table-row px-5 py-3 flex items-center justify-between"
-                >
-                  <span className="text-[13px] text-foreground/60">
-                    {item.action}
-                  </span>
-                  <span className="text-[13px] font-semibold text-cps-purple">
-                    +{item.points} pts
-                  </span>
-                </div>
-              ))}
-            </div>
+            {LEAD_SCORING_ACTIONS.map((item, i) => (
+              <div
+                key={`score-${i}`}
+                className={`grid grid-cols-[1fr_80px] gap-4 px-6 py-3.5 border-b border-black/[0.03] hover:bg-cps-grey/50 transition-colors ${i % 2 === 1 ? "bg-black/[0.01]" : ""}`}
+              >
+                <span className="text-sm text-foreground/60">
+                  {item.action}
+                </span>
+                <span className="text-sm font-semibold text-cps-purple text-right">
+                  +{item.points}
+                </span>
+              </div>
+            ))}
           </motion.div>
 
           {/* Tier Thresholds */}
@@ -303,36 +181,35 @@ function LeadScoringSummary() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="card-elevated overflow-hidden"
+            className="card-elevated !rounded-2xl overflow-hidden"
           >
-            <div className="table-header px-5 py-3">
-              <h4 className="text-xs font-semibold text-foreground/60">
-                Tier Thresholds
-              </h4>
+            <div className="grid grid-cols-[100px_80px_1fr] gap-4 px-6 py-4 bg-cps-blue/[0.04] border-b border-cps-blue/10">
+              <span className="text-[11px] font-semibold tracking-[0.1em] text-cps-blue uppercase">Tier</span>
+              <span className="text-[11px] font-semibold tracking-[0.1em] text-cps-blue uppercase">Score</span>
+              <span className="text-[11px] font-semibold tracking-[0.1em] text-cps-blue uppercase">Action</span>
             </div>
-            <div className="divide-y divide-black/[0.04]">
-              {LEAD_SCORING_TIERS.map((tier, i) => (
-                <div key={`tier-${i}`} className="table-row px-5 py-4">
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-sm font-semibold text-foreground/80">
-                      {tier.status}
-                    </span>
-                    <span
-                      className="tag text-[10px] px-2 py-0.5 rounded-full font-medium"
-                      style={{
-                        backgroundColor: tier.color + "15",
-                        color: tier.color,
-                      }}
-                    >
-                      {tier.score} pts
-                    </span>
-                  </div>
-                  <p className="text-[13px] text-foreground/50">
-                    {tier.action}
-                  </p>
-                </div>
-              ))}
-            </div>
+            {LEAD_SCORING_TIERS.map((tier, i) => (
+              <div
+                key={`tier-${i}`}
+                className={`grid grid-cols-[100px_80px_1fr] gap-4 px-6 py-3.5 border-b border-black/[0.03] hover:bg-cps-grey/50 transition-colors ${i % 2 === 1 ? "bg-black/[0.01]" : ""}`}
+              >
+                <span className="text-sm font-semibold" style={{ color: tier.color }}>
+                  {tier.status}
+                </span>
+                <span
+                  className="text-[11px] px-2 py-0.5 rounded-full font-medium text-center self-center"
+                  style={{
+                    backgroundColor: tier.color + "15",
+                    color: tier.color,
+                  }}
+                >
+                  {tier.score}
+                </span>
+                <span className="text-sm text-foreground/50">
+                  {tier.action}
+                </span>
+              </div>
+            ))}
           </motion.div>
         </div>
 
@@ -341,31 +218,86 @@ function LeadScoringSummary() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-6 card-elevated overflow-hidden"
+          className="mt-6 overflow-x-auto"
         >
-          <div className="table-header px-5 py-3">
-            <h4 className="text-xs font-semibold text-foreground/60">
-              Risk Triggers &amp; Auto-Responses
-            </h4>
-          </div>
-          <div className="divide-y divide-black/[0.04]">
+          <div className="min-w-[600px] card-elevated !rounded-2xl overflow-hidden">
+            <div className="grid grid-cols-3 gap-4 px-6 py-4 bg-cps-red/[0.04] border-b border-cps-red/10">
+              <span className="text-[11px] font-semibold tracking-[0.1em] text-cps-red uppercase">Phase</span>
+              <span className="text-[11px] font-semibold tracking-[0.1em] text-cps-red uppercase">Signal</span>
+              <span className="text-[11px] font-semibold tracking-[0.1em] text-cps-red uppercase">Auto-Response</span>
+            </div>
             {RISK_TRIGGERS.map((trigger, i) => (
               <div
                 key={`risk-${i}`}
-                className="table-row px-5 py-3 grid grid-cols-3 gap-4"
+                className={`grid grid-cols-3 gap-4 px-6 py-3.5 border-b border-black/[0.03] hover:bg-cps-grey/50 transition-colors ${i % 2 === 1 ? "bg-black/[0.01]" : ""}`}
               >
-                <span className="text-[13px] font-medium text-foreground/70">
+                <span className="text-sm font-medium text-foreground/70">
                   {trigger.phase}
                 </span>
-                <span className="text-[13px] text-cps-red/80">
+                <span className="text-sm text-cps-red/80">
                   {trigger.signal}
                 </span>
-                <span className="text-[13px] text-foreground/50">
+                <span className="text-sm text-foreground/50">
                   {trigger.response}
                 </span>
               </div>
             ))}
           </div>
+        </motion.div>
+
+        {/* Performance Escalation Logic */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="mt-10"
+        >
+          <h3 className="text-lg font-bold text-foreground mb-6 tracking-tight">
+            Performance Escalation Logic
+          </h3>
+          <div className="grid sm:grid-cols-2 gap-6 mb-6">
+            <div className="card-elevated !p-0 overflow-hidden">
+              <div className="h-[3px] w-full bg-cps-purple" />
+              <div className="p-6">
+                <h4 className="text-xs font-bold text-cps-purple uppercase tracking-wider mb-4">
+                  Scenario A — 6-Month Intake
+                </h4>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-2">
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-cps-purple/60 flex-shrink-0" />
+                    <span className="text-sm text-foreground/55 leading-[1.7]">If monthly leads fall below 78, investigate channel mix, landing page conversion, and admissions handoff</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-cps-purple/60 flex-shrink-0" />
+                    <span className="text-sm text-foreground/55 leading-[1.7]">If CPA rises above R1,286, optimise creative, audience quality, and nurture performance before changing strategic assumptions</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="card-elevated !p-0 overflow-hidden">
+              <div className="h-[3px] w-full bg-cps-blue" />
+              <div className="p-6">
+                <h4 className="text-xs font-bold text-cps-blue uppercase tracking-wider mb-4">
+                  Scenario B — 3-Month Intake
+                </h4>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-2">
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-cps-blue/60 flex-shrink-0" />
+                    <span className="text-sm text-foreground/55 leading-[1.7]">If monthly leads fall below 156, the intake pace is at risk and rapid optimisation is required</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-cps-blue/60 flex-shrink-0" />
+                    <span className="text-sm text-foreground/55 leading-[1.7]">If CPA rises above R643, the accelerated intake model is no longer efficient enough and the funnel must be improved urgently</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p className="text-sm text-foreground/40 italic">
+            In both scenarios, the monthly spend remains fixed at R15,000. Escalation is triggered by efficiency breakdown, not by budget expansion.
+          </p>
         </motion.div>
       </div>
     </section>
@@ -394,7 +326,7 @@ const REPORTING_CADENCE = [
   {
     frequency: "Bi-weekly",
     report: "Strategy Sync",
-    metrics: "A/B test results, scaling decisions, creative pipeline",
+    metrics: "A/B test results, optimisation decisions, creative pipeline",
     owner: "Joint call",
     color: "#10B981",
   },
@@ -480,37 +412,6 @@ function ReportingAttribution() {
           ))}
         </div>
 
-        {/* Attribution Model */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="card-elevated overflow-hidden"
-        >
-          <div className="table-header px-5 py-3">
-            <h4 className="text-xs font-semibold text-foreground/60">
-              Multi-Touch Attribution Model (Weighted)
-            </h4>
-          </div>
-          <div className="divide-y divide-black/[0.04]">
-            {ATTRIBUTION_MODEL.map((row) => (
-              <div
-                key={row.touch}
-                className="table-row px-5 py-3 grid grid-cols-[120px_60px_1fr] gap-4 items-center"
-              >
-                <span className="text-[13px] font-medium text-foreground/70">
-                  {row.touch}
-                </span>
-                <span className="text-[13px] font-bold text-cps-purple">
-                  {row.weight}
-                </span>
-                <span className="text-[13px] text-foreground/50">
-                  {row.description}
-                </span>
-              </div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );
@@ -525,7 +426,7 @@ function ConversionHeader() {
   const inView = useInView(ref, { once: true, margin: "-40px" });
 
   return (
-    <section className="relative pt-16 pb-8 sm:pt-24 sm:pb-12">
+    <section className="relative pt-32 pb-16 sm:pt-40 sm:pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -543,8 +444,7 @@ function ConversionHeader() {
           </h1>
           <p className="text-base sm:text-lg text-foreground/50 max-w-3xl">
             Website conversion strategy, email &amp; WhatsApp nurturing, lead
-            scoring, admissions handoff, launch plan, KPIs, and reporting
-            attribution.
+            scoring, and reporting attribution.
           </p>
         </motion.div>
       </div>
@@ -564,10 +464,9 @@ export default function ConversionPage() {
       <LeadNurturing />
       <LeadScoringSummary />
       <WhatsAppTemplates />
-      <AdmissionsHandoff />
+      <MartechStack />
+      <DataAttribution />
       <ReportingAttribution />
-      <LaunchPlan />
-      <MeasurementKpis />
       <Footer />
     </div>
   );

@@ -34,7 +34,7 @@ const PAGES = [
     color: "#10B981",
     icon: Megaphone,
     description:
-      "CPA calculator, Google & Meta campaigns, budget scaling, A/B testing",
+      "Intake scenario modelling, Google & Meta campaigns, efficiency framework, A/B testing",
   },
   {
     title: "Content & Creative",

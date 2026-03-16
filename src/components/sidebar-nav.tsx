@@ -8,6 +8,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import {
   LayoutDashboard,
   Target,
+  Users,
   BookOpen,
   BarChart3,
   Pen,
@@ -32,6 +33,7 @@ const groups = [
     label: "STRATEGY",
     items: [
       { name: "Strategy & Market", href: "/strategy", icon: Target },
+      { name: "Audience", href: "/audience", icon: Users },
       { name: "Programme & Brand", href: "/programmes", icon: BookOpen },
     ],
   },

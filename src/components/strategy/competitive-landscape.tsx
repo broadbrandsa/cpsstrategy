@@ -7,43 +7,43 @@ const COMPETITORS = [
   {
     factor: "Platform",
     cps: "CPSLearn (proprietary, AI-powered)",
-    chartwell: "Third-party LMS",
+    chartall: "Third-party LMS",
     others: "Third-party LMS",
   },
   {
     factor: "AI Features",
     cps: "Reflection tool, AI assessment marking, AI program building",
-    chartwell: "None",
+    chartall: "None",
     others: "None",
   },
   {
     factor: "Assessment Speed",
     cps: "2\u00D7 faster feedback",
-    chartwell: "Standard",
+    chartall: "Standard",
     others: "Standard",
   },
   {
     factor: "Pricing",
     cps: "~20% below competitors",
-    chartwell: "Higher",
+    chartall: "Higher",
     others: "Varies",
   },
   {
     factor: "Accreditation",
     cps: "CHE + QCTO",
-    chartwell: "CHE",
+    chartall: "CHE",
     others: "CHE",
   },
   {
     factor: "Student Experience",
     cps: "Stewardship model, personalized learning",
-    chartwell: "Standard",
+    chartall: "Standard",
     others: "Standard",
   },
   {
     factor: "B2B Track Record",
     cps: "11,400+ across Absa, Standard Bank, FNB, Capitec, Nedbank",
-    chartwell: "Banking focused",
+    chartall: "Banking focused",
     others: "Multi-sector",
   },
 ];
@@ -104,10 +104,10 @@ export default function CompetitiveLandscape() {
                   CPS
                 </span>
                 <span className="text-[11px] font-semibold tracking-[0.1em] text-foreground/30 uppercase">
-                  Chartwell
+                  Chartall
                 </span>
                 <span className="text-[11px] font-semibold tracking-[0.1em] text-foreground/30 uppercase">
-                  Milpark / MANCOSA / Regent
+                  Milpark / Novia / Others
                 </span>
               </div>
 
@@ -129,7 +129,7 @@ export default function CompetitiveLandscape() {
                     {row.cps}
                   </span>
                   <span className="text-sm text-foreground/35">
-                    {row.chartwell}
+                    {row.chartall}
                   </span>
                   <span className="text-sm text-foreground/35">
                     {row.others}

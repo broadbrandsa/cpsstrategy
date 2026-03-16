@@ -65,8 +65,8 @@ export default function ExecutiveSummary() {
               className="mt-10 p-6 rounded-2xl bg-white border border-cps-purple/8 accent-bar-left pl-8"
             >
               <p className="text-sm text-foreground/60 leading-[1.8]">
-                With a starting media budget of <span className="text-foreground font-semibold">R15,000/month</span> across
-                Google and Meta, scaling with traction, and two intakes per year to start, this plan is designed to be{" "}
+                With a fixed media budget of <span className="text-foreground font-semibold">R15,000/month</span> across
+                Google and Meta, and two intakes per year to start, this plan is designed to be{" "}
                 <span className="text-cps-purple font-semibold">lean, measurable, and built for compounding returns</span>.
               </p>
             </motion.div>
