@@ -336,7 +336,7 @@ export default function CpaModelling() {
                         min={cfg.min}
                         max={cfg.max}
                         step={cfg.step}
-                        onValueChange={(val) => updateParam(cfg.key, val)}
+                        onValueChange={(val) => updateParam(cfg.key, val as number | number[])}
                       />
                       <div className="flex justify-between mt-1.5">
                         <span className="text-[10px] text-foreground/20">
