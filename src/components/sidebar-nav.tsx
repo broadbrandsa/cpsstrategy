@@ -18,8 +18,8 @@ import {
   Menu,
   X,
   EyeOff,
+  FileDown,
 } from "lucide-react";
-import { DownloadPdfButton } from "@/components/download-pdf-button";
 
 /* ------------------------------------------------------------------ */
 /*  Navigation structure                                               */
@@ -134,7 +134,14 @@ function SidebarContent({ pathname, onNavigate }: { pathname: string; onNavigate
       <div className="px-5 pb-5 pt-4" data-print-hide>
         <div className="mb-3 border-t border-black/[0.06]" />
 
-        <DownloadPdfButton pathname={pathname} variant="sidebar" />
+        <a
+          href="/CPS-Digital-Marketing-Strategy.pdf"
+          download="CPS-Digital-Marketing-Strategy.pdf"
+          className="mb-1 flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-[12px] font-medium text-foreground/40 transition-colors hover:bg-cps-purple/[0.04] hover:text-cps-purple"
+        >
+          <FileDown size={15} strokeWidth={1.8} />
+          Download Full Strategy PDF
+        </a>
 
         <button
           type="button"
@@ -200,7 +207,14 @@ export default function SidebarNav() {
           <span className="text-[13px] font-semibold text-foreground/80">CPS Strategy</span>
         </div>
 
-        <DownloadPdfButton pathname={pathname} variant="mobile" />
+        <a
+          href="/CPS-Digital-Marketing-Strategy.pdf"
+          download="CPS-Digital-Marketing-Strategy.pdf"
+          aria-label="Download strategy PDF"
+          className="rounded-md p-1.5 text-foreground/60 hover:bg-black/[0.04] transition-colors"
+        >
+          <FileDown size={20} strokeWidth={1.8} />
+        </a>
       </div>
 
       {/* ---- Mobile slide-over ---- */}
