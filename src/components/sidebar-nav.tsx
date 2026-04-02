@@ -19,6 +19,7 @@ import {
   X,
   EyeOff,
 } from "lucide-react";
+import { DownloadPdfButton } from "@/components/download-pdf-button";
 
 /* ------------------------------------------------------------------ */
 /*  Navigation structure                                               */
@@ -130,8 +131,10 @@ function SidebarContent({ pathname, onNavigate }: { pathname: string; onNavigate
       </nav>
 
       {/* ---- Footer ---- */}
-      <div className="px-5 pb-5 pt-4">
+      <div className="px-5 pb-5 pt-4" data-print-hide>
         <div className="mb-3 border-t border-black/[0.06]" />
+
+        <DownloadPdfButton pathname={pathname} variant="sidebar" />
 
         <button
           type="button"
@@ -192,10 +195,12 @@ export default function SidebarNav() {
           <Menu size={22} />
         </button>
 
-        <div className="ml-3 flex items-center gap-2">
+        <div className="ml-3 flex flex-1 items-center gap-2">
           <Image src="/logos/cps-logo.avif" alt="CPS Logo" width={28} height={28} className="rounded-md" />
           <span className="text-[13px] font-semibold text-foreground/80">CPS Strategy</span>
         </div>
+
+        <DownloadPdfButton pathname={pathname} variant="mobile" />
       </div>
 
       {/* ---- Mobile slide-over ---- */}

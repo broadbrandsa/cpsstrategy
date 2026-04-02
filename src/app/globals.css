@@ -371,3 +371,68 @@ a, button {
   60% { transform: translateX(6px); }
   75% { transform: translateX(-3px); }
 }
+
+/* ============================
+   Print / PDF styles
+   ============================ */
+@media print {
+  /* Hide navigation, mobile bar, download buttons, and interactive elements */
+  aside,
+  .md\:hidden,
+  [data-print-hide],
+  nav {
+    display: none !important;
+  }
+
+  /* Remove sidebar offset */
+  main {
+    margin-left: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  /* Remove animations and transforms on cards */
+  .card-elevated,
+  .card-flat,
+  .metric-card {
+    transform: none !important;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08) !important;
+    break-inside: avoid;
+  }
+
+  /* Ensure backgrounds print */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Keep gradient text visible */
+  .text-gradient-purple,
+  .text-blue-accent-gradient {
+    -webkit-text-fill-color: initial !important;
+    background: none !important;
+    color: #6B2D8B !important;
+  }
+  .text-blue-accent-gradient {
+    color: #00A8E1 !important;
+  }
+
+  /* Avoid breaking inside sections */
+  section {
+    break-inside: avoid;
+  }
+
+  /* Clean page margins */
+  @page {
+    margin: 0.6in 0.5in;
+    size: A4;
+  }
+
+  /* Hide scrollbar artefacts */
+  ::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  body {
+    overflow: visible !important;
+  }
+}
