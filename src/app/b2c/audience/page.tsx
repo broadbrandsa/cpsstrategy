@@ -1374,7 +1374,7 @@ export default function AudiencePage() {
             className="text-sm text-foreground/40 mt-6 leading-[1.8]"
           >
             Community and alumni participation also strengthen audience growth over time by creating warmer retargeting pools, stronger social proof, and more credible referral pathways.{" "}
-            <Link href="/alumni" className="text-cps-purple font-medium hover:underline">
+            <Link href="/b2c/alumni" className="text-cps-purple font-medium hover:underline">
               See Alumni / Community Flywheel &rarr;
             </Link>
           </motion.p>

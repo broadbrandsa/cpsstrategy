@@ -438,7 +438,7 @@ function WhatsAppTemplates() {
           className="text-sm text-foreground/40 mt-8 leading-[1.8]"
         >
           The long-term goal is not only enrollment, but continued participation in a broader CPS community that strengthens retention, progression, and advocacy.{" "}
-          <Link href="/alumni" className="text-cps-purple font-medium hover:underline">
+          <Link href="/b2c/alumni" className="text-cps-purple font-medium hover:underline">
             See Alumni / Community Flywheel &rarr;
           </Link>
         </motion.p>

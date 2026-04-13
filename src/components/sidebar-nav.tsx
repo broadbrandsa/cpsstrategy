@@ -15,10 +15,16 @@ import {
   GitBranch,
   RefreshCw,
   Briefcase,
+  LineChart,
+  Package,
+  FileText,
+  Megaphone,
+  TrendingUp,
   Menu,
   X,
   EyeOff,
   FileDown,
+  ChevronDown,
 } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
@@ -27,32 +33,36 @@ import {
 
 const groups = [
   {
-    label: "DASHBOARD",
+    label: "HOME",
+    accent: null,
     items: [
-      { name: "Overview", href: "/", icon: LayoutDashboard },
+      { name: "Dashboard", href: "/", icon: LayoutDashboard },
     ],
   },
   {
-    label: "STRATEGY",
+    label: "B2C · STUDENT ACQUISITION",
+    accent: "#6B2D8B",
     items: [
-      { name: "Strategy & Market", href: "/strategy", icon: Target },
-      { name: "Audience", href: "/audience", icon: Users },
-      { name: "Programme & Brand", href: "/programmes", icon: BookOpen },
+      { name: "Overview", href: "/b2c", icon: LayoutDashboard },
+      { name: "Strategy & Market", href: "/b2c/strategy", icon: Target },
+      { name: "Audience", href: "/b2c/audience", icon: Users },
+      { name: "Programme & Brand", href: "/b2c/programmes", icon: BookOpen },
+      { name: "Paid Media", href: "/b2c/paid-media", icon: BarChart3 },
+      { name: "Content & Messaging", href: "/b2c/content", icon: Pen },
+      { name: "Conversion & Nurture", href: "/b2c/conversion", icon: GitBranch },
+      { name: "Alumni / Community", href: "/b2c/alumni", icon: RefreshCw },
     ],
   },
   {
-    label: "EXECUTION",
+    label: "B2B · CORPORATE PARTNERSHIPS",
+    accent: "#00A8E1",
     items: [
-      { name: "Paid Media", href: "/paid-media", icon: BarChart3 },
-      { name: "Content & Creative", href: "/content-creative", icon: Pen },
-      { name: "Conversion & Ops", href: "/conversion", icon: GitBranch },
-    ],
-  },
-  {
-    label: "GROWTH",
-    items: [
-      { name: "B2B Strategy", href: "/b2b", icon: Briefcase },
-      { name: "Alumni / Community", href: "/alumni", icon: RefreshCw },
+      { name: "Overview", href: "/b2b", icon: Briefcase },
+      { name: "Strategy & Market", href: "/b2b/strategy", icon: LineChart },
+      { name: "Product Portfolio", href: "/b2b/products", icon: Package },
+      { name: "Sales Enablement", href: "/b2b/sales", icon: FileText },
+      { name: "Content & Thought Leadership", href: "/b2b/content", icon: Megaphone },
+      { name: "Account Growth & Ops", href: "/b2b/growth", icon: TrendingUp },
     ],
   },
 ];
@@ -63,7 +73,19 @@ const groups = [
 
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
+  /* Exact match for overview pages, prefix for sub-pages */
+  if (href === "/b2c" || href === "/b2b") return pathname === href;
   return pathname.startsWith(href);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Get accent color based on current route                            */
+/* ------------------------------------------------------------------ */
+
+function getRouteAccent(pathname: string): string {
+  if (pathname.startsWith("/b2b")) return "#00A8E1";
+  if (pathname.startsWith("/b2c")) return "#6B2D8B";
+  return "#6B2D8B";
 }
 
 /* ------------------------------------------------------------------ */
@@ -71,6 +93,25 @@ function isActive(pathname: string, href: string) {
 /* ------------------------------------------------------------------ */
 
 function SidebarContent({ pathname, onNavigate }: { pathname: string; onNavigate?: () => void }) {
+  const accent = getRouteAccent(pathname);
+
+  /* Auto-expand groups that contain the active route */
+  const getDefaultExpanded = () => {
+    const expanded: Record<string, boolean> = {};
+    groups.forEach((group) => {
+      if (!group.accent) return; // HOME group is always shown
+      const hasActiveChild = group.items.some((item) => isActive(pathname, item.href));
+      expanded[group.label] = hasActiveChild;
+    });
+    return expanded;
+  };
+
+  const [expanded, setExpanded] = useState<Record<string, boolean>>(getDefaultExpanded);
+
+  const toggleGroup = (label: string) => {
+    setExpanded((prev) => ({ ...prev, [label]: !prev[label] }));
+  };
+
   return (
     <div className="flex h-full flex-col">
       {/* ---- Logo section ---- */}
@@ -91,43 +132,96 @@ function SidebarContent({ pathname, onNavigate }: { pathname: string; onNavigate
       <div className="mx-5 mb-4 border-b border-black/[0.06]" />
 
       {/* ---- Nav groups ---- */}
-      <nav className="flex-1 space-y-5 overflow-y-auto px-3">
-        {groups.map((group) => (
-          <div key={group.label}>
-            <p className="mb-1.5 px-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-foreground/25">
-              {group.label}
-            </p>
+      <nav className="flex-1 space-y-5 overflow-y-auto px-3 pb-4">
+        {groups.map((group) => {
+          const groupAccent = group.accent;
+          const isCollapsible = !!group.accent; // B2C and B2B groups are collapsible
+          const isExpanded = isCollapsible ? expanded[group.label] ?? false : true;
 
-            <ul className="space-y-0.5">
-              {group.items.map((item) => {
-                const active = isActive(pathname, item.href);
-                const Icon = item.icon;
+          return (
+            <div key={group.label}>
+              {isCollapsible ? (
+                <button
+                  type="button"
+                  onClick={() => toggleGroup(group.label)}
+                  className="mb-1.5 flex w-full items-center justify-between px-2 text-left"
+                >
+                  <span
+                    className="text-[9px] font-semibold uppercase tracking-[0.18em]"
+                    style={{ color: groupAccent || "rgba(0,0,0,0.25)" }}
+                  >
+                    {group.label}
+                  </span>
+                  <motion.span
+                    animate={{ rotate: isExpanded ? 0 : -90 }}
+                    transition={{ duration: 0.2 }}
+                    className="flex-shrink-0"
+                  >
+                    <ChevronDown
+                      size={12}
+                      style={{ color: groupAccent || "rgba(0,0,0,0.25)" }}
+                    />
+                  </motion.span>
+                </button>
+              ) : (
+                <p
+                  className="mb-1.5 px-2 text-[9px] font-semibold uppercase tracking-[0.18em]"
+                  style={{ color: groupAccent || "rgba(0,0,0,0.25)" }}
+                >
+                  {group.label}
+                </p>
+              )}
 
-                return (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      onClick={onNavigate}
-                      className={`relative flex items-center gap-3 rounded-md px-3 py-2 text-[13px] font-medium transition-colors ${
-                        active
-                          ? "bg-cps-purple/[0.06] text-cps-purple"
-                          : "text-foreground/50 hover:bg-black/[0.02] hover:text-foreground/70"
-                      }`}
-                    >
-                      {/* Active accent bar */}
-                      {active && (
-                        <span className="absolute left-0 top-1/2 h-5 w-[3px] -translate-y-1/2 rounded-r-full bg-cps-purple" />
-                      )}
+              <AnimatePresence initial={false}>
+                {isExpanded && (
+                  <motion.ul
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.2, ease: "easeInOut" }}
+                    className="space-y-0.5 overflow-hidden"
+                  >
+                    {group.items.map((item) => {
+                      const active = isActive(pathname, item.href);
+                      const Icon = item.icon;
+                      const itemAccent = groupAccent || accent;
 
-                      <Icon size={17} strokeWidth={active ? 2.2 : 1.8} />
-                      {item.name}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        ))}
+                      return (
+                        <li key={item.href}>
+                          <Link
+                            href={item.href}
+                            onClick={onNavigate}
+                            className={`relative flex items-center gap-3 rounded-md px-3 py-2 text-[13px] font-medium transition-colors ${
+                              active
+                                ? "text-foreground/90"
+                                : "text-foreground/50 hover:bg-black/[0.02] hover:text-foreground/70"
+                            }`}
+                            style={active ? { backgroundColor: `${itemAccent}0A` } : undefined}
+                          >
+                            {/* Active accent bar */}
+                            {active && (
+                              <span
+                                className="absolute left-0 top-1/2 h-5 w-[3px] -translate-y-1/2 rounded-r-full"
+                                style={{ backgroundColor: itemAccent }}
+                              />
+                            )}
+
+                            <Icon
+                              size={17}
+                              strokeWidth={active ? 2.2 : 1.8}
+                              style={active ? { color: itemAccent } : undefined}
+                            />
+                            {item.name}
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </motion.ul>
+                )}
+              </AnimatePresence>
+            </div>
+          );
+        })}
       </nav>
 
       {/* ---- Footer ---- */}
@@ -140,7 +234,7 @@ function SidebarContent({ pathname, onNavigate }: { pathname: string; onNavigate
           className="mb-1 flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-[12px] font-medium text-foreground/40 transition-colors hover:bg-cps-purple/[0.04] hover:text-cps-purple"
         >
           <FileDown size={15} strokeWidth={1.8} />
-          Download Full Strategy PDF
+          Download Strategy PDF
         </a>
 
         <button
@@ -185,7 +279,7 @@ export default function SidebarNav() {
       {/* ============================================================ */}
       {/*  Desktop sidebar (hidden below md)                            */}
       {/* ============================================================ */}
-      <aside className="fixed inset-y-0 left-0 z-40 hidden w-[240px] border-r border-black/[0.06] bg-white md:block">
+      <aside className="fixed inset-y-0 left-0 z-40 hidden w-[260px] border-r border-black/[0.06] bg-white md:block">
         <SidebarContent pathname={pathname} />
       </aside>
 

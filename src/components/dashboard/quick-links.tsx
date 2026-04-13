@@ -14,7 +14,7 @@ import {
 const PAGES = [
   {
     title: "Strategy & Market",
-    href: "/strategy",
+    href: "/b2c/strategy",
     color: "#6B2D8B",
     icon: Globe,
     description:
@@ -22,7 +22,7 @@ const PAGES = [
   },
   {
     title: "Programme & Brand",
-    href: "/programmes",
+    href: "/b2c/programmes",
     color: "#00A8E1",
     icon: BookOpen,
     description:
@@ -30,7 +30,7 @@ const PAGES = [
   },
   {
     title: "Paid Media",
-    href: "/paid-media",
+    href: "/b2c/paid-media",
     color: "#10B981",
     icon: Megaphone,
     description:
@@ -38,7 +38,7 @@ const PAGES = [
   },
   {
     title: "Content & Creative",
-    href: "/content-creative",
+    href: "/b2c/content",
     color: "#F59E0B",
     icon: Palette,
     description:
@@ -46,7 +46,7 @@ const PAGES = [
   },
   {
     title: "Conversion & Ops",
-    href: "/conversion",
+    href: "/b2c/conversion",
     color: "#EF4444",
     icon: ArrowRightLeft,
     description:

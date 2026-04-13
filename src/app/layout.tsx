@@ -32,7 +32,7 @@ export default function RootLayout({
           <SidebarNav />
 
           {/* Main content: offset by sidebar width on desktop, full-width + top-bar offset on mobile */}
-          <main className="min-h-screen pt-14 md:ml-[240px] md:pt-0">
+          <main className="min-h-screen pt-14 md:ml-[260px] md:pt-0">
             <TooltipProvider>{children}</TooltipProvider>
           </main>
         </LockScreen>
