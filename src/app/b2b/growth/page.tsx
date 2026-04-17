@@ -150,27 +150,14 @@ const FUNNEL_STEPS = [
   { label: "Expand", color: "#EF4444" },
 ];
 
-const KPI_DATA = [
-  { metric: "Website B2B leads", current: "0", target: "First lead in 2026", cadence: "Monthly", owner: "Broadbrand" },
-  { metric: "L&D penetration (existing clients)", current: "~20%", target: "50%+", cadence: "Quarterly", owner: "Dylan + Sales" },
-  { metric: "Master classes hosted", current: "0", target: "1/month", cadence: "Monthly", owner: "Dylan + Broadbrand" },
-  { metric: "White papers published", current: "0", target: "1/quarter", cadence: "Quarterly", owner: "Broadbrand + Academic co-author" },
-  { metric: "New divisions penetrated (existing clients)", current: "TBD", target: "2/quarter", cadence: "Quarterly", owner: "Dylan" },
-  { metric: "LinkedIn engagement (CEO + company)", current: "Inconsistent", target: "2 posts/week", cadence: "Weekly", owner: "Broadbrand + CEO" },
-  { metric: "Conference speaking slots", current: "0 (2yr gap)", target: "2/year", cadence: "Annual", owner: "CPS leadership" },
-  { metric: "B2B \u2192 B2C student conversions", current: "0 (no system)", target: "Track from launch", cadence: "Monthly", owner: "Broadbrand" },
-  { metric: "Corporate profile distributed", current: "Not created", target: "100% of sales team using same version", cadence: "Once, then maintain", owner: "Broadbrand" },
-  { metric: "Professional brand assets", current: "None since pre-COVID", target: "Photo + video shoot completed", cadence: "Within 30 days", owner: "Broadbrand" },
-];
-
 const REPORTING_TABLE = [
   { activity: "Website B2B lead tracking", owner: "Broadbrand", frequency: "Weekly", tool: "GA4 + Pipedrive CRM" },
-  { activity: "Master class pipeline & scheduling", owner: "Dylan", frequency: "Weekly", tool: "CRM + Calendar" },
-  { activity: "KPI dashboard update", owner: "Broadbrand + Dylan", frequency: "Monthly", tool: "Shared dashboard" },
+  { activity: "Master class pipeline & scheduling", owner: "Indira", frequency: "Weekly", tool: "CRM + Calendar" },
+  { activity: "KPI dashboard update", owner: "Broadbrand + Indira", frequency: "Monthly", tool: "Shared dashboard" },
   { activity: "White paper production", owner: "Broadbrand + academic co-author", frequency: "Quarterly", tool: "Content calendar" },
   { activity: "LinkedIn B2B content (drafts)", owner: "Broadbrand", frequency: "2\u00d7/week", tool: "LinkedIn + scheduling tool" },
   { activity: "LinkedIn B2B content (CEO approval)", owner: "CEO", frequency: "2\u00d7/week", tool: "LinkedIn" },
-  { activity: "Account penetration review", owner: "Dylan", frequency: "Monthly", tool: "CRM / Pipeline spreadsheet" },
+  { activity: "Account penetration review", owner: "Indira", frequency: "Monthly", tool: "CRM / Pipeline spreadsheet" },
   { activity: "B2B \u2192 B2C tracking", owner: "Broadbrand", frequency: "Monthly", tool: "Analytics + CRM" },
   { activity: "Bursary outcome documentation", owner: "CPS Admin + Broadbrand", frequency: "Quarterly", tool: "Student records" },
   { activity: "Email campaigns (master class promos, white paper distribution)", owner: "Broadbrand", frequency: "Monthly", tool: "MailChimp" },
@@ -656,63 +643,6 @@ function SalesFunnelKPIs() {
           </div>
         </motion.div>
 
-        {/* KPI Dashboard */}
-        <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.6 }}
-        >
-          <div className="flex items-center gap-3 mb-6">
-            <BarChart3 size={18} className="text-[#10B981]" />
-            <h3 className="text-lg font-bold text-foreground">KPI Dashboard</h3>
-          </div>
-
-          <div className="card-elevated !p-0 overflow-hidden">
-            <div className="h-[3px] w-full bg-gradient-to-r from-[#10B981] to-[#00A8E1]" />
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-black/[0.05]">
-                    <th className="text-left text-[10px] font-semibold text-foreground/30 uppercase tracking-wider p-4 pb-3">KPI</th>
-                    <th className="text-left text-[10px] font-semibold text-foreground/30 uppercase tracking-wider p-4 pb-3">Current</th>
-                    <th className="text-left text-[10px] font-semibold text-foreground/30 uppercase tracking-wider p-4 pb-3">Target</th>
-                    <th className="text-left text-[10px] font-semibold text-foreground/30 uppercase tracking-wider p-4 pb-3">Cadence</th>
-                    <th className="text-left text-[10px] font-semibold text-foreground/30 uppercase tracking-wider p-4 pb-3">Owner</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {KPI_DATA.map((row, i) => (
-                    <motion.tr
-                      key={row.metric}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={inView ? { opacity: 1, x: 0 } : {}}
-                      transition={{ duration: 0.3, delay: 0.7 + i * 0.04 }}
-                      className="border-b border-black/[0.03] last:border-0 hover:bg-black/[0.01] transition-colors"
-                    >
-                      <td className="p-4 text-sm font-medium text-foreground/70">{row.metric}</td>
-                      <td className="p-4">
-                        <span className="text-xs font-semibold text-[#EF4444]/70 bg-[#EF4444]/[0.06] px-2.5 py-1 rounded-full">
-                          {row.current}
-                        </span>
-                      </td>
-                      <td className="p-4">
-                        <span className="text-xs font-semibold text-[#10B981] bg-[#10B981]/[0.06] px-2.5 py-1 rounded-full">
-                          {row.target}
-                        </span>
-                      </td>
-                      <td className="p-4 text-xs text-foreground/40">{row.cadence}</td>
-                      <td className="p-4">
-                        <span className="text-xs font-semibold text-[#6B2D8B] bg-[#6B2D8B]/[0.06] px-2.5 py-1 rounded-full">
-                          {row.owner}
-                        </span>
-                      </td>
-                    </motion.tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
