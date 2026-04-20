@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import { VercelToolbar } from "@vercel/toolbar/next";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import SidebarNav from "@/components/sidebar-nav";
 import { LockScreen } from "@/components/LockScreen";
@@ -25,6 +26,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const shouldInjectToolbar =
+    process.env.NODE_ENV === "development" ||
+    process.env.VERCEL_ENV === "preview";
+
   return (
     <html lang="en" className={`${poppins.variable} ${poppins.className}`}>
       <body className="antialiased">
@@ -36,6 +41,7 @@ export default function RootLayout({
             <TooltipProvider>{children}</TooltipProvider>
           </main>
         </LockScreen>
+        {shouldInjectToolbar && <VercelToolbar />}
       </body>
     </html>
   );
