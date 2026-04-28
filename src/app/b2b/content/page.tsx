@@ -187,6 +187,18 @@ const COMPETITOR_COUNTERS = [
     useIn: "Client pitches",
     color: "#FFD100",
   },
+  {
+    claim: "\u201CWe partner for impact\u201D",
+    counter: "\u201CWe measure it. CPSLearn pre/post assessment shows 12\u201320% competency shifts, and 30,000+ learnerships prove what real impact at scale looks like.\u201D",
+    useIn: "Sales conversations, proposals",
+    color: "#EF4444",
+  },
+  {
+    claim: "\u201CWe build skills beyond the workplace\u201D",
+    counter: "\u201CWe build skills accredited beyond the workplace \u2014 QCTO/SETA-approved qualifications that translate into recognised career progression, not just internal certificates.\u201D",
+    useIn: "LinkedIn, proposals",
+    color: "#10B981",
+  },
 ];
 
 const DO_SAY = [
