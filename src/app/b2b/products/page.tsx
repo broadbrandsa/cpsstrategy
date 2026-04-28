@@ -62,7 +62,16 @@ const CATEGORIES = [
     name: "Vocational Qualifications",
     color: "#94A3B8",
     icon: GraduationCap,
-    products: ["~9 vocational quals (banking + insurance)"],
+    products: [
+      "Foundations of Value Selling",
+      "Relationship Manager Development Programme",
+      "Thrive Track Workplace Development",
+      "Branch Manager Development Programme",
+      "Digital Transformation Programme",
+      "Digital Innovation Programme",
+      "Sales and Client Experience Excellence",
+      "Principles of Sustainable Investments",
+    ],
     tag: "Volume",
   },
   {
