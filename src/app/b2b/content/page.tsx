@@ -128,7 +128,7 @@ const MESSAGING_HIERARCHY = [
   { level: "Primary", label: "Outcome-focused", description: "Lead with what the client achieves, not what CPS sells.", color: "#00A8E1", icon: Target },
   { level: "Secondary", label: "Future skills alignment", description: "Position CPS as forward-looking, connected to where the industry is heading.", color: "#10B981", icon: TrendingUp },
   { level: "Tertiary", label: "Platform & innovation", description: "CPSLearn as the delivery mechanism — technology that enables scale.", color: "#6B2D8B", icon: Layers },
-  { level: "Trust", label: "Track record", description: "25 years, 11,400+ professionals. Proof that this works at scale.", color: "#FFD100", icon: Shield },
+  { level: "Trust", label: "Track record", description: "More than 20 years (two decades), 35,000+ professionals. Proof that this works at scale.", color: "#FFD100", icon: Shield },
 ];
 
 const PROBLEM_LED = [
@@ -165,7 +165,7 @@ const PROBLEM_LED = [
 const COMPETITOR_COUNTERS = [
   {
     claim: "\u201CWe\u2019re future-skills focused\u201D",
-    counter: "\u201CSo are we \u2014 and we\u2019ve been doing it for 25 years with 30,000+ learnerships delivered\u201D",
+    counter: "\u201CSo are we \u2014 and we\u2019ve been doing it for more than 20 years (two decades) with 30,000+ learnerships delivered\u201D",
     useIn: "LinkedIn, proposals",
     color: "#00A8E1",
   },

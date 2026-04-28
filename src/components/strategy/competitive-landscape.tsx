@@ -42,7 +42,7 @@ const COMPETITORS = [
   },
   {
     factor: "B2B Track Record",
-    cps: "11,400+ across Absa, Standard Bank, FNB, Capitec, Nedbank",
+    cps: "35,000+ across Absa, Standard Bank, Capitec, Nedbank",
     chartall: "Banking focused",
     others: "Multi-sector",
   },

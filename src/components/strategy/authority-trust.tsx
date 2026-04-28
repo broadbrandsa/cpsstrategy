@@ -17,8 +17,8 @@ const PROOF_CATEGORIES = [
     title: "Market Proof",
     color: "#00A8E1",
     points: [
-      "11,400+ graduates",
-      "Trusted by Absa, Standard Bank, FNB, Capitec, and Nedbank",
+      "35,000+ graduates",
+      "Trusted by Absa, Standard Bank, Capitec, and Nedbank",
     ],
   },
   {

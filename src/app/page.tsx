@@ -116,7 +116,7 @@ const SHARED_PROOF_POINTS = [
     icon: Landmark,
     title: "Bank Trust Signals",
     description:
-      "Absa, Standard Bank, FNB, Capitec, and Nedbank logos from B2B partnerships serve as powerful B2C trust signals on marketing collateral.",
+      "Absa, Standard Bank, Capitec, and Nedbank logos from B2B partnerships serve as powerful B2C trust signals on marketing collateral.",
     color: "#00A8E1",
   },
   {
@@ -128,7 +128,7 @@ const SHARED_PROOF_POINTS = [
   },
   {
     icon: Users,
-    title: "11,400+ Professionals Trained",
+    title: "35,000+ Professionals Trained",
     description:
       "A shared proof point that validates both the B2B corporate offering and the B2C individual programmes with a single powerful number.",
     color: "#10B981",
@@ -410,14 +410,14 @@ export default function Home() {
                       Expanding bank, insurance, and fintech partnerships through LinkedIn
                       thought leadership, a dedicated B2B landing page, and relationship-driven
                       sales enablement. Currently represents{" "}
-                      <span className="text-foreground font-semibold">70% of revenue</span>.
+                      <span className="text-foreground font-semibold">97% of revenue</span>.
                     </p>
 
                     <div className="flex flex-wrap gap-3 mb-6">
                       {[
-                        { icon: Percent, text: "70% current revenue" },
+                        { icon: Percent, text: "97% current revenue" },
                         { icon: Target, text: "First web B2B lead in 2026" },
-                        { icon: Award, text: "25 years in market" },
+                        { icon: Award, text: "20+ years in market" },
                       ].map((item) => (
                         <span
                           key={item.text}

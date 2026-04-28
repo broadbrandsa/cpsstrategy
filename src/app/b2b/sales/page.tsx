@@ -155,7 +155,7 @@ const COLLATERAL_SYSTEM = [
 const PROPOSAL_DECK_SLIDES = [
   {
     slide: 1,
-    content: "CPS at a Glance \u2014 25 years, 11,400+ professionals, bank logos, accreditation badges",
+    content: "CPS at a Glance \u2014 More than 20 years (two decades), 35,000+ professionals, bank logos, accreditation badges",
     purpose: "Establish credibility",
     color: "#6B2D8B",
   },

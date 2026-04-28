@@ -116,7 +116,7 @@ const voicePrinciples = [
 const doDont = [
   { do: "Launch a real banking career", dont: "Obtain your NQF 5 qualification" },
   { do: "R2,480/month for 12 months", dont: "Affordable pricing options" },
-  { do: "Trusted by Absa, Standard Bank, FNB", dont: "We are the best education provider" },
+  { do: "Trusted by Absa, Standard Bank, Capitec, Nedbank", dont: "We are the best education provider" },
   { do: "Study online while you work", dont: "Flexible learning modalities available" },
 ];
 
@@ -567,7 +567,7 @@ export default function ProgrammesPage() {
             transition={{ duration: 0.6, delay: 0.15 }}
             className="text-sm text-foreground/35 mb-16 max-w-3xl"
           >
-            Built in-house over 25 years. 2,000&ndash;2,700 current students. End-to-end learning platform.
+            Built in-house over more than 20 years (two decades). 2,000&ndash;2,700 current students. End-to-end learning platform.
           </motion.p>
 
           {/* AI Features Table */}

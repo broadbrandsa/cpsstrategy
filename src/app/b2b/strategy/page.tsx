@@ -70,7 +70,7 @@ const PERSONA_TWO = {
 };
 
 const COMPARISON_FACTORS = [
-  { factor: "Track Record", cps: "25 years in banking & financial services", novia: "~12 years, younger company", edge: "cps" },
+  { factor: "Track Record", cps: "More than 20 years (two decades) in banking & financial services", novia: "~12 years, younger company", edge: "cps" },
   { factor: "Learnership Volume", cps: "30,000+ learnerships delivered", novia: "6,400 learnerships", edge: "cps" },
   { factor: "Platform", cps: "CPSLearn \u2014 proprietary, AI-powered, built in-house", novia: "Third-party LMS", edge: "cps" },
   { factor: "AI Capabilities", cps: "AI assessment marking (LIVE, regulator approved), AI reflection tool (LIVE), AI program building (in progress)", novia: "No known AI integration", edge: "cps" },
@@ -93,9 +93,9 @@ const CPS_GENUINE_WINS = [
   { text: "5\u00d7 the learnership volume (30,000+ vs 6,400)", icon: BarChart3 },
   { text: "Proprietary AI-powered platform vs. third-party LMS", icon: Monitor },
   { text: "AI assessment marking \u2014 LIVE and regulator approved (Novia has nothing like this)", icon: Brain },
-  { text: "25 years vs ~12 years of track record", icon: Award },
+  { text: "More than 20 years (two decades) vs ~12 years of track record", icon: Award },
   { text: "~20% lower pricing (but never reveal this upfront \u2014 it\u2019s a closing advantage)", icon: DollarSign },
-  { text: "Deep relationships with SA\u2019s major banks (Absa, Standard Bank, FNB, Capitec, Nedbank)", icon: Handshake },
+  { text: "Deep relationships with SA\u2019s major banks (Absa, Standard Bank, Capitec, Nedbank) \u2014 FNB is a target where we need to build strong relationships", icon: Handshake },
 ];
 
 const NOVIA_PERCEIVED_ADVANTAGES = [
@@ -105,7 +105,7 @@ const NOVIA_PERCEIVED_ADVANTAGES = [
   },
   {
     claim: "\u201cThey look more modern\u201d",
-    counter: "\u201cWe\u2019re the ones with AI-powered assessment that\u2019s regulator approved. Our platform was built in-house over 25 years and has capabilities no competitor can match.\u201d",
+    counter: "\u201cWe\u2019re the ones with AI-powered assessment that\u2019s regulator approved. Our platform was built in-house over more than 20 years (two decades) and has capabilities no competitor can match.\u201d",
   },
   {
     claim: "\u201cThey do great webinars\u201d",
