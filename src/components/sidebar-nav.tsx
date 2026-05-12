@@ -25,6 +25,7 @@ import {
   EyeOff,
   FileDown,
   ChevronDown,
+  CalendarDays,
 } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
@@ -37,6 +38,7 @@ const groups = [
     accent: null,
     items: [
       { name: "Dashboard", href: "/", icon: LayoutDashboard },
+      { name: "Marketing Calendar", href: "/calendar", icon: CalendarDays },
     ],
   },
   {
@@ -85,6 +87,7 @@ function isActive(pathname: string, href: string) {
 function getRouteAccent(pathname: string): string {
   if (pathname.startsWith("/b2b")) return "#00A8E1";
   if (pathname.startsWith("/b2c")) return "#6B2D8B";
+  if (pathname.startsWith("/calendar")) return "#10B981";
   return "#6B2D8B";
 }
 
