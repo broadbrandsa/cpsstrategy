@@ -34,9 +34,6 @@ import {
   APPROVED_PHRASINGS,
   VOICE_NOTES,
   WEEKLY_RHYTHM,
-  BLOG_KEEP,
-  BLOG_REFRESH,
-  BLOG_RETIRE_NOTE,
   GRADUATION_ASSETS,
   GRADUATION_DEADLINES,
   MONTHLY_SUMMARY,
@@ -1325,13 +1322,8 @@ function CalendarPanel() {
         {/* Monthly summary roll-up — always shown so the year is legible at a glance */}
         <MonthlySummarySection />
 
-        {/* May-only: production assets and existing blog content */}
-        {activeIdx === 0 && (
-          <>
-            <GraduationContentSection />
-            <BlogPlanSection />
-          </>
-        )}
+        {/* May-only: production assets */}
+        {activeIdx === 0 && <GraduationContentSection />}
       </div>
     </section>
   );
@@ -1438,78 +1430,6 @@ function GraduationContentSection() {
   );
 }
 
-function BlogPlanSection() {
-  return (
-    <div className="mt-16">
-      <div className="flex items-baseline gap-3 mb-2">
-        <h2 className="text-2xl sm:text-3xl font-bold text-foreground/90 tracking-tight">
-          Existing CPS blog — keep, refresh, retire
-        </h2>
-      </div>
-      <p className="text-sm text-foreground/50 max-w-3xl mb-6 leading-[1.7]">
-        The cps.co.za blog has ~51 posts and has been dormant since 25 August 2025. This plan revives it. <span className="text-foreground/75 font-medium">{BLOG_KEEP.length} posts to keep & promote</span> · <span className="text-foreground/75 font-medium">{BLOG_REFRESH.length} to refresh</span> · the rest to retire (URLs stay live).
-      </p>
-
-      <div className="grid lg:grid-cols-2 gap-4">
-        {/* Keep & promote */}
-        <div className="card-elevated !p-0 overflow-hidden">
-          <div className="h-[3px] w-full bg-[#10B981]" />
-          <div className="p-5 sm:p-6">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#10B981] mb-3">
-              Keep &amp; promote ({BLOG_KEEP.length})
-            </h4>
-            <ul className="space-y-2.5">
-              {BLOG_KEEP.map((b) => (
-                <li key={b.title} className="rounded-lg bg-[#10B981]/[0.04] border border-[#10B981]/12 p-3">
-                  <div className="flex items-start justify-between gap-2 mb-0.5">
-                    <p className="text-xs font-semibold text-foreground/75 leading-[1.5]">{b.title}</p>
-                    <span className="text-[10px] font-bold text-[#10B981] bg-[#10B981]/12 px-1.5 py-0.5 rounded shrink-0">
-                      → {b.linkMonth}
-                    </span>
-                  </div>
-                  <p className="text-[10px] text-foreground/40">{b.date}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* Refresh */}
-        <div className="card-elevated !p-0 overflow-hidden">
-          <div className="h-[3px] w-full bg-[#F59E0B]" />
-          <div className="p-5 sm:p-6">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#F59E0B] mb-3">
-              Refresh ({BLOG_REFRESH.length}) — counts toward bi-weekly cadence
-            </h4>
-            <ul className="space-y-2.5">
-              {BLOG_REFRESH.map((b) => (
-                <li key={b.title} className="rounded-lg bg-[#F59E0B]/[0.04] border border-[#F59E0B]/15 p-3">
-                  <div className="flex items-start justify-between gap-2 mb-0.5">
-                    <p className="text-xs font-semibold text-foreground/75 leading-[1.5]">{b.title}</p>
-                    <span className="text-[10px] font-bold text-[#F59E0B] bg-[#F59E0B]/12 px-1.5 py-0.5 rounded shrink-0">
-                      {b.refreshWindow}
-                    </span>
-                  </div>
-                  <p className="text-[10px] text-foreground/40">{b.date}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-4 rounded-2xl bg-white border border-black/[0.06] p-5" style={{ borderLeft: "4px solid #94A3B8" }}>
-        <div className="flex items-start gap-3">
-          <AlertCircle size={16} className="text-foreground/40 shrink-0 mt-0.5" aria-hidden="true" />
-          <p className="text-xs text-foreground/55 leading-[1.7]">
-            <span className="font-semibold text-foreground/75">Retire (URLs stay live, don't link):</span>{" "}
-            {BLOG_RETIRE_NOTE}
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 /* ════════════════════════════════════════════════════════════════════
    PANEL: B2C
