@@ -20,14 +20,14 @@ const HEADLINES = [
   },
   {
     angle: "Social Proof",
-    headline: "Join 11,400+ professionals who chose CPS",
+    headline: "Join 35,000+ professionals who chose CPS",
     useFor: "Landing page hero, Google ads",
     color: "#10B981",
   },
   {
     angle: "Authority",
     headline:
-      "Trusted by Absa, FNB, Standard Bank, Capitec, and Nedbank",
+      "Trusted by Absa, Standard Bank, Capitec, and Nedbank",
     useFor: "Landing page badges, Meta",
     color: "#00A8E1",
   },

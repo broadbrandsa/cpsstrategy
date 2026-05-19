@@ -34,19 +34,19 @@ import Footer from "@/components/sections/footer";
 /* ─── Data ─── */
 
 const HERO_STATS = [
-  { value: "70%", label: "B2B revenue share (current)", color: "#6B2D8B" },
-  { value: "11,400+", label: "Professionals trained across major SA banks", color: "#00A8E1" },
+  { value: "97%", label: "B2B revenue share (current)", color: "#6B2D8B" },
+  { value: "35,000+", label: "Professionals trained across major SA banks", color: "#00A8E1" },
   { value: "0", label: "Website B2B leads in 10 years (goal: first in 2026)", color: "#EF4444" },
-  { value: "80%", label: "L&D community at existing clients unaware of CPS", color: "#FFD100" },
+  { value: "80%", label: "Business decision makers not aware of CPS", color: "#FFD100" },
 ];
 
 const READINESS_ITEMS = [
   { block: "Corporate Business Profile", status: "RED", detail: "Doesn\u2019t exist yet \u2014 critical for broker model" },
   { block: "Product Brochures", status: "AMBER", detail: "Being created, not finalized or brand-consistent" },
   { block: "Website B2B Entry Point", status: "RED", detail: "Zero inbound B2B leads in 10 years" },
-  { block: "LinkedIn Presence", status: "AMBER", detail: "Exists but inconsistent, no cadence" },
+  { block: "LinkedIn Presence", status: "RED", detail: "Exists but inconsistent, no cadence — critical gap" },
   { block: "White Papers", status: "RED", detail: "None produced" },
-  { block: "Master Classes", status: "AMBER", detail: "Concept clear, none scheduled" },
+  { block: "Master Classes", status: "RED", detail: "Concept clear, none scheduled — critical gap" },
   { block: "Conference Speaking", status: "RED", detail: "2-year gap since last speaking engagement" },
   { block: "Sales Collateral Consistency", status: "RED", detail: "\u201CWe all send different things about CPS\u201D" },
   { block: "Professional Photography/Video", status: "RED", detail: "No professional shoots since pre-COVID" },
@@ -62,7 +62,6 @@ const SPRINT_PHASES = [
       "Finalise corporate business profile document",
       "Audit all existing sales collateral and identify gaps",
       "Set up LinkedIn content calendar and posting cadence",
-      "Brief professional photography and video production",
     ],
   },
   {
@@ -74,6 +73,7 @@ const SPRINT_PHASES = [
       "Build first B2B landing page on website",
       "Draft first white paper outline (topic: banking skills gap)",
       "Create standardised proposal template and deck",
+      "Prepare for first masterclass",
     ],
   },
   {
@@ -83,9 +83,8 @@ const SPRINT_PHASES = [
     items: [
       "Publish first white paper (gated for lead capture)",
       "Launch CEO thought leadership series on LinkedIn",
-      "Complete professional photography and video shoots",
       "Develop first corporate case study (AXA preferred provider win)",
-      "Schedule first master class with existing client",
+      "Schedule first master class with existing client and alumni (topic dependant)",
     ],
   },
   {
@@ -97,6 +96,7 @@ const SPRINT_PHASES = [
       "Broker collateral pack complete and distributed",
       "Conference speaking slot secured for Q3/Q4",
       "Internal brand alignment session completed with all client-facing staff",
+      "Brief and complete professional photography and video shoots (July)",
       "Full B2B readiness scorecard review \u2014 measure progress against baseline",
     ],
   },
@@ -206,7 +206,7 @@ const GROWTH_LOOPS = [
     title: "Proof Loop",
     color: "#10B981",
     icon: Award,
-    body: "B2B bank logos (Absa, Standard Bank, FNB, Capitec, Nedbank) \u2192 B2C trust signals for individual students \u2192 student success stories \u2192 B2B proposal proof points \u2192 reinforces bank partnerships.",
+    body: "B2B bank logos (Absa, Standard Bank, Capitec, Nedbank) \u2192 B2C trust signals for individual students \u2192 student success stories \u2192 B2B proposal proof points \u2192 reinforces bank partnerships.",
   },
 ];
 
@@ -239,7 +239,7 @@ function B2BHeader() {
             <span className="text-gradient-purple italic">Banking & Financial Services</span>
           </h1>
           <p className="text-base sm:text-lg text-foreground/50 max-w-3xl mb-8">
-            CPS&apos;s B2B business represents 70% of revenue, built on 25 years of deep relationships with South Africa&apos;s major banks. This strategy transforms that foundation into a visible, scalable B2B growth engine &mdash; expanding within existing accounts, building digital lead generation, and establishing CPS as the definitive voice in financial services skills development.
+            CPS&apos;s B2B business represents 97% of revenue, built on more than 20 years (two decades) of deep relationships with South Africa&apos;s major banks. This strategy transforms that foundation into a visible, scalable B2B growth engine &mdash; expanding within existing accounts, building digital lead generation, and establishing CPS as the definitive voice in financial services skills development. A strong strategic drive is required to embed and build brand resonance across the corporate partnership market.
           </p>
         </motion.div>
 

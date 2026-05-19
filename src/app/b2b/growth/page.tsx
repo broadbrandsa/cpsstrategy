@@ -82,7 +82,7 @@ const NETWORK_ACTIVATION_CARDS = [
   },
   {
     title: "Alumni Network",
-    body: "11,400+ professionals trained by CPS across major banks. These are potential advocates, referral sources, and internal champions at their current organisations.",
+    body: "35,000+ professionals trained by CPS across major banks. These are potential advocates, referral sources, and internal champions at their current organisations.",
     color: "#10B981",
     icon: UserCheck,
   },

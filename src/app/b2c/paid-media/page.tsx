@@ -359,7 +359,7 @@ function MetaDeepDive() {
               {
                 title: "Proof & Authority",
                 body: "Build trust through credibility signals such as accreditation, graduate numbers, and bank partnerships.",
-                example: "\u201CTrusted by professionals from Absa, Standard Bank, FNB and more.\u201D",
+                example: "\u201CTrusted by professionals from Absa, Standard Bank, Capitec, Nedbank and more.\u201D",
                 color: "#00A8E1",
               },
               {

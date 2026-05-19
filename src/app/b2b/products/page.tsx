@@ -18,6 +18,7 @@ import {
   Lock,
   Link2,
   AlertTriangle,
+  AlertCircle,
   Quote,
   Zap,
   Clock,
@@ -61,7 +62,16 @@ const CATEGORIES = [
     name: "Vocational Qualifications",
     color: "#94A3B8",
     icon: GraduationCap,
-    products: ["~9 vocational quals (banking + insurance)"],
+    products: [
+      "Foundations of Value Selling",
+      "Relationship Manager Development Programme",
+      "Thrive Track Workplace Development",
+      "Branch Manager Development Programme",
+      "Digital Transformation Programme",
+      "Digital Innovation Programme",
+      "Sales and Client Experience Excellence",
+      "Principles of Sustainable Investments",
+    ],
     tag: "Volume",
   },
   {
@@ -244,6 +254,32 @@ function ProductOrganisation() {
             </motion.div>
           ))}
         </div>
+
+        {/* Portfolio rebalance note */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.55 }}
+          className="card-elevated !p-0 overflow-hidden mb-10"
+          style={{ borderLeft: "4px solid #FFD100" }}
+        >
+          <div className="p-6 sm:p-7">
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded-xl bg-[#FFD100]/[0.08] border border-[#FFD100]/15 flex items-center justify-center shrink-0">
+                <AlertCircle size={18} style={{ color: "#FFD100" }} />
+              </div>
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-wider mb-2" style={{ color: "#B8860B" }}>
+                  Portfolio Note &mdash; Under Review
+                </h3>
+                <p className="text-sm text-foreground/55 leading-[1.7]">
+                  There is overlap between the <span className="font-semibold text-foreground/75">Banking &amp; Financial Services (Core)</span> and{" "}
+                  <span className="font-semibold text-foreground/75">Vocational Qualifications</span> categories that needs to be rebalanced. Indira to provide further detail on the product portfolio breakdown so categories can be cleanly separated.
+                </p>
+              </div>
+            </div>
+          </div>
+        </motion.div>
 
         {/* Product Naming Strategy quote */}
         <motion.div
