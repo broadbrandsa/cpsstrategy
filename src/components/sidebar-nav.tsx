@@ -29,6 +29,7 @@ import {
   Calculator,
   ExternalLink,
   Globe,
+  Presentation,
 } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
@@ -40,6 +41,7 @@ type NavItem = {
   href: string;
   icon: typeof LayoutDashboard;
   external?: boolean;
+  hint?: string;
 };
 
 const groups: { label: string; accent: string | null; items: NavItem[] }[] = [
@@ -57,6 +59,13 @@ const groups: { label: string; accent: string | null; items: NavItem[] }[] = [
     accent: "#0B7285",
     items: [
       { name: "CPS Website", href: "https://cps-new-website.vercel.app/", icon: Globe, external: true },
+      {
+        name: "Example Client Proposal",
+        href: "https://eyproposal.vercel.app/",
+        icon: Presentation,
+        external: true,
+        hint: "Access code: 0310",
+      },
     ],
   },
   {
@@ -208,7 +217,7 @@ function SidebarContent({ pathname, onNavigate }: { pathname: string; onNavigate
                       const Icon = item.icon;
                       const itemAccent = groupAccent || accent;
 
-                      const linkClasses = `relative flex items-center gap-3 rounded-md px-3 py-2 text-[13px] font-medium transition-colors ${
+                      const linkClasses = `relative flex items-start gap-3 rounded-md px-3 py-2 text-[13px] font-medium transition-colors ${
                         active
                           ? "text-foreground/90"
                           : "text-foreground/50 hover:bg-black/[0.02] hover:text-foreground/70"
@@ -225,13 +234,24 @@ function SidebarContent({ pathname, onNavigate }: { pathname: string; onNavigate
                           <Icon
                             size={17}
                             strokeWidth={active ? 2.2 : 1.8}
+                            className="shrink-0 mt-px"
                             style={active ? { color: itemAccent } : undefined}
                           />
-                          <span className="flex-1">{item.name}</span>
+                          <span className="flex-1 flex flex-col leading-tight">
+                            <span>{item.name}</span>
+                            {item.hint && (
+                              <span
+                                className="text-[10px] font-normal mt-0.5"
+                                style={{ color: `${itemAccent}99` }}
+                              >
+                                {item.hint}
+                              </span>
+                            )}
+                          </span>
                           {item.external && (
                             <ExternalLink
                               size={12}
-                              className="text-foreground/35"
+                              className="text-foreground/35 shrink-0 mt-0.5"
                               aria-hidden="true"
                             />
                           )}
