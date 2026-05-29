@@ -326,7 +326,7 @@ export default function RevenueModelPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-[360px_1fr] gap-6">
             {/* ─── Inputs panel ─── */}
-            <aside className="card-elevated !p-0 overflow-hidden self-start lg:sticky lg:top-20">
+            <aside className="card-elevated !p-0 overflow-hidden self-start">
               <div className="h-[3px] w-full" style={{ backgroundColor: COLORS.accent }} />
               <div className="p-5 sm:p-6">
                 <h2 className="text-xs font-bold uppercase tracking-wider text-foreground/60 mb-1">
