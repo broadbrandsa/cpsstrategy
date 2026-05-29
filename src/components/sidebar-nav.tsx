@@ -26,19 +26,37 @@ import {
   FileDown,
   ChevronDown,
   CalendarDays,
+  Calculator,
+  ExternalLink,
+  Globe,
 } from "lucide-react";
 
 /* ------------------------------------------------------------------ */
 /*  Navigation structure                                               */
 /* ------------------------------------------------------------------ */
 
-const groups = [
+type NavItem = {
+  name: string;
+  href: string;
+  icon: typeof LayoutDashboard;
+  external?: boolean;
+};
+
+const groups: { label: string; accent: string | null; items: NavItem[] }[] = [
   {
     label: "HOME",
     accent: null,
     items: [
       { name: "Dashboard", href: "/", icon: LayoutDashboard },
       { name: "Marketing Calendar", href: "/calendar", icon: CalendarDays },
+      { name: "Revenue Model", href: "/revenue-model", icon: Calculator },
+    ],
+  },
+  {
+    label: "EXTERNAL",
+    accent: "#0B7285",
+    items: [
+      { name: "CPS Website", href: "https://cps-new-website.vercel.app/", icon: Globe, external: true },
     ],
   },
   {
@@ -88,6 +106,7 @@ function getRouteAccent(pathname: string): string {
   if (pathname.startsWith("/b2b")) return "#00A8E1";
   if (pathname.startsWith("/b2c")) return "#6B2D8B";
   if (pathname.startsWith("/calendar")) return "#10B981";
+  if (pathname.startsWith("/revenue-model")) return "#0B7285";
   return "#6B2D8B";
 }
 
@@ -185,37 +204,63 @@ function SidebarContent({ pathname, onNavigate }: { pathname: string; onNavigate
                     className="space-y-0.5 overflow-hidden"
                   >
                     {group.items.map((item) => {
-                      const active = isActive(pathname, item.href);
+                      const active = !item.external && isActive(pathname, item.href);
                       const Icon = item.icon;
                       const itemAccent = groupAccent || accent;
 
+                      const linkClasses = `relative flex items-center gap-3 rounded-md px-3 py-2 text-[13px] font-medium transition-colors ${
+                        active
+                          ? "text-foreground/90"
+                          : "text-foreground/50 hover:bg-black/[0.02] hover:text-foreground/70"
+                      }`;
+
+                      const inner = (
+                        <>
+                          {active && (
+                            <span
+                              className="absolute left-0 top-1/2 h-5 w-[3px] -translate-y-1/2 rounded-r-full"
+                              style={{ backgroundColor: itemAccent }}
+                            />
+                          )}
+                          <Icon
+                            size={17}
+                            strokeWidth={active ? 2.2 : 1.8}
+                            style={active ? { color: itemAccent } : undefined}
+                          />
+                          <span className="flex-1">{item.name}</span>
+                          {item.external && (
+                            <ExternalLink
+                              size={12}
+                              className="text-foreground/35"
+                              aria-hidden="true"
+                            />
+                          )}
+                        </>
+                      );
+
                       return (
                         <li key={item.href}>
-                          <Link
-                            href={item.href}
-                            onClick={onNavigate}
-                            className={`relative flex items-center gap-3 rounded-md px-3 py-2 text-[13px] font-medium transition-colors ${
-                              active
-                                ? "text-foreground/90"
-                                : "text-foreground/50 hover:bg-black/[0.02] hover:text-foreground/70"
-                            }`}
-                            style={active ? { backgroundColor: `${itemAccent}0A` } : undefined}
-                          >
-                            {/* Active accent bar */}
-                            {active && (
-                              <span
-                                className="absolute left-0 top-1/2 h-5 w-[3px] -translate-y-1/2 rounded-r-full"
-                                style={{ backgroundColor: itemAccent }}
-                              />
-                            )}
-
-                            <Icon
-                              size={17}
-                              strokeWidth={active ? 2.2 : 1.8}
-                              style={active ? { color: itemAccent } : undefined}
-                            />
-                            {item.name}
-                          </Link>
+                          {item.external ? (
+                            <a
+                              href={item.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={onNavigate}
+                              className={linkClasses}
+                              aria-label={`${item.name} (opens in new tab)`}
+                            >
+                              {inner}
+                            </a>
+                          ) : (
+                            <Link
+                              href={item.href}
+                              onClick={onNavigate}
+                              className={linkClasses}
+                              style={active ? { backgroundColor: `${itemAccent}0A` } : undefined}
+                            >
+                              {inner}
+                            </Link>
+                          )}
                         </li>
                       );
                     })}
